@@ -4,7 +4,7 @@
 
 #### Configurations
 
-Open the `application.properties` file and set your own configurations.
+Open the `application.properties` file and set your own configurations. (currently your local database name is set to `challengedb` by default)
 
 #### Prerequisites
 
