@@ -59,7 +59,6 @@
         <configuration>
             <gcloud_directory>${gcloud.directory}</gcloud_directory>
             <gcloud_project>blissful-cell-141318</gcloud_project>
-            <!--<default_gcs_bucket_name>blissful-cell-141318.appspot.com</default_gcs_bucket_name>-->
             <verbosity>debug</verbosity>
             <set_default>true</set_default>
             <log_level>info</log_level>
