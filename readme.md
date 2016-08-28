@@ -29,6 +29,7 @@ Open the `application.properties` file and set your own configurations. (current
 
 #### Deploy to Google App Engine
 
+* Open `application.properties` and make sure spring.datasource.url points to the cloudSQL instance, not localhost database
 * Go on the project's root folder, then type:
 ```
     $ mvn gcloud:deploy
