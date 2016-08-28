@@ -20,9 +20,12 @@ Go on the project's root folder, then type:
 
 #### Deploy to Google App Engine
 
-Go on the project's root folder, then type:
-(for installing Cloud SDK, refer to https://cloud.google.com/sdk/docs/quickstarts)
+One time setup:
+1. Install Cloud SDK (Refer to https://cloud.google.com/sdk/docs/quickstarts)
+2. Set the Cloud SDK installation directory in pom.xml as following example:
+    <gcloud.directory>/Users/cyoun/dev/google-cloud-sdk</gcloud.directory>
 
+Go on the project's root folder, then type:
     $ mvn gcloud:deploy
 
 
