@@ -14,9 +14,9 @@ Open the `application.properties` file and set your own configurations.
 #### Start localhost
 
 * Go on the project's root folder, then type:
-
+```
     $ mvn spring-boot:run
-
+```
 * App is running here : http://localhost:8080/
 
 #### One time setup for Cloud SDK to be able to deploy to Google App Engine
@@ -30,12 +30,12 @@ Open the `application.properties` file and set your own configurations.
 #### Deploy to Google App Engine
 
 * Go on the project's root folder, then type:
-
+```
     $ mvn gcloud:deploy
-
+```
 * App is running here : https://blissful-cell-141318.appspot.com/
 
-lean up
+
 ### Usage
 
 - Run the application and go on http://localhost:8080/
