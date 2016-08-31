@@ -1,6 +1,7 @@
 package challenge.configuration;
 
 import challenge.controllers.HealthController;
+import challenge.controllers.MainController;
 import challenge.controllers.RecognitionController;
 import challenge.controllers.UserController;
 import challenge.dto.Recognition;
@@ -14,6 +15,8 @@ public class JerseyConfig extends ResourceConfig {
         register(HealthController.class);
         register(UserController.class);
         register(RecognitionController.class);
+        register(MainController.class);
+
     }
 
 }
