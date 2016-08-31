@@ -25,7 +25,7 @@ Open the `application.properties` file and set your own configurations. (current
 ```
     <gcloud.directory>/Users/cyoun/dev/google-cloud-sdk</gcloud.directory>
 ```
-
+* You can also provide Cloud SK installation directory at the time of deployment. If you choose to do so instead of pom.xml, see next section.
 
 #### Deploy to Google App Engine
 
@@ -34,6 +34,11 @@ Open the `application.properties` file and set your own configurations. (current
 ```
     $ mvn gcloud:deploy
 ```
+* Or you can do the following, if you want to provide Cloud SK installation directory
+```
+    $ mvn gcloud:deploy -Dgcloud.gcloud_directory=/Users/cyoun/dev/google-cloud-sdk
+```
+
 * App is running here : https://blissful-cell-141318.appspot.com/
 
 
