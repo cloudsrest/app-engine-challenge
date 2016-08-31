@@ -10,7 +10,7 @@ public class MainController {
   @RequestMapping("/")
   @ResponseBody
   public String index() {
-    return "Welcome to SpringBoot!";
+    return "Welcome to SpringBoot123!";
   }
 
 }
