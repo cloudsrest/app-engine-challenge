@@ -17,10 +17,6 @@ public class UserServiceMockTest {
         User requestingUser = new User();
         List<User> users = userServiceMock.getUsers(requestingUser);
         Assert.assertNotNull(users);
-
-        for (User user : users) {
-            System.out.println("user = " + user);
-        }
     }
 
 }
