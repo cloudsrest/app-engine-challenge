@@ -1,12 +1,12 @@
 package challenge.services;
 
-import challenge.dto.User;
+import challenge.model.User;
 
 import java.util.List;
 
 public interface UserService {
 
     public List<User> getUsers(User requestingUser);
-    public User getUser(String userId);
+    public User getUser(User requestingUser, Long userId);
 
 }

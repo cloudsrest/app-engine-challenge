@@ -4,7 +4,6 @@ import challenge.controllers.HealthController;
 import challenge.controllers.MainController;
 import challenge.controllers.RecognitionController;
 import challenge.controllers.UserController;
-import challenge.dto.Recognition;
 import org.glassfish.jersey.server.ResourceConfig;
 import org.springframework.context.annotation.Configuration;
 
