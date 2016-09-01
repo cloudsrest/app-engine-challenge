@@ -3,20 +3,27 @@ sudo: false # faster builds
 jdk:
   - oraclejdk8
 
-# script: "mvn cobertura:cobertura"
-
 cache:
   directories:
   - $HOME/.m2
+  - $HOME/google-cloud-sdk/
+
+# script: "mvn cobertura:cobertura"
+script:
+  - gcloud version || true
+  - if [ ! -d "$HOME/google-cloud-sdk/bin" ]; then rm -rf $HOME/google-cloud-sdk; export CLOUDSDK_CORE_DISABLE_PROMPTS=1; curl https://sdk.cloud.google.com | bash; fi
+  # Add gcloud to $PATH
+  - source /home/travis/google-cloud-sdk/path.bash.inc
+  - gcloud version
 
 before_install:
   # Decrypt the credentials we added to the repo using the key we added with the Travis command line tool
   # - openssl aes-256-cbc -K $encrypted_45d1b36fa803_key -iv $encrypted_45d1b36fa803_iv -in client-secret.json.enc -out client-secret.json -d
   # If the SDK is not already cached, download it and unpack it
-  - if [ ! -d ${HOME}/google-cloud-sdk ]; then
-     curl https://sdk.cloud.google.com | bash;
-    fi
-  - mkdir -p lib
+  # - if [ ! -d ${HOME}/google-cloud-sdk ]; then
+  #   curl https://sdk.cloud.google.com | bash;
+  #  fi
+  #- mkdir -p lib
   # Here we use the decrypted service account credentials to authenticate the command line tool
   - gcloud auth activate-service-account --key-file client-secret.json
 
