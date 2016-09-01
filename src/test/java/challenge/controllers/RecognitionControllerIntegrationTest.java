@@ -25,7 +25,7 @@ import static org.junit.Assert.assertFalse;
 public class RecognitionControllerIntegrationTest extends BaseRestTest {
 
 	// FIXME - temporary ignore so that build can pass
-	@Ignore
+	@org.junit.Ignore
     @Test
     public void testCreateRecognitions() throws JsonProcessingException {
         Recognition recognition1 = new Recognition("111","222", RecognitionTypeEnum.CREATIVITY.toString(),"xxx","zzz");
