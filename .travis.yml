@@ -32,7 +32,7 @@ install:
 
 deploy:
   provider: gae
-  keyfile: client-secret.json
+  keyfile: client-secret.json.enc
   project: blissful-cell-141318
   default: true
   on:
