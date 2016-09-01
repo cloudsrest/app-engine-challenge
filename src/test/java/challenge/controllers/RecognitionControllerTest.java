@@ -29,7 +29,7 @@ public class RecognitionControllerTest {
     @Test
     public void testCreateRecognition() {
         String fromUserKey = "123";
-        recognitionService.createRecognition(new User(), new Recognition(fromUserKey, "222", RecognitionTypeEnum.CREATIVITY.toString(), "good job", "product demo"));
+        recognitionService.createRecognition(new User(), new Recognition(fromUserKey, "222", RecognitionTypeEnum.CREATIVITY.toString(), "good job"));
 
         List<Recognition> recognitions = recognitionController.getRecognitions();
         assertNotNull(recognitions);

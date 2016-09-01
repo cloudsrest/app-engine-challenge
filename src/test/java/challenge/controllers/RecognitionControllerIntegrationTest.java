@@ -39,8 +39,8 @@ public class RecognitionControllerIntegrationTest extends BaseRestTest {
 
     @Test
     public void testCreateRecognitions() throws JsonProcessingException {
-        Recognition recognition1 = new Recognition("111","222", RecognitionTypeEnum.CREATIVITY.toString(),"xxx","zzz");
-        Recognition recognition2 = new Recognition("333","444", RecognitionTypeEnum.HARD_WORK.toString(),"iii","ppp");
+        Recognition recognition1 = new Recognition("111","222", RecognitionTypeEnum.CREATIVITY.toString(),"xxx");
+        Recognition recognition2 = new Recognition("333","444", RecognitionTypeEnum.HARD_WORK.toString(),"iii");
 
         createRecognition(recognition1);
 
@@ -72,9 +72,7 @@ public class RecognitionControllerIntegrationTest extends BaseRestTest {
     }
 
     private List<Recognition> getRecognitions() {
-        Recognition[] forNow;
-        forNow = restTemplate.getForObject("http://localhost:9000/recognitions", Recognition[].class);
-        return Arrays.asList(forNow);
+        return Arrays.asList(restTemplate.getForObject("http://localhost:9000/recognitions", Recognition[].class));
     }
 
 }

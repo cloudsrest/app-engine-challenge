@@ -23,7 +23,6 @@ public class UserControllerIntegrationTest extends BaseRestTest {
 
     @Test
     public void testGetUser() {
-
         User[] forNow = restTemplate.getForObject("http://localhost:9000/users", User[].class);
         List<User> users = Arrays.asList(forNow);
 
