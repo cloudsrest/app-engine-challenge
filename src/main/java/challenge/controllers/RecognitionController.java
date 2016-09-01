@@ -34,4 +34,11 @@ public class RecognitionController {
         return Response.status(Response.Status.CREATED).entity(STATUS_CREATE_REC_SUCCESS).type("text/plain").build();
     }
 
+    @DELETE
+    @Produces("application/json")
+    public Response deleteAllRecognitions() {
+        recognitionService.deleteAllRecognitions();
+        return Response.status(Response.Status.CREATED).entity("All recognitions deleted").type("text/plain").build();
+    }
+
 }

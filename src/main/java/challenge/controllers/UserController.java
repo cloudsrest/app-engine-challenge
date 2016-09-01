@@ -7,6 +7,7 @@ import org.springframework.stereotype.Component;
 
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
+import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import java.util.List;
 
@@ -21,6 +22,13 @@ public class UserController {
     @Produces("application/json")
     public List<User> getUsers() {
         return userService.getUsers(new User());
+    }
+
+    @GET
+    @Path("{userId}")
+    @Produces("application/json")
+    public User getUser(@PathParam("userId") String userId) {
+        return userService.getUser(userId);
     }
 
 }

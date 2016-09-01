@@ -23,4 +23,9 @@ public class RecognitionServiceMock implements RecognitionService {
         mockDB.addRecognition(recognition);
     }
 
+    @Override
+    public void deleteAllRecognitions() {
+        mockDB.deleteAllRecognitions();
+    }
+
 }

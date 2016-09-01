@@ -17,11 +17,15 @@ public class MockDB {
     private MockDB() {
     }
 
-    public void addRecognition(Recognition recognition) {
+    public synchronized void addRecognition(Recognition recognition) {
         recognitions.add(recognition);
     }
 
     public List<Recognition> getRecognitions() {
         return recognitions;
+    }
+
+    public synchronized void  deleteAllRecognitions() {
+        recognitions = new ArrayList<>();
     }
 }

@@ -52,4 +52,14 @@ public class UserServiceMock implements UserService {
         return mockUsers;
     }
 
+    @Override
+    public User getUser(String userId) {
+        for (User mockUser : mockUsers) {
+            if (mockUser.getId().equals(userId)) {
+                return mockUser;
+            }
+        }
+        return null;
+    }
+
 }
