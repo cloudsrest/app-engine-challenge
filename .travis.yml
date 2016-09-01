@@ -25,7 +25,7 @@ before_install:
   #  fi
   #- mkdir -p lib
   # Here we use the decrypted service account credentials to authenticate the command line tool
-  #- gcloud auth activate-service-account --key-file client-secret.json
+  - gcloud auth activate-service-account --key-file client-secret.json
 
 deploy:
   provider: gae
