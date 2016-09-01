@@ -1,0 +1,14 @@
+language: java
+sudo: false # faster builds
+jdk:
+  - oraclejdk8
+
+# script: "mvn cobertura:cobertura"
+
+deploy:
+  provider: gae
+  keyfile: client-secret.json.enc
+  project: blissful-cell-141318
+
+after_success:
+  - bash <(curl -s https://codecov.io/bash)
