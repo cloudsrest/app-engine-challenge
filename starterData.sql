@@ -2,11 +2,9 @@ delete from recognition;
 delete from user;
 delete from team;
 
-insert into team (id, name)
-values
-(1, 'Mystic'), (2, 'Instinct'), (3, 'Valor');
+insert into team (id, name)  values (1, 'Mystic'), (2, 'Instinct'), (3, 'Valor');
 
-insert into user (id, username, first_name, last_name, is_admin, team_id)
+insert into user (id, username, first_name, last_name, is_admin, team)
 VALUES
 (1, 'nturner', 'Nathan', 'Turner', 0, 1),
 (2, 'fcarr', 'Frank', 'Carr', 0, 1),
