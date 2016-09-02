@@ -67,7 +67,7 @@
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <start-class>challenge.Application</start-class>
         <java.version>1.8</java.version>
-        <gcloud.directory>/Users/cyoun/dev/google-cloud-sdk</gcloud.directory>
+        <gcloud.directory>{sdk-path}</gcloud.directory>
     </properties>
 
     <build>
@@ -83,6 +83,10 @@
                         </goals>
                     </execution>
                 </executions>
+            </plugin>
+            <plugin>
+                <groupId>com.google.cloud.tools</groupId>
+                <artifactId>appengine-maven-plugin</artifactId>
             </plugin>
             <plugin>
                 <groupId>com.google.appengine</groupId>
