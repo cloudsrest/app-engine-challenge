@@ -1,4 +1,4 @@
-package challenge.dao;
+package challenge.daos;
 
 import challenge.model.Team;
 import challenge.model.User;

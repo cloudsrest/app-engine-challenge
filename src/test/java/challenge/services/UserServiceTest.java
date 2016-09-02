@@ -1,4 +1,4 @@
-package challenge.service;
+package challenge.services;
 
 public class UserServiceTest {
 

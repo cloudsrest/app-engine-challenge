@@ -1,12 +1,12 @@
-package challenge.service.impl;
+package challenge.services.impl;
 
-import challenge.dao.RecognitionDao;
-import challenge.dao.UserDao;
+import challenge.daos.RecognitionDao;
+import challenge.daos.UserDao;
 import challenge.dto.RecognitionDTO;
 import challenge.dto.RecognitionTypeEnum;
 import challenge.model.Recognition;
 import challenge.model.User;
-import challenge.service.RecognitionService;
+import challenge.services.RecognitionService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

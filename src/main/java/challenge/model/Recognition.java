@@ -27,6 +27,17 @@ public class Recognition {
     @Temporal(TemporalType.TIMESTAMP)
     private Date timestamp;
 
+    public Recognition(User fromUser, User toUser, RecognitionTypeEnum recognitionType, String comment, Date timestamp) {
+        this.fromUser = fromUser;
+        this.toUser = toUser;
+        this.recognitionType = recognitionType;
+        this.comment = comment;
+        this.timestamp = timestamp;
+    }
+
+    public Recognition() {
+    }
+
     public long getId() {
         return id;
     }

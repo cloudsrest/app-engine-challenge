@@ -1,8 +1,8 @@
-package challenge.service.impl;
+package challenge.services.impl;
 
-import challenge.dao.UserDao;
+import challenge.daos.UserDao;
 import challenge.model.User;
-import challenge.service.UserService;
+import challenge.services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

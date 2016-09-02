@@ -1,4 +1,4 @@
-package challenge.controller;
+package challenge.controllers;
 
 import challenge.Application;
 import challenge.dto.UserDTO;
