@@ -29,7 +29,9 @@ public class RecognitionControllerTest extends BaseDaoTest {
         String comment = "way to go - party time!";
         recognitionController.createRecognition(new RecognitionDTO(mockRecognition(getTestUser(), comment)));
 
-        List<RecognitionDTO> recognitions = recognitionController.getRecognitions();
+        recognitionController.setRequester(getTestUser());
+        List<RecognitionDTO> recognitions = recognitionController.getMyRecognitions();
+
         assertNotNull(recognitions);
         assertEquals(1, recognitions.size());
         RecognitionDTO recognitionDTO = recognitions.get(0);

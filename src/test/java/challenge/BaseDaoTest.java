@@ -64,8 +64,8 @@ public class BaseDaoTest {
         return userDao.save(getUser(user));
     }
 
-    public User getUser(String user) {
-        return new User(TEST_USR_PREFIX + user, "test", "user", false, getTeam());
+    public User getUser(String userName) {
+        return new User(TEST_USR_PREFIX + userName, "test", "user", false, getTeam());
     }
 
     public void cleanup() {

@@ -6,10 +6,10 @@ import challenge.model.User;
 import org.junit.Test;
 
 import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
 
 
 public class UserDaoTest extends BaseDaoTest {
-
 
     @Test
     public void testSaveUser() {
@@ -19,22 +19,39 @@ public class UserDaoTest extends BaseDaoTest {
         User staged = getUser(user);
         User saved = userDao.save(staged);
         assertNotNull(saved);
-        assertEquals(staged.getFirstName(), saved.getFirstName());
-
         long savedId = saved.getId();
         assertNotNull(savedId);
-
-        Team team = saved.getTeam();
-        assertNotNull(team);
-        assertEquals(TEST_TEAM_NAME, team.getName());
+        assertEquals(staged.getFirstName(), saved.getFirstName());
 
         cleanup();
+    }
 
-        User one = userDao.findOne(savedId);
+    @Test
+    public void findOne() {
+        User saved = userDao.save(getUser("someUSer"));
+        User one = userDao.findOne(saved.getId());
+        assertNotNull(one);
+        assertEquals(saved.getFirstName(), saved.getFirstName());
+    }
+
+    @Test
+    public void testDelete() {
+        User saved = userDao.save(getUser("someUSer"));
+        User one = userDao.findOne(saved.getId());
+        assertNotNull(one);
+        assertEquals(saved.getFirstName(), saved.getFirstName());
+        userDao.delete(saved);
+        one = userDao.findOne(saved.getId());
         assertNull(one);
     }
 
-
+    @Test
+    public void testFindByUserName() {
+        String usrName = "someUsr";
+        User saved = userDao.save(getUserSaved(usrName));
+        User fetched = userDao.findByUsername(TEST_USR_PREFIX + usrName);
+        assertEquals(saved.getId(), fetched.getId());
+    }
 
 
 }
