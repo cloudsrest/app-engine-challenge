@@ -1,14 +1,15 @@
 package challenge.services;
 
-import challenge.dto.Recognition;
-import challenge.dto.User;
+import challenge.dto.RecognitionDTO;
+import challenge.model.Recognition;
+import challenge.model.User;
 
 import java.util.List;
 
 public interface RecognitionService {
 
-    public List<Recognition> getRecognitions(User user);
-    public void createRecognition(User user, Recognition recognition);
-    public void deleteAllRecognitions();
+    public List<Recognition> getAllRecognitions(User user);
+    public List<Recognition> getMyRecognitions(User user);
+    public Recognition createRecognition(User user, RecognitionDTO recognition);
 
 }

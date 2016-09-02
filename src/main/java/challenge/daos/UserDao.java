@@ -1,8 +1,11 @@
-package challenge.models;
+package challenge.daos;
 
 import javax.transaction.Transactional;
 
+import challenge.model.User;
 import org.springframework.data.repository.CrudRepository;
+
+import java.util.List;
 
 /**
  * A DAO for the entity User is simply created by extending the CrudRepository
@@ -16,11 +19,10 @@ import org.springframework.data.repository.CrudRepository;
 @Transactional
 public interface UserDao extends CrudRepository<User, Long> {
 
-  /**
-   * Return the user having the passed email or null if no user is found.
-   * 
-   * @param email the user email.
-   */
-  public User findByEmail(String email);
+  public User findByUsername(String username);
 
-} // class UserDao
+  public List<User> findAll();
+
+  public User findOne(Long userId);
+
+}
