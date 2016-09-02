@@ -8,6 +8,7 @@ public class RecognitionDTO {
     private Long toUserId;
     private String type;
     private String comment;
+    private Long timestamp;
 
     public RecognitionDTO() {
     }
@@ -17,6 +18,7 @@ public class RecognitionDTO {
         this.toUserId = recognition.getToUser().getId();
         this.type = recognition.getRecognitionType() == null ? null : recognition.getRecognitionType().toString();
         this.comment = recognition.getComment();
+        this.timestamp = recognition.getTimestamp().getTime();
     }
 
     public Long getFromUserId() {
@@ -49,5 +51,13 @@ public class RecognitionDTO {
 
     public void setComment(String comment) {
         this.comment = comment;
+    }
+
+    public Long getTimestamp() {
+        return timestamp;
+    }
+
+    public void setTimestamp(Long timestamp) {
+        this.timestamp = timestamp;
     }
 }

@@ -10,6 +10,7 @@ import challenge.services.RecognitionService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.Date;
 import java.util.List;
 
 @Service("recognitionService")
@@ -32,7 +33,7 @@ public class RecognitionServiceImpl implements RecognitionService {
     }
 
     @Override
-    public void createRecognition(User user, RecognitionDTO recognitionDTO) {
+    public Recognition createRecognition(User user, RecognitionDTO recognitionDTO) {
         User fromUser = userDao.findOne(recognitionDTO.getFromUserId());
         User toUser = userDao.findOne(recognitionDTO.getToUserId());
         Recognition recognition = new Recognition();
@@ -42,6 +43,7 @@ public class RecognitionServiceImpl implements RecognitionService {
         if (recognitionDTO.getType() != null) {
             recognition.setRecognitionType(RecognitionTypeEnum.valueOf(recognitionDTO.getType()));
         }
-        recognitionDao.save(recognition);
+        recognition.setTimestamp(new Date());
+        return recognitionDao.save(recognition);
     }
 }

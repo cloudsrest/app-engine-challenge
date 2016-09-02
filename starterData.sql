@@ -19,11 +19,12 @@ VALUES
 (11, 'joliver', 'Julian', 'Oliver', 0, 3),
 (12, 'jwallace', 'Jessica', 'Wallace', 0, 3);
 
-insert into recognition(id, from_user_id, to_user_id, recognition_type, comment)
+
+insert into recognition(id, from_user, to_user, recognition_type, comment, timestamp)
 VALUES
-(1, 1, 2, null, 'Love what you did on the Dodge project!'),
-(2, 2, 1, 'INNOVATION', 'Good idea to use Spring Boot'),
-(3, 6, 1, 'CREATIVITY', null),
-(4, 7, 8), 'TEAM_WORK', null),
-(4, 9, 8), 'TEAM_WORK', null),
-(4, 9, 8), 'HARD_WORK', null);
+(1, 1, 2, null, 'Love what you did on the Dodge project!', '2016-08-11 12:55:19'),
+(2, 2, 1, 'INNOVATION', 'Good idea to use Spring Boot', '2016-08-13 09:07:31'),
+(3, 6, 1, 'CREATIVITY', null, '2016-08-21 05:23:40'),
+(4, 7, 8, 'TEAM_WORK', null, '2016-08-09 05:49:47'),
+(5, 9, 8, 'TEAM_WORK', null, '2016-08-15 18:16:55'),
+(6, 9, 8, 'HARD_WORK', null, '2016-08-03 13:37:03');

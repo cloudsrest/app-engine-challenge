@@ -57,12 +57,9 @@ public class RecognitionController {
     @POST
     @Consumes("application/json")
     @Produces("application/json")
-    public Response createRecognition(RecognitionDTO recognition) {
-        recognitionService.createRecognition(requestor(), recognition);
-        return Response.status(Response.Status.CREATED)
-                .entity(STATUS_CREATE_REC_SUCCESS)
-                .type("text/plain")
-                .build();
+    public RecognitionDTO createRecognition(RecognitionDTO recognition) {
+        Recognition saved = recognitionService.createRecognition(requestor(), recognition);
+        return new RecognitionDTO(saved);
     }
 
 }

@@ -4,6 +4,7 @@ import challenge.dto.RecognitionTypeEnum;
 import org.hibernate.annotations.Type;
 
 import javax.persistence.*;
+import java.util.Date;
 
 @Entity
 public class Recognition {
@@ -22,6 +23,9 @@ public class Recognition {
 
     @Type(type="text")
     private String comment;
+
+    @Temporal(TemporalType.TIMESTAMP)
+    private Date timestamp;
 
     public long getId() {
         return id;
@@ -61,5 +65,13 @@ public class Recognition {
 
     public void setComment(String comment) {
         this.comment = comment;
+    }
+
+    public Date getTimestamp() {
+        return timestamp;
+    }
+
+    public void setTimestamp(Date timestamp) {
+        this.timestamp = timestamp;
     }
 }

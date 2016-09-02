@@ -10,6 +10,6 @@ public interface RecognitionService {
 
     public List<Recognition> getAllRecognitions(User user);
     public List<Recognition> getMyRecognitions(User user);
-    public void createRecognition(User user, RecognitionDTO recognition);
+    public Recognition createRecognition(User user, RecognitionDTO recognition);
 
 }
