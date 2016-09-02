@@ -1,4 +1,4 @@
-package challenge.service;
+package challenge.services;
 
 import challenge.model.User;
 
