@@ -26,7 +26,7 @@ import static org.junit.Assert.assertTrue;
 @WebAppConfiguration
 @IntegrationTest("server.port=9000")
 public class RecognitionControllerIntegrationTest extends BaseRestTest {
-//
+
 //    @Before
 //    public void setup() {
 //        deleteAllRecognitions();
@@ -36,9 +36,9 @@ public class RecognitionControllerIntegrationTest extends BaseRestTest {
 //    public void tearDown() {
 //        deleteAllRecognitions();
 //    }
-//
-//    @Test
-//    public void testCreateRecognitions() throws JsonProcessingException {
+
+    @Test
+    public void testCreateRecognitions() throws JsonProcessingException {
 //        Recognition recognition1 = new Recognition("111","222", RecognitionTypeEnum.CREATIVITY.toString(),"xxx");
 //        Recognition recognition2 = new Recognition("333","444", RecognitionTypeEnum.HARD_WORK.toString(),"iii");
 //
@@ -61,8 +61,8 @@ public class RecognitionControllerIntegrationTest extends BaseRestTest {
 //
 //        recognitions = getRecognitions();
 //        assertTrue(recognitions.isEmpty());
-//    }
-//
+    }
+
 //    private void createRecognition(Recognition recognition2) {
 //        restTemplate.postForEntity("http://localhost:9000/recognitions", recognition2, String.class);
 //    }
