@@ -5,13 +5,17 @@ import challenge.model.Recognition;
 import challenge.model.Team;
 import challenge.model.User;
 import org.junit.After;
+import org.junit.Assert;
 import org.junit.Before;
+import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.SpringApplicationConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import java.util.List;
+
+import static org.junit.Assert.assertTrue;
 
 @SpringApplicationConfiguration(classes = Application.class)
 @RunWith(SpringJUnit4ClassRunner.class)
@@ -38,6 +42,11 @@ public class BaseDaoTest {
     @After
     public void tearDown() {
         cleanup();
+    }
+
+    @Test
+    public void stub() {
+        assertTrue(true);
     }
 
     User getUserSaved(String user) {
