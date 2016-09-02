@@ -8,11 +8,11 @@ import javax.transaction.Transactional;
 import java.util.List;
 
 @Transactional
-public interface RecognitionDao  extends CrudRepository<Recognition, Long> {
+public interface RecognitionDao extends CrudRepository<Recognition, Long> {
 
     public Recognition save(Recognition recognition);
-
     public List<Recognition> findAll();
-
     public List<Recognition> findByToUser(User toUser);
+    public List<Recognition> findByFromUser(User toUser);
+
 }

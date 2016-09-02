@@ -29,7 +29,7 @@ public class RecognitionServiceImpl implements RecognitionService {
 
     @Override
     public List<Recognition> getMyRecognitions(User user) {
-        return recognitionDao.findByToUser(user);
+        return recognitionDao.findByFromUser(user);
     }
 
     @Override

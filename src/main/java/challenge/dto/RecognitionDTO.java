@@ -4,6 +4,7 @@ import challenge.model.Recognition;
 
 public class RecognitionDTO {
 
+    private Long id;
     private Long fromUserId;
     private Long toUserId;
     private String type;
@@ -14,11 +15,19 @@ public class RecognitionDTO {
     }
 
     public RecognitionDTO(Recognition recognition) {
+        this.id = recognition.getId();
         this.fromUserId = recognition.getFromUser().getId();
         this.toUserId = recognition.getToUser().getId();
         this.type = recognition.getRecognitionType() == null ? null : recognition.getRecognitionType().toString();
         this.comment = recognition.getComment();
-        this.timestamp = recognition.getTimestamp().getTime();
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
     }
 
     public Long getFromUserId() {
@@ -59,5 +68,17 @@ public class RecognitionDTO {
 
     public void setTimestamp(Long timestamp) {
         this.timestamp = timestamp;
+    }
+
+
+    @Override
+    public String toString() {
+        return "RecognitionDTO{" +
+                "fromUserId=" + fromUserId +
+                ", toUserId=" + toUserId +
+                ", type='" + type + '\'' +
+                ", comment='" + comment + '\'' +
+                ", timestamp=" + timestamp +
+                '}';
     }
 }

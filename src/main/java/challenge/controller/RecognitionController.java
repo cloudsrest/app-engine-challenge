@@ -24,9 +24,14 @@ public class RecognitionController {
     @Autowired
     private UserService userService;
 
+    private User requester = null;
+
     //FIXME
     private User requestor() {
-        return userService.getUsers(new User()).get(0);
+        if (requester == null) {
+           requester = userService.getUsers(new User()).get(0);
+        }
+        return requester;
     }
 
     @GET
@@ -59,4 +64,7 @@ public class RecognitionController {
         return new RecognitionDTO(saved);
     }
 
+    public void setRequester(User requester) {
+        this.requester = requester;
+    }
 }

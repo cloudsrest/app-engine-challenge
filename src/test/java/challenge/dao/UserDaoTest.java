@@ -1,5 +1,6 @@
 package challenge.dao;
 
+import challenge.BaseDaoTest;
 import challenge.model.Team;
 import challenge.model.User;
 import org.junit.Test;

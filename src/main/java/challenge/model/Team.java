@@ -12,7 +12,7 @@ public class Team {
     private String name;
 
     @OneToMany(mappedBy="team")
-    private List<User> users; 
+    private List<User> users;
 
     public long getId() {
         return id;

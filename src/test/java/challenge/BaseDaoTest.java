@@ -1,6 +1,11 @@
-package challenge.dao;
+package challenge;
 
 import challenge.Application;
+import challenge.controller.RecognitionController;
+import challenge.dao.RecognitionDao;
+import challenge.dao.TeamDao;
+import challenge.dao.UserDao;
+import challenge.dto.RecognitionTypeEnum;
 import challenge.model.Recognition;
 import challenge.model.Team;
 import challenge.model.User;
@@ -24,15 +29,21 @@ public class BaseDaoTest {
     public static final String TEST_TEAM_NAME = "unitTest";
     public static final String TEST_USR_PREFIX = "unitTest-";
 
+    public User testUser = null;
+
 
     @Autowired
-    UserDao userDao;
+    public RecognitionController recognitionController;
+
 
     @Autowired
-    TeamDao teamDao;
+    public UserDao userDao;
 
     @Autowired
-    RecognitionDao recognitionDao;
+    public TeamDao teamDao;
+
+    @Autowired
+    public RecognitionDao recognitionDao;
 
     @Before
     public void setup() {
@@ -49,15 +60,15 @@ public class BaseDaoTest {
         assertTrue(true);
     }
 
-    User getUserSaved(String user) {
+    public User getUserSaved(String user) {
         return userDao.save(getUser(user));
     }
 
-    User getUser(String user) {
+    public User getUser(String user) {
         return new User(TEST_USR_PREFIX + user, "test", "user", false, getTeam());
     }
 
-    void cleanup() {
+    public void cleanup() {
         List<Recognition> allRecognitions = recognitionDao.findAll();
         for (Recognition recognition : allRecognitions) {
             if (recognition.getFromUser().getUsername().toLowerCase().contains(TEST_USR_PREFIX.toLowerCase())) {
@@ -69,7 +80,14 @@ public class BaseDaoTest {
         allUser.stream().filter(user -> user.getUsername().toLowerCase().contains("unit")).forEach(userDao::delete);
     }
 
-    Team getTeam() {
+    public Recognition mockRecognition(User fromUser, String comment) {
+        if (fromUser == null) {
+            fromUser = getTestUser();
+        }
+        return new Recognition(fromUser, getUserSaved("toUser"), RecognitionTypeEnum.CREATIVITY, comment, null);
+    }
+
+    public Team getTeam() {
         List<Team> all = teamDao.findAll();
         if (all!=null && !all.isEmpty()) {
             return all.get(0);
@@ -79,6 +97,14 @@ public class BaseDaoTest {
 
         team.setName(TEST_TEAM_NAME);
         return teamDao.save(team);
+    }
+
+    public User getTestUser() {
+        if (testUser == null) {
+            testUser = getUserSaved("fromUser");
+        }
+        recognitionController.setRequester(testUser);
+        return testUser;
     }
 
 }

@@ -1,93 +1,131 @@
 package challenge.controller;
 
 import challenge.Application;
-import challenge.dao.UserDao;
+import challenge.dao.RecognitionDao;
 import challenge.dto.RecognitionDTO;
+import challenge.dto.RecognitionTypeEnum;
 import challenge.model.Recognition;
 import challenge.model.User;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import org.junit.After;
 import org.junit.Before;
-import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.IntegrationTest;
 import org.springframework.boot.test.SpringApplicationConfiguration;
+import org.springframework.http.ResponseEntity;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.context.web.WebAppConfiguration;
 
 import java.util.Arrays;
 import java.util.List;
-import java.util.Random;
 
 import static org.junit.Assert.*;
 
-@Ignore
 @RunWith(SpringJUnit4ClassRunner.class)
 @SpringApplicationConfiguration(classes = Application.class)
 @WebAppConfiguration
-@IntegrationTest("server.port=9000")
+@IntegrationTest("server.port=9002")
 public class RecognitionControllerIntegrationTest extends BaseRestTest {
 
-    @Autowired
-    private UserDao userDao;
+    public static final String BASE_RECOGNITION_URL = "http://localhost:9002/recognitions";
 
     @Before
     public void setup() {
-        deleteAllRecognitionDTOs();
+        testUser = getTestUser();
+        cleanUp();
     }
 
     @After
     public void tearDown() {
-        deleteAllRecognitionDTOs();
+        cleanUp();
     }
 
     @Test
     public void testCreateRecognitionDTOs() throws JsonProcessingException {
-        RecognitionDTO RecognitionDTO1 = new RecognitionDTO(mockRecognition());
-        RecognitionDTO RecognitionDTO2 = new RecognitionDTO(mockRecognition());
+        String comment1 = "great!";
+        RecognitionDTO RecognitionDTO1 = new RecognitionDTO(mockRecognition(null, comment1));
+        String comment2 = "awesome!";
+        RecognitionDTO RecognitionDTO2 = new RecognitionDTO(mockRecognition(null, comment2));
 
-        createRecognitionDTO(RecognitionDTO1);
+        RecognitionDTO recognition = createRecognition(RecognitionDTO1);
+        assertNotNull(recognition.getId());
+        assertEquals(recognition.getComment(), comment1);
 
-        RecognitionDTO[] forNow = restTemplate.getForObject("http://localhost:9000/RecognitionDTOs", RecognitionDTO[].class);
-        List<RecognitionDTO> RecognitionDTOs = Arrays.asList(forNow);
-        assertFalse(RecognitionDTOs.isEmpty());
-        assertEquals(1, RecognitionDTOs.size());
-        assertEquals(RecognitionDTO1, RecognitionDTOs.get(0));
+        List<RecognitionDTO> recognitions = getMyRecognitionDTOs();
+        assertFalse(recognitions.isEmpty());
+        assertEquals(1, recognitions.size());
+        assertEquals(RecognitionDTO1.getComment(), recognitions.get(0).getComment());
 
-        createRecognitionDTO(RecognitionDTO2);
+        recognition = createRecognition(RecognitionDTO2);
+        assertNotNull(recognition.getId());
+        assertEquals(recognition.getComment(), comment2);
 
-        RecognitionDTOs = getRecognitionDTOs();
-        assertFalse(RecognitionDTOs.isEmpty());
-        assertEquals(2, RecognitionDTOs.size());
-        assertEquals(RecognitionDTO2, RecognitionDTOs.get(1));
+        recognitions = getMyRecognitionDTOs();
+        assertFalse(recognitions.isEmpty());
+        assertEquals(2, recognitions.size());
+        assertEquals(RecognitionDTO2.getComment(), recognitions.get(1).getComment());
 
-        deleteAllRecognitionDTOs();
-
-        RecognitionDTOs = getRecognitionDTOs();
-        assertTrue(RecognitionDTOs.isEmpty());
+        cleanUp();
+        recognitions = getMyRecognitionDTOs();
+        assertTrue(recognitions.isEmpty());
     }
 
-    private void createRecognitionDTO(RecognitionDTO RecognitionDTO2) {
-        restTemplate.postForEntity("http://localhost:9000/RecognitionDTOs", RecognitionDTO2, String.class);
+
+    @Test
+    public void testGetMine()  {
+        RecognitionDTO RecognitionDTO1 = new RecognitionDTO(mockRecognition(null, "dude!"));
+        RecognitionDTO RecognitionDTO2 = new RecognitionDTO(mockRecognition(null, "sweet!"));
+        RecognitionDTO RecognitionDTO3 = new RecognitionDTO(mockRecognition(getUserSaved("yup"), "dude!"));
+
+        createRecognition(RecognitionDTO1);
+        createRecognition(RecognitionDTO2);
+        createRecognition(RecognitionDTO3);
+
+        List<RecognitionDTO> myRecognitionDTOs = getMyRecognitionDTOs();
+        assertEquals(2, myRecognitionDTOs.size());
+        for (RecognitionDTO myRecognitionDTO : myRecognitionDTOs) {
+            assertEquals(new Long(testUser.getId()), myRecognitionDTO.getFromUserId());
+        }
     }
 
-    private void deleteAllRecognitionDTOs() {
-        restTemplate.delete("http://localhost:9000/RecognitionDTOs");
+    @Test
+    public void testGetAll()  {
+        RecognitionDTO RecognitionDTO1 = new RecognitionDTO(mockRecognition(null, "dude!"));
+        RecognitionDTO RecognitionDTO2 = new RecognitionDTO(mockRecognition(null, "sweet!"));
+        RecognitionDTO RecognitionDTO3 = new RecognitionDTO(mockRecognition(getUserSaved("yup"), "dude!"));
+
+        createRecognition(RecognitionDTO1);
+        createRecognition(RecognitionDTO2);
+        createRecognition(RecognitionDTO3);
+
+        List<RecognitionDTO> myRecognitionDTOs = getAllRecognitionDTOs();
+        assertTrue(myRecognitionDTOs.size() > 2);
     }
 
-    private List<RecognitionDTO> getRecognitionDTOs() {
-        return Arrays.asList(restTemplate.getForObject("http://localhost:9000/RecognitionDTOs", RecognitionDTO[].class));
+    private RecognitionDTO createRecognition(RecognitionDTO recognition) {
+        //restTemplate.postForEntity(BASE_RECOGNITION_URL, recognition, RecognitionDTO.class);
+        return restTemplate.postForObject(BASE_RECOGNITION_URL, recognition, RecognitionDTO.class);
     }
 
-    private Recognition mockRecognition() {
-        Random random = new Random();
-        int index = random.nextInt(1000);
+    private List<RecognitionDTO> getMyRecognitionDTOs() {
+        return Arrays.asList(restTemplate.getForObject(BASE_RECOGNITION_URL + "/mine", RecognitionDTO[].class));
+    }
 
-        User fromUser = new User();
-        User toUser = new User();
-        return new Recognition();
+    private List<RecognitionDTO> getAllRecognitionDTOs() {
+        return Arrays.asList(restTemplate.getForObject(BASE_RECOGNITION_URL + "/all", RecognitionDTO[].class));
+    }
+
+    private void cleanUp() {
+        List<Recognition> allRecognitions = recognitionDao.findAll();
+        if (allRecognitions!=null) {
+            allRecognitions.stream().filter(s -> {
+                System.out.println(s);
+                System.out.println(testUser);
+                return s.getFromUser().getId() == (testUser.getId());
+            }).forEach(recognitionDao::delete);
+        }
     }
 
 }

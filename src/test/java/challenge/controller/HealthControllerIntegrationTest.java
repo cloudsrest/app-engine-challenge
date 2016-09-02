@@ -16,11 +16,10 @@ import org.springframework.web.client.RestTemplate;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 
-@Ignore
 @RunWith(SpringJUnit4ClassRunner.class)
 @SpringApplicationConfiguration(classes = Application.class)
 @WebAppConfiguration
-@IntegrationTest("server.port=9000")
+@IntegrationTest("server.port=9001")
 public class HealthControllerIntegrationTest {
 
     private RestTemplate restTemplate = new TestRestTemplate();
@@ -28,7 +27,7 @@ public class HealthControllerIntegrationTest {
     @Test
     public void health() {
         ResponseEntity<Health> entity =
-                restTemplate.getForEntity("http://localhost:9000/health", Health.class);
+                restTemplate.getForEntity("http://localhost:9001/health", Health.class);
 
         assertTrue(entity.getStatusCode().is2xxSuccessful());
         assertEquals(entity.getBody().getStatus(), HealthController.STATUS);
