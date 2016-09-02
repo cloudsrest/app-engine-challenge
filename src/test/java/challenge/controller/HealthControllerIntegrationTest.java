@@ -1,4 +1,4 @@
-package challenge.controllers;
+package challenge.controller;
 
 import challenge.Application;
 import challenge.dto.Health;

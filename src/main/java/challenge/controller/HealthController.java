@@ -1,4 +1,4 @@
-package challenge.controllers;
+package challenge.controller;
 
 import challenge.dto.Health;
 import org.springframework.stereotype.Component;

@@ -1,9 +1,9 @@
 package challenge.configuration;
 
-import challenge.controllers.HealthController;
-import challenge.controllers.MainController;
-import challenge.controllers.RecognitionController;
-import challenge.controllers.UserController;
+import challenge.controller.HealthController;
+import challenge.controller.MainController;
+import challenge.controller.RecognitionController;
+import challenge.controller.UserController;
 import org.glassfish.jersey.server.ResourceConfig;
 import org.springframework.context.annotation.Configuration;
 

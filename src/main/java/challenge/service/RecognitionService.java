@@ -1,4 +1,4 @@
-package challenge.services;
+package challenge.service;
 
 import challenge.dto.RecognitionDTO;
 import challenge.model.Recognition;

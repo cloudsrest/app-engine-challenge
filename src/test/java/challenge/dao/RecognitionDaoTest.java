@@ -1,4 +1,4 @@
-package challenge.daos;
+package challenge.dao;
 
 import challenge.dto.RecognitionTypeEnum;
 import challenge.model.Recognition;

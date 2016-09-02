@@ -1,4 +1,4 @@
-package challenge.controllers;
+package challenge.controller;
 
 import org.springframework.stereotype.Controller;
 

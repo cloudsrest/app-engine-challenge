@@ -1,8 +1,8 @@
-package challenge.services.impl;
+package challenge.service.impl;
 
-import challenge.daos.TeamDao;
+import challenge.dao.TeamDao;
 import challenge.model.Team;
-import challenge.services.TeamService;
+import challenge.service.TeamService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

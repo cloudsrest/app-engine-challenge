@@ -1,4 +1,4 @@
-package challenge.daos;
+package challenge.dao;
 
 import javax.transaction.Transactional;
 

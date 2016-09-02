@@ -1,10 +1,10 @@
-package challenge.controllers;
+package challenge.controller;
 
 import challenge.dto.RecognitionDTO;
 import challenge.model.Recognition;
 import challenge.model.User;
-import challenge.services.RecognitionService;
-import challenge.services.UserService;
+import challenge.service.RecognitionService;
+import challenge.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 

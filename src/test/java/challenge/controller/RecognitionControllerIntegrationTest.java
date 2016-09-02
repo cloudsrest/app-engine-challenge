@@ -1,7 +1,7 @@
-package challenge.controllers;
+package challenge.controller;
 
 import challenge.Application;
-import challenge.daos.UserDao;
+import challenge.dao.UserDao;
 import challenge.dto.RecognitionDTO;
 import challenge.model.Recognition;
 import challenge.model.User;
