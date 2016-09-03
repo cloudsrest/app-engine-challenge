@@ -60,8 +60,8 @@ public class BaseDaoTest {
         assertTrue(true);
     }
 
-    public User getUserSaved(String user) {
-        return userDao.save(getUser(user));
+    public User getUserSaved(String userId) {
+        return userDao.save(getUser(userId));
     }
 
     public User getUser(String userName) {
@@ -71,9 +71,11 @@ public class BaseDaoTest {
     public void cleanup() {
         List<Recognition> allRecognitions = recognitionDao.findAll();
         for (Recognition recognition : allRecognitions) {
-            if (recognition.getFromUser().getUsername().toLowerCase().contains(TEST_USR_PREFIX.toLowerCase())) {
+            User fromUser = recognition.getFromUser();
+            if (recognition.getFromUser() == null || fromUser.getUsername().toLowerCase().contains(TEST_USR_PREFIX.toLowerCase())) {
                 recognitionDao.delete(recognition);
             }
+
         }
 
         List<User> allUser = userDao.findAll();
@@ -89,7 +91,7 @@ public class BaseDaoTest {
 
     public Team getTeam() {
         List<Team> all = teamDao.findAll();
-        if (all!=null && !all.isEmpty()) {
+        if (all != null && !all.isEmpty()) {
             return all.get(0);
         }
 

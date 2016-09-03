@@ -16,8 +16,6 @@ import java.util.List;
 @Path("/recognitions")
 public class RecognitionController {
 
-    public static final String STATUS_CREATE_REC_SUCCESS = "Recognition created successfully";
-
     @Autowired
     private RecognitionService recognitionService;
 

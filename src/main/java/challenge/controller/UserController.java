@@ -20,11 +20,15 @@ public class UserController {
     @Autowired
     private UserService userService;
 
+    private User requester = null;
+
     //FIXME
     private User requestor() {
-        return new User();
+        if (requester == null) {
+            requester = userService.getUsers(new User()).get(0);
+        }
+        return requester;
     }
-
 
     @GET
     @Produces("application/json")
@@ -43,4 +47,14 @@ public class UserController {
         return new UserDTO(userService.getUser(requestor(), userId));
     }
 
+    @GET
+    @Path("/me")
+    @Produces("application/json")
+    public UserDTO whoAmI() {
+        return new UserDTO(userService.getUser(requestor(), requestor().getId()));
+    }
+
+    public void setRequester(User requester) {
+        this.requester = requester;
+    }
 }

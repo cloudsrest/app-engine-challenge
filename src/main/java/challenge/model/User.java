@@ -79,4 +79,16 @@ public class User {
     public void setTeam(Team team) {
         this.team = team;
     }
+
+    @Override
+    public String toString() {
+        return "User{" +
+                "id=" + id +
+                ", username='" + username + '\'' +
+                ", firstName='" + firstName + '\'' +
+                ", lastName='" + lastName + '\'' +
+                ", isAdmin=" + isAdmin +
+                ", team=" + team +
+                '}';
+    }
 }
