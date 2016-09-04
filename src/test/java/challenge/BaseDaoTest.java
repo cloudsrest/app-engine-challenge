@@ -61,7 +61,8 @@ public class BaseDaoTest {
     }
 
     public User getUserSaved(String userId) {
-        return userDao.save(getUser(userId));
+        User save = userDao.save(getUser(userId));
+        return save;
     }
 
     public User getUser(String userName) {

@@ -1,21 +1,20 @@
 package challenge.controller;
 
 import challenge.dto.Health;
-import org.springframework.stereotype.Component;
+import org.springframework.http.MediaType;
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 
-import javax.ws.rs.GET;
-import javax.ws.rs.Path;
-import javax.ws.rs.Produces;
-
-@Component
-@Path("/health")
+@Controller
+@RequestMapping("/health")
 public class HealthController {
 
     public static final String STATUS = "Jersey: Up and Running!";
 
-    @GET
-    @Produces("application/json")
-    public Health health() {
+    @RequestMapping(method = RequestMethod.GET, produces={MediaType.APPLICATION_JSON_VALUE})
+    public @ResponseBody Health health() {
         return new Health(STATUS);
     }
 
