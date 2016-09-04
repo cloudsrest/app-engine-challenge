@@ -1,14 +1,18 @@
 package challenge.dao;
 
-import challenge.BaseDaoTest;
-import challenge.model.Team;
 import challenge.model.User;
 import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
+import org.springframework.test.context.junit4.SpringRunner;
 
 import static org.junit.Assert.*;
 import static org.junit.Assert.assertEquals;
 
 
+
+@RunWith(SpringRunner.class)
+@DataJpaTest
 public class UserDaoTest extends BaseDaoTest {
 
     @Test
@@ -22,8 +26,6 @@ public class UserDaoTest extends BaseDaoTest {
         long savedId = saved.getId();
         assertNotNull(savedId);
         assertEquals(staged.getFirstName(), saved.getFirstName());
-
-        cleanup();
     }
 
     @Test
@@ -47,9 +49,9 @@ public class UserDaoTest extends BaseDaoTest {
 
     @Test
     public void testFindByUserName() {
-        String usrName = "someUsr";
-        User saved = userDao.save(getUserSaved(usrName));
-        User fetched = userDao.findByUsername(TEST_USR_PREFIX + usrName);
+        String userName = "someUser";
+        User saved = userDao.save(getUserSaved(userName));
+        User fetched = userDao.findByUsername(userName);
         assertEquals(saved.getId(), fetched.getId());
     }
 
