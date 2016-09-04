@@ -1,14 +1,24 @@
 package challenge.controller;
 
-import challenge.BaseDaoTest;
+import challenge.dao.BaseDaoTest;
 import org.junit.Assert;
+import org.junit.Ignore;
 import org.junit.Test;
-import org.springframework.boot.test.TestRestTemplate;
-import org.springframework.web.client.RestTemplate;
+import org.junit.runner.RunWith;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
+import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.boot.test.web.client.TestRestTemplate;
+import org.springframework.test.context.junit4.SpringRunner;
 
-public class BaseRestTest extends BaseDaoTest {
+@RunWith(SpringRunner.class)
+@SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
+//@DataJpaTest
+@Ignore // FIXME
+public class BaseRestTest {
 
-    RestTemplate restTemplate = new TestRestTemplate();
+    @Autowired
+    private TestRestTemplate restTemplate;
 
     @Test
     public void stub() {

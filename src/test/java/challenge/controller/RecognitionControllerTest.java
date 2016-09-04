@@ -1,11 +1,8 @@
 package challenge.controller;
 
 import challenge.Application;
-import challenge.BaseDaoTest;
+import challenge.dao.BaseDaoTest;
 import challenge.dto.RecognitionDTO;
-import challenge.dto.RecognitionTypeEnum;
-import challenge.dto.UserDTO;
-import challenge.service.RecognitionService;
 import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -22,7 +19,13 @@ import static org.junit.Assert.assertTrue;
 
 @SpringApplicationConfiguration(classes = Application.class)
 @RunWith(SpringJUnit4ClassRunner.class)
+@Ignore
 public class RecognitionControllerTest extends BaseDaoTest {
+
+    @Autowired
+    public RecognitionController recognitionController;
+
+
 
     @Test
     public void testCreateRecognition() {

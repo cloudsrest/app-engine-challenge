@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 @RequestMapping("/health")
 public class HealthController {
 
-    public static final String STATUS = "Jersey: Up and Running!";
+    public static final String STATUS = "Up and Running!";
 
     @RequestMapping(method = RequestMethod.GET, produces={MediaType.APPLICATION_JSON_VALUE})
     public @ResponseBody Health health() {
