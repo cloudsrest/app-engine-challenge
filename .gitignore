@@ -24,3 +24,6 @@ tmp/
 .idea_modules
 .project
 RUNNING_PID
+
+
+src/main/resources/application-default.properties

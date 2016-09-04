@@ -4,7 +4,15 @@
 
 #### Configurations
 
-Open the `application.properties` file and set your own configurations. (currently your local database name is set to `challengedb` by default)
+The `application.properties` file has production properties in it, to use your own database, 
+create a file `src/main/resources/application-default.properties` that provides local values.
+For example:
+```
+$ cat src/main/resources/application-default.properties
+spring.datasource.url = jdbc:mysql://localhost:3306/challengedb?useSSL=false
+spring.datasource.username = root
+spring.datasource.password = root
+```
 
 #### Prerequisites
 
