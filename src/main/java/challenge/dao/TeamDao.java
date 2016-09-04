@@ -10,7 +10,7 @@ import java.util.List;
 @Transactional
 public interface TeamDao extends CrudRepository<Team, Long> {
 
-    public User findByName(String username);
+    public User findByName(String name);
 
     public List<Team> findAll();
 
