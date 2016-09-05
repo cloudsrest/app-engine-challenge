@@ -15,6 +15,8 @@ before_install:
   # Add gcloud to $PATH
   - source /home/travis/google-cloud-sdk/path.bash.inc
   - gcloud version
+  - gcloud auth activate-service-account --key-file client-secret.json
+
 
 #before_install:
   # Decrypt the credentials we added to the repo using the key we added with the Travis command line tool
