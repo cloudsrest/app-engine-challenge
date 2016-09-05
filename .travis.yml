@@ -36,6 +36,7 @@ deploy:
   project: blissful-cell-141318
   # default: true
   config: src/main/appengine/app.yaml
+  skip_cleanup: true
   on:
     all_branches: true
 
