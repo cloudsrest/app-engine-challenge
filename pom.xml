@@ -78,7 +78,7 @@
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <start-class>challenge.Application</start-class>
         <java.version>1.8</java.version>
-        <gcloud.directory>/Users/adrianyacub/dev/google-cloud-sdk</gcloud.directory>
+        <gcloud.directory>$HOME/google-cloud-sdk</gcloud.directory>
     </properties>
 
     <build>
