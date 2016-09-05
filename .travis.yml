@@ -32,7 +32,7 @@ install:
 
 deploy:
   provider: script
-  script: (mvn clean pakcage && exec mvn gcloud:deploy)
+  script: (mvn clean package && exec mvn gcloud:deploy)
   on:
     all_branches: true
 
