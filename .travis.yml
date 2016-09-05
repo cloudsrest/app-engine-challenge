@@ -30,7 +30,7 @@ before_install:
 install:
   - gcloud config set project blissful-cell-141318
 
-script: ./copyjar.sh
+script: ./cpjar.sh
 
 deploy:
   provider: gae
