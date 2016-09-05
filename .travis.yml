@@ -34,7 +34,7 @@ deploy:
   provider: gae
   keyfile: client-secret.json
   project: blissful-cell-141318
-  config: src/main/appengine/app.yaml
+  config: src/main/appengine/NOT/app.yaml
   on:
     all_branches: true
 

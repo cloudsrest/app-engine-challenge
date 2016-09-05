@@ -16,8 +16,6 @@
 runtime: java
 vm: true
 
-module: default
-
 runtime_config:  # Optional
   jdk: openjdk8
 

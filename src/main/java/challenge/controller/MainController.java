@@ -11,7 +11,7 @@ public class MainController {
 
     @RequestMapping(method = RequestMethod.GET, produces=MediaType.TEXT_HTML_VALUE)
     public String index() {
-        return "Welcome to SpringBoot123!";
+        return "Welcome to SpringBoot (via CD)!";
     }
 
 }
