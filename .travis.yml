@@ -1,20 +1,20 @@
 language: java
 sudo: false # faster builds
-jdk:
-  - oraclejdk8
-
-env:
-# Make sure gcloud command is on our PATH
-- PATH=$PATH:${HOME}/google-cloud-sdk/bin
-
-before_install:
-# If the SDK is not already cached, download it and unpack it
-- if [ ! -d ${HOME}/google-cloud-sdk ]; then
-     curl https://sdk.cloud.google.com | bash;
-  fi
-
-- gcloud auth activate-service-account --key-file client-secret.json
-
+#jdk:
+#  - oraclejdk8
+#
+#env:
+## Make sure gcloud command is on our PATH
+#- PATH=$PATH:${HOME}/google-cloud-sdk/bin
+#
+#before_install:
+## If the SDK is not already cached, download it and unpack it
+#- if [ ! -d ${HOME}/google-cloud-sdk ]; then
+#     curl https://sdk.cloud.google.com | bash;
+#  fi
+#
+#- gcloud auth activate-service-account --key-file client-secret.json
+#
 
 #before_install:
   # Decrypt the credentials we added to the repo using the key we added with the Travis command line tool
@@ -27,8 +27,8 @@ before_install:
   # Here we use the decrypted service account credentials to authenticate the command line tool
   # - gcloud auth activate-service-account --key-file client-secret.json
 
-install:
-  - gcloud config set project blissful-cell-141318
+#install:
+#  - gcloud config set project blissful-cell-141318
 
 deploy:
   provider: gae
