@@ -37,7 +37,7 @@ deploy:
   keyfile: client-secret.json
   project: blissful-cell-141318
   default: true
-  config: src/main/appengine/app.yaml
+  # config: src/main/appengine/app.yaml
   skip_cleanup: true
   verbosity: debug
   on:
