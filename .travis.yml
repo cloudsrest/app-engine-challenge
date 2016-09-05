@@ -42,3 +42,4 @@ deploy:
   config: src/main/appengine/app.yaml
   on:
     all_branches: true
+
