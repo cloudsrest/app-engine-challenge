@@ -31,8 +31,12 @@ install:
   - gcloud config set project blissful-cell-141318
 
 deploy:
-  provider: script
-  script: (mvn clean pakcage && exec mvn gcloud:deploy)
+  provider: gae
+  keyfile: client-secret.json
+  project: blissful-cell-141318
+  # default: true
+  config: src/main/appengine/app.yaml
+  verbosity: debug
   on:
     all_branches: true
 
