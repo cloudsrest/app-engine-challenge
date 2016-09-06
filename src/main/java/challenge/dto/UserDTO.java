@@ -17,7 +17,6 @@ public class UserDTO {
         this.username = model.getUsername();
         this.firstName = model.getFirstName();
         this.lastName = model.getLastName();
-        this.isAdmin = model.isAdmin();
         this.team = model.getTeam() == null ? null : model.getTeam().getId();
     }
 

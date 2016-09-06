@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 @Controller
-@RequestMapping("/health")
+@RequestMapping("/public/health")
 public class HealthController {
 
     public static final String STATUS = "Up and Running!";

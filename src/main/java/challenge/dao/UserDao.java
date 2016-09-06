@@ -3,7 +3,9 @@ package challenge.dao;
 import javax.transaction.Transactional;
 
 import challenge.model.User;
+import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;
+import org.springframework.data.repository.query.Param;
 
 import java.util.List;
 
@@ -28,5 +30,17 @@ public interface UserDao extends CrudRepository<User, Long> {
     public User save(User user);
 
     public void delete(User user);
+
+    @Query("SELECT u FROM User u WHERE LOWER(u.username) = LOWER(:username)")
+    User findByUsernameCaseInsensitive(@Param("username") String username);
+
+    @Query
+    User findByEmail(String email);
+
+    @Query
+    User findByEmailAndActivationKey(String email, String activationKey);
+
+    @Query
+    User findByEmailAndResetPasswordKey(String email, String resetPasswordKey);
 
 }
