@@ -22,6 +22,14 @@ before_install:
 install:
   - gcloud config set project blissful-cell-141318
 
+before_script:
+  env:
+  - TEST=true
+
+after_script:
+  env:
+  - TEST=false
+
 deploy:
   provider: script
   script: (mvn clean package && exec mvn gcloud:deploy)
