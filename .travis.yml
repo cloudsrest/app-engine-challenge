@@ -24,7 +24,7 @@ install:
 
 deploy:
   provider: script
-  script: (mvn clean package -Ptest && exec mvn gcloud:deploy)
+  script: (mvn clean package && exec mvn gcloud:deploy)
   on: master
 
 after_success:
