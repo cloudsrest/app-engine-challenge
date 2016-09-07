@@ -9,10 +9,7 @@ import challenge.dto.RecognitionTypeEnum;
 import challenge.model.Recognition;
 import challenge.model.Team;
 import challenge.model.User;
-import org.junit.After;
-import org.junit.Assert;
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.*;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
@@ -25,6 +22,7 @@ import static org.junit.Assert.assertTrue;
 
 @RunWith(SpringRunner.class)
 @DataJpaTest
+@Ignore
 public class BaseDaoTest {
 
     public static final String TEST_TEAM_NAME = "team rocket";

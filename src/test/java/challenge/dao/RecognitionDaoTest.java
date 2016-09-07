@@ -3,6 +3,7 @@ package challenge.dao;
 import challenge.dto.RecognitionTypeEnum;
 import challenge.model.Recognition;
 import challenge.model.User;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
@@ -17,6 +18,7 @@ import static org.junit.Assert.assertTrue;
 
 @RunWith(SpringRunner.class)
 @DataJpaTest
+@Ignore
 public class RecognitionDaoTest extends BaseDaoTest {
 
     @Test

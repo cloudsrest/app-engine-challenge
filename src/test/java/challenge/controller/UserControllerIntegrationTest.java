@@ -1,35 +1,26 @@
 package challenge.controller;
 
-import challenge.Application;
-import challenge.dto.UserDTO;
 import challenge.model.User;
 import challenge.service.UserService;
 import org.junit.Before;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Matchers;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.IntegrationTest;
-import org.springframework.boot.test.SpringApplicationConfiguration;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
-import org.springframework.boot.test.web.client.TestRestTemplate;
-import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.context.junit4.SpringRunner;
-import org.springframework.test.context.web.WebAppConfiguration;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
-import static junit.framework.Assert.*;
 import static org.mockito.BDDMockito.given;
-import static org.mockito.Matchers.anyObject;
 
 @RunWith(SpringRunner.class)
 @DataJpaTest
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.MOCK)
+@Ignore
 public class UserControllerIntegrationTest {
 //    @Autowired
 //    private MockMvc mvc;
