@@ -1,5 +1,7 @@
-package challenge.controller;
+package challenge.integration;
+import challenge.controller.HealthController;
 import challenge.dto.Health;
+import org.junit.Assert;
 import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -14,7 +16,6 @@ import static org.junit.Assert.assertTrue;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
-@Ignore // FIXME
 public class HealthControllerIntegrationTest {
     @Autowired
     private TestRestTemplate restTemplate;
@@ -22,8 +23,8 @@ public class HealthControllerIntegrationTest {
     @Test
     public void health() {
         ResponseEntity<Health> entity =
-                restTemplate.getForEntity("/health", Health.class);
+                restTemplate.getForEntity("/api/public/health", Health.class);
         assertTrue(entity.getStatusCode().is2xxSuccessful());
-        assertEquals(entity.getBody().getStatus(), HealthController.STATUS);
+        Assert.assertEquals(entity.getBody().getStatus(), HealthController.STATUS);
     }
 }

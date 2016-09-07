@@ -37,4 +37,10 @@ public class UserController extends BaseController {
         return new UserDTO(user);
     }
 
+    @RequestMapping(value="/me", method = RequestMethod.GET, produces= MediaType.APPLICATION_JSON_VALUE)
+    public @ResponseBody UserDTO getMe(Principal principal) {
+        User user = userService.getUser(requestor(principal), userDao.findByUsername(principal.getName()).getId());
+        return new UserDTO(user);
+    }
+
 }
