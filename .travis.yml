@@ -27,7 +27,7 @@ script: "mvn -Ptest verify"
 deploy:
   provider: script
   #attempting to run test with in-memory profile then package without
-  script: (mvn -Ptest verify && mvn clean package -DskipTests && exec mvn gcloud:deploy)
+  script: (mvn -Ptest clean package -DskipTests && exec mvn gcloud:deploy -DskipTests)
   on: master
 
 after_success:
