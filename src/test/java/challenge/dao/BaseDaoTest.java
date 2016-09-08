@@ -1,18 +1,14 @@
 package challenge.dao;
 
-import challenge.Application;
-import challenge.controller.RecognitionController;
-import challenge.dao.RecognitionDao;
-import challenge.dao.TeamDao;
-import challenge.dao.UserDao;
 import challenge.dto.RecognitionTypeEnum;
 import challenge.model.Recognition;
 import challenge.model.Team;
 import challenge.model.User;
-import org.junit.*;
+import org.junit.After;
+import org.junit.Before;
+import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 
@@ -21,10 +17,10 @@ import java.util.List;
 import static org.junit.Assert.assertTrue;
 
 @RunWith(SpringRunner.class)
-@DataJpaTest
-@Ignore
+@SpringBootTest()
 public class BaseDaoTest {
 
+    public static final String TEST_USER_NAME = "unitTestUser";
     public static final String TEST_TEAM_NAME = "team rocket";
 
     public User testUser = null;
@@ -39,14 +35,27 @@ public class BaseDaoTest {
     @Autowired
     public RecognitionDao recognitionDao;
 
+    @Before
+    public void setup() {
+        cleanup();
+    }
+
+    @After
+    public void tearDown() {
+        cleanup();
+    }
+
     @Test
     public void stub() {
         assertTrue(true);
     }
 
-    public User getUserSaved(String userId) {
-        User save = userDao.save(getUser(userId));
-        return save;
+    public User getUserSaved(String userName) {
+        User usr = userDao.findByUsername(userName);
+        if (usr == null) {
+            usr = userDao.save(getUser(userName));
+        }
+        return usr;
     }
 
     public User getUser(String userName) {
@@ -75,9 +84,14 @@ public class BaseDaoTest {
 
     public User getTestUser() {
         if (testUser == null) {
-            testUser = getUserSaved("fromUser");
+            testUser = getUserSaved(TEST_USER_NAME);
         }
         return testUser;
+    }
+
+    public void cleanup() {
+        List<Recognition> all = recognitionDao.findAll();
+        all.stream().filter(rec -> rec.getFromUser().getId() == getTestUser().getId()).forEach(recognitionDao::delete);
     }
 
 }
