@@ -24,8 +24,9 @@ install:
 
 deploy:
   provider: script
-  script: (mvn clean package && exec mvn gcloud:deploy)
-  on: master
+  script: (mvn clean package && exec mvn gcloud:deploy -Dgcloud.version=cyoun)
+  # on: master
+  on: feature/FCE-36-deploy-version
 
 after_success:
   - bash <(curl -s https://codecov.io/bash)
