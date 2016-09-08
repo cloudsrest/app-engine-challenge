@@ -102,7 +102,7 @@
                     <gcloud_directory>${gcloud.directory}</gcloud_directory>
                     <gcloud_project>blissful-cell-141318</gcloud_project>
                     <verbosity>debug</verbosity>
-                    <set_default>true</set_default>
+                    <!--<set_default>true</set_default>-->
                     <log_level>info</log_level>
                 </configuration>
             </plugin>
