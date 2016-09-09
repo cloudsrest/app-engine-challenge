@@ -26,11 +26,17 @@ install:
 # script: "mvn -Ptest verify"
 
 deploy:
-  provider: script
-  #attempting to run test with in-memory profile then package without
-  script: (mvn -Ptest clean package -DskipTests && exec mvn gcloud:deploy -DskipTests)
-  on:
-    all_branches: true
+  - provider: script
+    #attempting to run test with in-memory profile then package without
+    script: (mvn -Ptest clean package -DskipTests && exec mvn gcloud:deploy -DskipTests -Dgcloud.version=staging)
+    on:
+      all_branches: true
+  - provider: script
+    #attempting to run test with in-memory profile then package without
+    script: (mvn -Ptest clean package -DskipTests && exec mvn gcloud:deploy -DskipTests -Dgcloud.version=prod)
+    # no_stop_previous_version: true
+    on:
+      all_branches: true
 
 after_success:
   - bash <(curl -s https://codecov.io/bash)
