@@ -29,7 +29,8 @@ deploy:
   provider: script
   #attempting to run test with in-memory profile then package without
   script: (mvn -Ptest clean package -DskipTests && exec mvn gcloud:deploy -DskipTests)
-  on: feature/FCE-27-run-code-coverage-report
+  on:
+    all_branches: true
 
 after_success:
   - bash <(curl -s https://codecov.io/bash)
