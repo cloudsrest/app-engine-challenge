@@ -27,10 +27,10 @@ install:
 
 deploy:
   provider: script
+  skip_cleanup: true
   #attempting to run test with in-memory profile then package without
-  script: (mvn -Ptest clean package -DskipTests && exec mvn gcloud:deploy -DskipTests)
-  on:
-    all_branches: true
+  script: (mvn clean package -DskipTests && exec mvn gcloud:deploy -DskipTests)
+  on: master
 
 after_success:
   - bash <(curl -s https://codecov.io/bash)
