@@ -1,15 +1,20 @@
 package challenge.saucelabs;
 
 import org.junit.Test;
+import org.junit.runner.RunWith;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.remote.DesiredCapabilities;
 import org.openqa.selenium.remote.RemoteWebDriver;
+import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.test.context.junit4.SpringRunner;
 
 import java.net.URL;
 
 import static org.junit.Assert.assertNotEquals;
 
-public class SampleSauce {
+@RunWith(SpringRunner.class)
+@SpringBootTest()
+public class SauceLabsTest {
 
   public static final String USERNAME = "cloudsrest";
   public static final String ACCESS_KEY = "da75edb5-517a-485d-9d1f-3e6cb84a3f3a";
