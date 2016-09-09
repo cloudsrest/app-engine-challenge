@@ -27,6 +27,9 @@ export class UserProvider {
           this.users = User.asUsers(res.json());
           observer.next(this.users);
           observer.complete();
+        }, (err) => {
+          observer.error(err);
+          observer.complete();
         });
       }).catch(() => {
         observer.error();

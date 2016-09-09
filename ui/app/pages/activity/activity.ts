@@ -38,7 +38,7 @@ export class ActivityPage {
   }
 
   errorHandler(res: Response) {
-    if (res.status === 401) {
+    if (!res || (res && res.status === 401)) {
       this.navCtrl.setRoot(LoginPage);
     }
   }
