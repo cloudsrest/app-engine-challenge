@@ -2,7 +2,6 @@ package challenge.controller;
 
 import challenge.dto.RecognitionDTO;
 import challenge.model.Recognition;
-import challenge.model.User;
 import challenge.service.RecognitionService;
 import challenge.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,13 +23,8 @@ public class RecognitionController extends BaseController {
     @Autowired
     private RecognitionService recognitionService;
 
-    @Autowired
-    private UserService userService;
-
-    private User requester = null;
-
     @RequestMapping(value = "/all", method = RequestMethod.GET, produces=MediaType.APPLICATION_JSON_VALUE)
-    public @ResponseBody List<RecognitionDTO> getRecognitions(Principal principal) {
+    public @ResponseBody List<RecognitionDTO> getAllRecognitions(Principal principal) {
         List<RecognitionDTO> ret = new ArrayList<>();
         for (Recognition recognition: recognitionService.getAllRecognitions(requestor(principal))) {
             ret.add(new RecognitionDTO(recognition));
@@ -53,7 +47,4 @@ public class RecognitionController extends BaseController {
         return new RecognitionDTO(saved);
     }
 
-    public void setRequester(User requester) {
-        this.requester = requester;
-    }
 }
