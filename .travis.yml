@@ -29,7 +29,7 @@ deploy:
   - provider: script
     #attempting to run test with in-memory profile then package without
     script: (mvn -Ptest clean package -DskipTests && exec mvn gcloud:deploy -DskipTests -Dgcloud.version=staging)
-    no_stop_previous_version: true
+    no_promote: true
     on:
       all_branches: true
   - provider: script
