@@ -1,10 +1,13 @@
 package challenge.saucelabs;
 
+import org.junit.Test;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.remote.DesiredCapabilities;
 import org.openqa.selenium.remote.RemoteWebDriver;
 
 import java.net.URL;
+
+import static org.junit.Assert.assertEquals;
 
 public class SampleSauce {
 
@@ -12,7 +15,8 @@ public class SampleSauce {
   public static final String ACCESS_KEY = "da75edb5-517a-485d-9d1f-3e6cb84a3f3a";
   public static final String URL = "http://" + USERNAME + ":" + ACCESS_KEY + "@ondemand.saucelabs.com:80/wd/hub";
 
-  public static void main(String[] args) throws Exception {
+  @Test
+  public void testSauce() throws Exception {
 
     DesiredCapabilities caps = DesiredCapabilities.chrome();
     caps.setCapability("platform", "Windows XP");
@@ -25,7 +29,7 @@ public class SampleSauce {
      */
 
     driver.get("https://saucelabs.com/test/guinea-pig");
-    System.out.println("title of page is: " + driver.getTitle());
+    assertEquals("I am a page title - Sauce Labs", driver.getTitle());
 
     driver.quit();
   }
