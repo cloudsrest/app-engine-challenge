@@ -27,9 +27,9 @@ install:
 
 deploy:
   provider: script
-  skip_cleanup: true
+  # skip_cleanup: true
   #attempting to run test with in-memory profile then package without
-  script: (mvn -Ptest clean package -DskipTests && exec mvn gcloud:deploy -DskipTests -Dgcloud.version=cyoun)
+  script: (mvn -Ptest clean package -DskipTests && exec mvn gcloud:deploy -DskipTests -Dgcloud.version=staging)
   on:
     all_branches: true
 
