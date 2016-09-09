@@ -7,7 +7,7 @@ import org.openqa.selenium.remote.RemoteWebDriver;
 
 import java.net.URL;
 
-import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotEquals;
 
 public class SampleSauce {
 
@@ -29,7 +29,7 @@ public class SampleSauce {
      */
 
     driver.get("https://saucelabs.com/test/guinea-pig");
-    assertEquals("I am a page title - Sauce Labs", driver.getTitle());
+    assertNotEquals("I am a page title - Sauce Labs", driver.getTitle());
 
     driver.quit();
   }
