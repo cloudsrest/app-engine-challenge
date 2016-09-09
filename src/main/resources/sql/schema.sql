@@ -1,5 +1,5 @@
-DROP TABLE IF EXISTS `oauth_access_token`;
-DROP TABLE IF EXISTS `oauth_refresh_token`;
+DROP TABLE IF EXISTS oauth_access_token;
+DROP TABLE IF EXISTS oauth_refresh_token;
 
 CREATE TABLE oauth_access_token (
   token_id VARCHAR(256) DEFAULT NULL,

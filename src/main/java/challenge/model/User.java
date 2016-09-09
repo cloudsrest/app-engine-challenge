@@ -24,6 +24,7 @@ public class User {
     private String password;
 
     @Email
+    @Column(unique=true)
     private String email;
 
     private boolean activated  = true;

@@ -70,6 +70,11 @@
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-jetty</artifactId>
         </dependency>
+        <dependency>
+            <groupId>org.apache.maven.plugins</groupId>
+            <artifactId>maven-antrun-plugin</artifactId>
+            <version>1.8</version>
+        </dependency>
     </dependencies>
 
     <properties>
@@ -101,8 +106,8 @@
                 <configuration>
                     <gcloud_directory>${gcloud.directory}</gcloud_directory>
                     <gcloud_project>blissful-cell-141318</gcloud_project>
-                    <verbosity>debug</verbosity>
-                    <!--<set_default>true</set_default>-->
+                    <verbosity>info</verbosity>
+                    <set_default>true</set_default>
                     <log_level>info</log_level>
                 </configuration>
             </plugin>
@@ -119,6 +124,26 @@
                 </configuration>
             </plugin>
         </plugins>
+
     </build>
+
+    <profiles>
+        <profile>
+            <id>test</id>
+            <activation>
+                <property>
+                    <name>env.TEST</name>
+                    <value>true</value>
+                </property>
+            </activation>
+            <build>
+                <resources>
+                    <resource>
+                        <directory>src/main/resources-test</directory>
+                    </resource>
+                </resources>
+            </build>
+        </profile>
+    </profiles>
 
 </project>
