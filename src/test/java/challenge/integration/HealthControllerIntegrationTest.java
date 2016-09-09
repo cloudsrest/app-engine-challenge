@@ -16,9 +16,7 @@ import static org.junit.Assert.assertTrue;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
-public class HealthControllerIntegrationTest {
-    @Autowired
-    private TestRestTemplate restTemplate;
+public class HealthControllerIntegrationTest extends BaseIntegrationTest {
 
     @Test
     public void health() {
