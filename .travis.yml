@@ -26,12 +26,10 @@ install:
 # script: "mvn -Ptest verify"
 
 deploy:
-  # provider: script
+  provider: script
+  skip_cleanup: true
   #attempting to run test with in-memory profile then package without
-  # script: (mvn -Ptest clean package -DskipTests && exec mvn gcloud:deploy -DskipTests -Dgcloud.version=cyoun)
-  provider: gae
-  keyfile: client-secret.json
-  project: blissful-cell-141318
+  script: (mvn -Ptest clean package -DskipTests && exec mvn gcloud:deploy -DskipTests -Dgcloud.version=cyoun)
   on:
     all_branches: true
 
