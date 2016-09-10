@@ -7,7 +7,7 @@ bin/
 build/
 dist/
 logs/
-node_modules/
+ui/node_modules/
 out/
 target/
 tmp/
@@ -27,3 +27,4 @@ RUNNING_PID
 
 
 src/main/resources/application-default.properties
+src/main/resources/static/www/

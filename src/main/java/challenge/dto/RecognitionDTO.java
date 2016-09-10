@@ -20,6 +20,7 @@ public class RecognitionDTO {
         this.toUserId = recognition.getToUser().getId();
         this.type = recognition.getRecognitionType() == null ? null : recognition.getRecognitionType().toString();
         this.comment = recognition.getComment();
+        this.timestamp = recognition.getTimestamp().getTime();
     }
 
     public Long getId() {
