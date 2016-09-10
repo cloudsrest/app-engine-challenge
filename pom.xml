@@ -106,7 +106,7 @@
                 <configuration>
                     <gcloud_directory>${gcloud.directory}</gcloud_directory>
                     <gcloud_project>blissful-cell-141318</gcloud_project>
-                    <verbosity>info</verbosity>
+                    <verbosity>warn</verbosity>
                     <set_default>true</set_default>
                     <log_level>info</log_level>
                 </configuration>
@@ -120,11 +120,6 @@
                         <format>html</format>
                         <format>xml</format>
                     </formats>
-                    <!--<instrumentation>-->
-                        <!--<ignores>-->
-                            <!--<ignore>org.slf4j.*</ignore>-->
-                        <!--</ignores>-->
-                    <!--</instrumentation>-->
                     <check/>
                 </configuration>
             </plugin>
