@@ -8,7 +8,7 @@ cache:
   - $HOME/.m2
   - $HOME/google-cloud-sdk/
 
-script: "mvn cobertura:cobertura -Ptest"
+script: "mvn cobertura:cobertura -Ptest -Dquiet=true"
 
 before_install:
   - gcloud version || true
@@ -29,15 +29,14 @@ install:
 deploy:
   - provider: script
     #attempting to run test with in-memory profile then package without
-    script: (mvn clean package -DskipTests && exec mvn gcloud:deploy -DskipTests -Dgcloud.version=staging)
-    on:
+    script: (mvn clean package -DskipTests && exec mvn gcloud:deploy -DskipTests -Dgcloud.version=staging -Dlog_level=error)
+    on: #master
       all_branches: true
   - provider: script
     #attempting to run test with in-memory profile then package without
-    script: (mvn clean package -DskipTests && exec mvn gcloud:deploy -DskipTests -Dgcloud.version=prod)
+    script: (mvn clean package -DskipTests && exec mvn gcloud:deploy -DskipTests -Dlog_level=error)
     # no_stop_previous_version: true
-    on:
-      all_branches: true
+    on: master
 
 after_success:
   - bash <(curl -s https://codecov.io/bash)
