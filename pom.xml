@@ -120,11 +120,11 @@
                         <format>html</format>
                         <format>xml</format>
                     </formats>
-                    <instrumentation>
-                        <ignores>
-                            <ignore>org.slf4j.*</ignore>
-                        </ignores>
-                    </instrumentation>
+                    <!--<instrumentation>-->
+                        <!--<ignores>-->
+                            <!--<ignore>org.slf4j.*</ignore>-->
+                        <!--</ignores>-->
+                    <!--</instrumentation>-->
                     <check/>
                 </configuration>
             </plugin>
