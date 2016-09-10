@@ -26,18 +26,25 @@ public class ExceptionResponseTest extends BaseIntegrationTest {
     @Autowired
     UserController usrController;
 
+    @Autowired
+    UserService userService;
+
     String meUrl = "/api/secure/users/me";
 
     @Test
     public void testGetMe_with_server_exception() throws IOException {
-        UserService userService = mock(UserService.class);
-        when(userService.getUser(testUser, testUser.getId())).thenThrow(new RuntimeException("Database not available"));
-        usrController.setUserService(userService);
-        TokenDTO accessToken = getAccessToken(testUser);
+        try {
+            UserService mockUsrSrv = mock(UserService.class);
+            when(mockUsrSrv.getUser(testUser, testUser.getId())).thenThrow(new RuntimeException("Database not available"));
+            usrController.setUserService(mockUsrSrv);
+            TokenDTO accessToken = getAccessToken(testUser);
 
-        ResponseEntity<ErrorDTO> exchange = restTemplate.exchange(meUrl, HttpMethod.GET, buildTokenHeader(accessToken, null), ErrorDTO.class);
-        Assert.assertEquals(HttpStatus.INTERNAL_SERVER_ERROR, exchange.getStatusCode());
-        Assert.assertEquals("Internal Server Error", exchange.getBody().getError());
+            ResponseEntity<ErrorDTO> exchange = restTemplate.exchange(meUrl, HttpMethod.GET, buildTokenHeader(accessToken, null), ErrorDTO.class);
+            Assert.assertEquals(HttpStatus.INTERNAL_SERVER_ERROR, exchange.getStatusCode());
+            Assert.assertEquals("Internal Server Error", exchange.getBody().getError());
+        } finally {
+            usrController.setUserService(userService);
+        }
     }
 
 }
