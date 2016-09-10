@@ -9,7 +9,6 @@ cache:
   - $HOME/google-cloud-sdk/
 
 # script: "mvn cobertura:cobertura -Ptest -Dquiet=true"
->>>>>>> master
 
 before_install:
   - gcloud version || true
