@@ -29,12 +29,12 @@ install:
 deploy:
   - provider: script
     #attempting to run test with in-memory profile then package without
-    script: (mvn clean package -DskipTests && exec mvn gcloud:deploy -DskipTests -Dgcloud.version=staging -Dlog_level=info)
+    script: (mvn clean package -DskipTests && exec mvn gcloud:deploy -DskipTests -Dgcloud.version=staging -Dlog_level=error)
     on: #master
       all_branches: true
   - provider: script
     #attempting to run test with in-memory profile then package without
-    script: (mvn clean package -DskipTests && exec mvn gcloud:deploy -DskipTests -Dlog_level=info)
+    script: (mvn clean package -DskipTests && exec mvn gcloud:deploy -DskipTests -Dlog_level=error)
     # no_stop_previous_version: true
     on: master
 
