@@ -1,6 +1,7 @@
 package challenge.controller;
 
 import challenge.dto.UserDTO;
+import challenge.exception.InternalServerException;
 import challenge.model.User;
 import challenge.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,23 +25,42 @@ public class UserController extends BaseController {
 
     @RequestMapping(method = RequestMethod.GET, produces= MediaType.APPLICATION_JSON_VALUE)
     public @ResponseBody List<UserDTO> getUsers(Principal principal) {
-        List<UserDTO> ret = new ArrayList<>();
-        for (User user : userService.getUsers(requestor(principal))) {
-            ret.add(new UserDTO(user));
+        List<UserDTO> ret;
+        try {
+            ret = new ArrayList<>();
+            for (User user : userService.getUsers(requestor(principal))) {
+                ret.add(new UserDTO(user));
+            }
+        } catch (Exception e) {
+            throw new InternalServerException(e.getMessage());
         }
         return ret;
     }
 
     @RequestMapping(value="{userId}", method = RequestMethod.GET, produces= MediaType.APPLICATION_JSON_VALUE)
     public @ResponseBody UserDTO getUser(@PathVariable Long userId, Principal principal) {
-        User user = userService.getUser(requestor(principal), userId);
+        User user;
+        try {
+            user = userService.getUser(requestor(principal), userId);
+        } catch (Exception e) {
+            throw new InternalServerException(e.getMessage());
+        }
         return new UserDTO(user);
     }
 
     @RequestMapping(value="/me", method = RequestMethod.GET, produces= MediaType.APPLICATION_JSON_VALUE)
     public @ResponseBody UserDTO getMe(Principal principal) {
-        User user = userService.getUser(requestor(principal), userDao.findByUsername(principal.getName()).getId());
+        User user;
+        try {
+            User requestor = requestor(principal);
+            user = userService.getUser(requestor(principal), requestor.getId());
+        } catch (Exception e) {
+            throw new InternalServerException(e.getMessage());
+        }
         return new UserDTO(user);
     }
 
+    public void setUserService(UserService userService) {
+        this.userService = userService;
+    }
 }
