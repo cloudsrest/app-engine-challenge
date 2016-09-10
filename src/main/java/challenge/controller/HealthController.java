@@ -17,7 +17,7 @@ import java.util.List;
 @RequestMapping("/public/health")
 public class HealthController {
 
-    public static final String STATUS = "Up and Running!";
+    public static final String STATUS = "Up and Running! staging/prod env.";
 
     @Autowired
     private UserDao userDao;
