@@ -90,7 +90,7 @@ public class RecognitionIntegrationTest extends BaseIntegrationTest {
     }
 
     private RecognitionDTO createRecognition(RecognitionDTO recognition) throws IOException {
-        TokenDTO accessToken = getAccessToken(null);
+        TokenDTO accessToken = getAccessToken(testUser);
         ResponseEntity<RecognitionDTO> exchange = restTemplate.exchange("/api/secure/recognitions", HttpMethod.POST, buildTokenHeader(accessToken, recognition), RecognitionDTO.class);
         return exchange.getBody();
     }
@@ -102,7 +102,7 @@ public class RecognitionIntegrationTest extends BaseIntegrationTest {
     }
 
     private List<RecognitionDTO> getAllRecognitionDTOs() throws IOException {
-        TokenDTO accessToken = getAccessToken(null);
+        TokenDTO accessToken = getAccessToken(testUser);
         ResponseEntity<RecognitionDTO[]> exchange = restTemplate.exchange("/api/secure//recognitions/all", HttpMethod.GET, buildTokenHeader(accessToken, null), RecognitionDTO[].class);
         return Arrays.asList(exchange.getBody());
     }
