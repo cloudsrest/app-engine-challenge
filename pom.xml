@@ -108,7 +108,7 @@
                     <gcloud_project>blissful-cell-141318</gcloud_project>
                     <verbosity>warning</verbosity>
                     <set_default>true</set_default>
-                    <log_level>info</log_level>
+                    <log_level>warning</log_level>
                 </configuration>
             </plugin>
             <plugin>
