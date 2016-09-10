@@ -12,7 +12,7 @@ script: "mvn cobertura:cobertura -Ptest -Dquiet=true"
 
 before_install:
   # this did not work...
-  # - npm config set registry http://registry.npmjs.org/
+  - npm config set registry http://registry.npmjs.org/
   - gcloud version || true
   - if [ ! -d "$HOME/google-cloud-sdk/bin" ]; then rm -rf $HOME/google-cloud-sdk; export CLOUDSDK_CORE_DISABLE_PROMPTS=1; curl https://sdk.cloud.google.com | bash; fi
   # Add gcloud to $PATH
