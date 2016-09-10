@@ -1,6 +1,5 @@
 package challenge.integration;
 
-import challenge.BaseTest;
 import challenge.dto.RecognitionDTO;
 import challenge.dto.TokenDTO;
 import challenge.model.User;

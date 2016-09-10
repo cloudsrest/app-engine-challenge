@@ -24,6 +24,7 @@ import org.springframework.test.context.junit4.SpringRunner;
 import java.io.IOException;
 import java.util.Date;
 import java.util.List;
+import java.util.Random;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
@@ -78,7 +79,8 @@ public class BaseTest {
     }
 
     public String getTestUserName(String userName) {
-        return TEST_USER_PREFIX + userName;
+        Random random = new Random(10000);
+        return TEST_USER_PREFIX + "-" + random.nextInt() + "-" + userName;
     }
 
     public User getUser(String userName) {
