@@ -120,7 +120,12 @@
                         <format>html</format>
                         <format>xml</format>
                     </formats>
-                    <check />
+                    <instrumentation>
+                        <ignores>
+                            <ignore>org.apache.log4j.*</ignore>
+                        </ignores>
+                    </instrumentation>
+                    <check/>
                 </configuration>
             </plugin>
 
