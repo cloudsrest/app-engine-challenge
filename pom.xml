@@ -122,7 +122,7 @@
                     </formats>
                     <instrumentation>
                         <ignores>
-                            <ignore>org.apache.log4j.*</ignore>
+                            <ignore>org.slf4j.*</ignore>
                         </ignores>
                     </instrumentation>
                     <check/>
