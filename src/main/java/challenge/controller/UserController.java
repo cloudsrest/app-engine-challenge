@@ -52,7 +52,8 @@ public class UserController extends BaseController {
     public @ResponseBody UserDTO getMe(Principal principal) {
         User user;
         try {
-            user = userService.getUser(requestor(principal), userDao.findByUsername(principal.getName()).getId());
+            User requestor = requestor(principal);
+            user = userService.getUser(requestor(principal), requestor.getId());
         } catch (Exception e) {
             throw new InternalServerException(e.getMessage());
         }
