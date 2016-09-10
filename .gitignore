@@ -27,3 +27,4 @@ RUNNING_PID
 
 
 src/main/resources/application-default.properties
+src/main/resources/static/www/
