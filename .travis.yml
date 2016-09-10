@@ -8,7 +8,7 @@ cache:
   - $HOME/.m2
   - $HOME/google-cloud-sdk/
 
-# script: "mvn cobertura:cobertura -Ptest"
+script: "mvn cobertura:cobertura -Ptest -Dquiet=true"
 
 before_install:
   - gcloud version || true
