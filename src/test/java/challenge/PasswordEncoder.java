@@ -11,7 +11,7 @@ public class PasswordEncoder {
     public void testEncodePassword() {
 
         StandardPasswordEncoder encoder = new StandardPasswordEncoder();
-        String pass = encoder.encode("pass");
+        String pass = encoder.encode("admin");
 
         System.out.println("pass = " + pass);
         Assert.assertNotNull(pass);

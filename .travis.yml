@@ -11,8 +11,6 @@ cache:
 script: "mvn cobertura:cobertura -Ptest -Dquiet=true"
 
 before_install:
-  # this did not work...
-  - npm config set registry http://registry.npmjs.org/
   - gcloud version || true
   - if [ ! -d "$HOME/google-cloud-sdk/bin" ]; then rm -rf $HOME/google-cloud-sdk; export CLOUDSDK_CORE_DISABLE_PROMPTS=1; curl https://sdk.cloud.google.com | bash; fi
   # Add gcloud to $PATH
@@ -21,6 +19,7 @@ before_install:
   # Decrypt gcloud service key
   - openssl aes-256-cbc -K $encrypted_1bf8a0d1cf40_key -iv $encrypted_1bf8a0d1cf40_iv -in client-secret.json.enc -out client-secret.json -d
   - gcloud auth activate-service-account --key-file client-secret.json
+  - npm config set registry http://registry.npmjs.org/
 
 install:
   - gcloud config set project blissful-cell-141318
@@ -31,13 +30,13 @@ deploy:
   - provider: script
     #attempting to run test with in-memory profile then package without
     script: (mvn clean package -DskipTests && exec mvn gcloud:deploy -DskipTests -Dgcloud.version=staging -Dlog_level=info)
-    on: master
+    on: #master
+      all_branches: true
   - provider: script
     #attempting to run test with in-memory profile then package without
     script: (mvn clean package -DskipTests && exec mvn gcloud:deploy -DskipTests -Dlog_level=info)
     # no_stop_previous_version: true
-    on: #master
-      all_branches: true
+    on: master
 
 after_success:
   - bash <(curl -s https://codecov.io/bash)
