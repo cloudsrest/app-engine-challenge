@@ -8,7 +8,8 @@ cache:
   - $HOME/.m2
   - $HOME/google-cloud-sdk/
 
-# script: "mvn cobertura:cobertura"
+script: "mvn cobertura:cobertura -Ptest"
+
 before_install:
   - gcloud version || true
   - if [ ! -d "$HOME/google-cloud-sdk/bin" ]; then rm -rf $HOME/google-cloud-sdk; export CLOUDSDK_CORE_DISABLE_PROMPTS=1; curl https://sdk.cloud.google.com | bash; fi
@@ -22,13 +23,18 @@ before_install:
 install:
   - gcloud config set project blissful-cell-141318
 
-script: "mvn -Ptest verify"
+# script: "mvn -Ptest verify"
 
 deploy:
-  provider: script
-  #attempting to run test with in-memory profile then package without
-  script: (mvn -Ptest clean package -DskipTests && exec mvn gcloud:deploy -DskipTests)
-  on: master
+  - provider: script
+    #attempting to run test with in-memory profile then package without
+    script: (mvn clean package -DskipTests && exec mvn gcloud:deploy -DskipTests -Dgcloud.version=staging)
+    on: master
+  - provider: script
+    #attempting to run test with in-memory profile then package without
+    script: (mvn clean package -DskipTests && exec mvn gcloud:deploy -DskipTests -Dgcloud.version=prod)
+    # no_stop_previous_version: true
+    on: master
 
 after_success:
   - bash <(curl -s https://codecov.io/bash)
