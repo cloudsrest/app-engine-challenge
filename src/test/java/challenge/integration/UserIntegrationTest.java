@@ -21,7 +21,7 @@ import static org.junit.Assert.*;
 public class UserIntegrationTest extends BaseIntegrationTest {
 
     String usersUrl = "/api/secure/users";
-    String userUrl = "/api/secure/users/1";
+    String userUrl = "/api/secure/users";
     String meUrl = "/api/secure/users/me";
 
     @Test
@@ -47,7 +47,11 @@ public class UserIntegrationTest extends BaseIntegrationTest {
 
     @Test
     public void testGetUsers_authenticated() throws IOException {
-        TokenDTO accessToken = getAccessToken(null);
+        String usr1 = "usr1";
+        getUser(usr1);
+        getUser("usr2");
+        getUser("usr3");
+        TokenDTO accessToken = getAccessToken(testUser);
 
         ResponseEntity<UserDTO[]> exchange = restTemplate.exchange(usersUrl, HttpMethod.GET, buildTokenHeader(accessToken, null), UserDTO[].class);
 
@@ -56,28 +60,28 @@ public class UserIntegrationTest extends BaseIntegrationTest {
         assertNotNull(userDTOs);
         assertTrue(userDTOs.size() > 2);
 
-        UserDTO admin = userDTOs.stream().filter(user -> user.getUsername().equals("admin")).findFirst().get();
-        assertNotNull(admin);
-        assertEquals("admin", admin.getUsername());
+        UserDTO userDto = userDTOs.stream().filter(user -> user.getUsername().equals(getTestUserName(usr1))).findFirst().get();
+        assertNotNull(userDto);
+        assertEquals(getTestUserName(usr1), userDto.getUsername());
     }
 
     @Test
     public void testGetUser_authenticated() throws IOException {
-        TokenDTO accessToken = getAccessToken(null);
+        TokenDTO accessToken = getAccessToken(testUser);
 
-        ResponseEntity<UserDTO> exchange = restTemplate.exchange(userUrl, HttpMethod.GET, buildTokenHeader(accessToken, null), UserDTO.class);
+        ResponseEntity<UserDTO> exchange = restTemplate.exchange(usersUrl + "/" + testUser.getId(), HttpMethod.GET, buildTokenHeader(accessToken, null), UserDTO.class);
 
         assertNotNull(exchange);
         assertEquals(HttpStatus.OK, exchange.getStatusCode());
         UserDTO userDTO = exchange.getBody();
         assertNotNull(userDTO);
-        assertEquals(new Long(1), userDTO.getId());
-        assertEquals("admin", userDTO.getUsername());
+        assertEquals(testUser.getId(), userDTO.getId());
+        assertEquals(testUser.getUsername(), userDTO.getUsername());
     }
 
     @Test
     public void testGetMe_authenticated() throws IOException {
-        TokenDTO accessToken = getAccessToken(null);
+        TokenDTO accessToken = getAccessToken(testUser);
 
         ResponseEntity<UserDTO> exchange = restTemplate.exchange(meUrl, HttpMethod.GET, buildTokenHeader(accessToken, null), UserDTO.class);
 
@@ -85,8 +89,8 @@ public class UserIntegrationTest extends BaseIntegrationTest {
         assertEquals(HttpStatus.OK, exchange.getStatusCode());
         UserDTO userDTO = exchange.getBody();
         assertNotNull(userDTO);
-        assertEquals(new Long(1), userDTO.getId());
-        assertEquals("admin", userDTO.getUsername());
+        assertEquals(testUser.getId(), userDTO.getId());
+        assertEquals(testUser.getUsername(), userDTO.getUsername());
     }
 
 }

@@ -19,6 +19,7 @@ before_install:
   # Decrypt gcloud service key
   - openssl aes-256-cbc -K $encrypted_1bf8a0d1cf40_key -iv $encrypted_1bf8a0d1cf40_iv -in client-secret.json.enc -out client-secret.json -d
   - gcloud auth activate-service-account --key-file client-secret.json
+  - npm config set registry http://registry.npmjs.org/
 
 install:
   - gcloud config set project blissful-cell-141318
@@ -29,12 +30,14 @@ deploy:
   - provider: script
     #attempting to run test with in-memory profile then package without
     script: (mvn clean package -DskipTests && exec mvn gcloud:deploy -DskipTests -Dgcloud.version=staging)
-    on: master
+    on:
+      all_branches: true
   - provider: script
     #attempting to run test with in-memory profile then package without
     script: (mvn clean package -DskipTests && exec mvn gcloud:deploy -DskipTests -Dgcloud.version=prod)
     # no_stop_previous_version: true
-    on: master
+    on:
+      all_branches: true
 
 after_success:
   - bash <(curl -s https://codecov.io/bash)
