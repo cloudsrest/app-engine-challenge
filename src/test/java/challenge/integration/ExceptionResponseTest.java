@@ -24,7 +24,7 @@ import static org.mockito.Mockito.when;
 public class ExceptionResponseTest extends BaseIntegrationTest {
 
     @Autowired
-    UserController userController;
+    UserController usrController;
 
     String meUrl = "/api/secure/users/me";
 
@@ -32,7 +32,7 @@ public class ExceptionResponseTest extends BaseIntegrationTest {
     public void testGetMe_with_server_exception() throws IOException {
         UserService userService = mock(UserService.class);
         when(userService.getUser(testUser, testUser.getId())).thenThrow(new RuntimeException("Database not available"));
-        userController.setUserService(userService);
+        usrController.setUserService(userService);
         TokenDTO accessToken = getAccessToken(testUser);
 
         ResponseEntity<ErrorDTO> exchange = restTemplate.exchange(meUrl, HttpMethod.GET, buildTokenHeader(accessToken, null), ErrorDTO.class);
