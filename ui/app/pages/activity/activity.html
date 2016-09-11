@@ -1,27 +1,30 @@
 <ion-header>
   <ion-toolbar primary-darkest>
+    <button menuToggle>
+      <ion-icon name="menu"></ion-icon>
+    </button>
     <ion-buttons end>
       <button (click)="openRecognitionCreate()">
-        <ion-icon name="person-add"></ion-icon>
+        Give Recognition
+        <ion-icon name="star"></ion-icon>
       </button>
     </ion-buttons>
   </ion-toolbar>
 </ion-header>
 
 <ion-content class="activity" padding>
-  <ion-segment [(ngModel)]="currentView" primary>
-    <ion-segment-button value="recent" (ionSelect)="showRecentActivity()">
-      Recent Activity
-    </ion-segment-button>
-    <ion-segment-button value="notifications" (ionSelect)="showNotifications()">
-      Notifications
-    </ion-segment-button>
-  </ion-segment>
   <ion-list>
-    <div *ngFor="let item of recognitions">
+    <ion-list-header>{{getViewTitle()}}</ion-list-header>
+    <ion-item *ngIf="!loading && recognitions.length === 0">
+      <p gray-light>No activity to display</p>
+    </ion-item>
+    <div class="text-center padding">
+      <ion-spinner *ngIf="loading"></ion-spinner>
+    </div>
+    <div *ngFor="let item of recognitions | orderBy : 'timestamp' : false">
       <ion-item text-wrap>
         <ion-avatar item-left>
-          <img src="https://api.adorable.io/avatars/face">
+          <img [src]="item.getIcon()">
         </ion-avatar>
         <h2 *ngIf="item.getFromUser() && item.getToUser()">
           {{item.getFromUser().getFirstName()}} {{item.getFromUser().getLastName()}}
@@ -30,7 +33,7 @@
           recognition
           <span *ngIf="item.getType()">for #{{item.getType().toLowerCase()}}</span>
         </h2>
-        <p>"{{item.getComment()}}"</p>
+        <p *ngIf="item.getComment()">"{{item.getComment()}}"</p>
         <small>{{item.getCreatedAt() | amTimeAgo}}</small>
       </ion-item>
       <!-- removing comments list, leaving example impl -->

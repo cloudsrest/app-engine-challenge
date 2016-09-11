@@ -1,5 +1,5 @@
 import {Component} from '@angular/core';
-import {NavController, ModalController} from 'ionic-angular';
+import {NavController, ModalController, NavParams} from 'ionic-angular';
 import {RecognitionProvider} from "../../providers/recognition/recognition-provider";
 import {Recognition} from "../../models/recognition/recognition";
 import {UserProvider} from "../../providers/user/user-provider";
@@ -8,10 +8,11 @@ import {LoginPage} from "../login/login";
 import {TimeAgoPipe} from "angular2-moment";
 import {RecognitionCreateModal} from "../recognition-create-modal/recognition-create-modal";
 import {Response} from "@angular/http";
+import {OrderByPipe} from "../../pipes/order-by";
 
 @Component({
   templateUrl: 'build/pages/activity/activity.html',
-  pipes: [TimeAgoPipe]
+  pipes: [TimeAgoPipe, OrderByPipe]
 })
 export class ActivityPage {
 
@@ -21,28 +22,36 @@ export class ActivityPage {
   };
   recognitions: Recognition[];
   currentView: string;
+  loading: boolean;
 
-  constructor(private navCtrl: NavController, private recData: RecognitionProvider, private userData: UserProvider, private modalCtrl: ModalController) {
+  constructor(private navCtrl: NavController, params: NavParams, private recData: RecognitionProvider, private userData: UserProvider, private modalCtrl: ModalController) {
     this.recognitions = [];
-    this.currentView = ActivityPage.ACTIVITY.recent;
+    // allow context to switch between notifications and recent activity using the same page
+    this.currentView = params.data.view || ActivityPage.ACTIVITY.recent;
   }
 
+  // load data before page becomes active
   onPageWillEnter() {
+    this.loading = true;
     this.userData.currentUser().subscribe(() => {
-      // current user is logged in
-      this.loadAllRecognitions();
+      // current user is logged in, load recognitions
+      if (this.currentView === ActivityPage.ACTIVITY.recent) {
+        this.showRecentActivity()
+      } else {
+        this.showNotifications();
+      }
     }, (res) => {
       // revert to login page
       this.errorHandler(res);
     });
   }
 
-  errorHandler(res: Response) {
-    if (!res || (res && res.status === 401)) {
-      this.navCtrl.setRoot(LoginPage);
-    }
+  // clear data before page becomes deactivated
+  onPageWillLeave() {
+    this.recognitions = [];
   }
 
+  // show the modal where the user can create a new recognition
   openRecognitionCreate() {
     let modal = this.modalCtrl.create(RecognitionCreateModal);
     modal.onDidDismiss((data?:any) => {
@@ -53,30 +62,43 @@ export class ActivityPage {
     modal.present();
   }
 
+  // load "recent activity"
   loadAllRecognitions(reload?: boolean) {
     this.recData.load(reload).subscribe((recognitions: Recognition[]) => {
       this.recognitions = this.mapUsersToRecognitions(recognitions);
+      this.loading = false;
     }, (res) => {
       this.errorHandler(res);
     });
   }
 
+  // load "notifications"
   loadRecognitionsForCurrentUser() {
     this.recData.allForCurrentUser().subscribe((recognitions: Recognition[]) => {
       this.recognitions = this.mapUsersToRecognitions(recognitions);
+      this.loading = false;
     }, (res) => {
       this.errorHandler(res);
     });
   }
 
+  // set the recognitions context to "recent activity"
   showRecentActivity() {
-    this.currentView = ActivityPage.ACTIVITY.recent;
     this.loadAllRecognitions();
   }
 
+  // set the recognitions context to "notifications"
   showNotifications() {
-    this.currentView = ActivityPage.ACTIVITY.notifications;
     this.loadRecognitionsForCurrentUser();
+  }
+
+  // what type of content is being displayed on the page
+  getViewTitle(): string {
+    if (this.currentView === ActivityPage.ACTIVITY.notifications) {
+      return 'Notifications';
+    } else {
+      return 'Recent Activity';
+    }
   }
 
   private mapUsersToRecognitions(recognitions) {
@@ -89,6 +111,15 @@ export class ActivityPage {
       });
       return recognition;
     });
+  }
+
+  // generic error handler, send user to login page on unauthorized response
+  private errorHandler(res: Response) {
+    if (!res || (res && res.status === 401)) {
+      this.navCtrl.setRoot(LoginPage);
+    }
+    console.log(res);
+    this.loading = false;
   }
 
 }

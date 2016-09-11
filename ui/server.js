@@ -13,7 +13,7 @@ var _url = require('url');
 
 var _app = _express();
 
-var _apiUrl = 'https://blissful-cell-141318.appspot.com/';
+var _apiUrl = 'https://prod-dot-blissful-cell-141318.appspot.com/';
 var _serveDir = '/www';
 var _server;
 var _port;
@@ -31,6 +31,7 @@ bootstrap();
 
 // request static assets
 _app.use('/build', _express.static(__dirname + _serveDir + '/build'));
+_app.use('/img', _express.static(__dirname + _serveDir + '/img'));
 
 // proxy api requests
 _app.use(apiProxy());

@@ -15,7 +15,7 @@ export class Recognition {
     this.comment = data.comment;
     this.toUser = data.toUser || null;
     this.fromUser = data.fromUser || null;
-    this.timestamp = data.timestamp;
+    this.timestamp = data.timestamp || ((new Date() as any).getTime());
   }
 
   getComment(): string {
@@ -54,6 +54,10 @@ export class Recognition {
     return this.timestamp && new Date(this.timestamp) || new Date();
   }
 
+  getIcon(): string {
+    return Recognition.getIcon(this.getType());
+  }
+
   setFromUser(user: User) {
     this.fromUser = user;
   }
@@ -71,5 +75,27 @@ export class Recognition {
     return recognitions.map((recognition: any) => {
       return new Recognition(recognition);
     });
+  }
+
+  static getIcon(type: string): string {
+    let icon;
+    switch (type) {
+      case 'HARD_WORK':
+        icon = 'img/thumbs-up.svg';
+            break;
+      case 'TEAM_WORK':
+        icon = 'img/team.svg';
+            break;
+      case 'CREATIVITY':
+        icon = 'img/brain.svg';
+            break;
+      case 'INNOVATION':
+        icon = 'img/light-bulb.svg';
+            break;
+      default:
+        icon = 'img/thumbs-up.svg';
+            break;
+    }
+    return icon;
   }
 }
