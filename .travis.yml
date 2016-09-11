@@ -24,7 +24,7 @@ before_install:
 install:
   - gcloud config set project blissful-cell-141318
 
-script: "mvn -Ptest verify -Dquiet=true"
+script: "mvn -Ptest cobertura:cobertura verify -Dquiet=true"
 
 deploy:
   - provider: script
