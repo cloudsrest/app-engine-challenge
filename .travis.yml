@@ -41,3 +41,12 @@ deploy:
 
 after_success:
   - bash <(curl -s https://codecov.io/bash)
+
+notifications:
+  email:
+    recipients:
+      - 1cloudsrest@gmail.com
+      - ayacub@yahoo.com
+    # on_success: [always|never|change] # default: change
+    # on_failure: [always|never|change] # default: always
+  on_success: always
