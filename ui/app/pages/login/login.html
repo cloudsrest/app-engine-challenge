@@ -4,20 +4,27 @@
 </ion-header>
 
 <ion-content class="login" padding>
-  <h1>Login</h1>
-  <form (ngSubmit)="login()">
-    <ion-list>
-      <ion-item>
-        <ion-label fixed>Username</ion-label>
-        <ion-input type="text" [(ngModel)]="username" name="username" required clearInput></ion-input>
-      </ion-item>
-      <ion-item>
-        <ion-label fixed>Password</ion-label>
-        <ion-input type="password" [(ngModel)]="password" name="password" required clearInput></ion-input>s
-      </ion-item>
-    </ion-list>
-    <div padding>
-      <button block>Sign In</button>
-    </div>
-  </form>
+  <ion-card>
+    <ion-card-header>
+      <h1>Sign in</h1>
+      <p alert>{{errorMsg}}</p>
+    </ion-card-header>
+    <ion-card-content>
+      <form (ngSubmit)="login()">
+        <ion-list>
+          <ion-item>
+            <ion-label stacked for="username">Username</ion-label>
+            <ion-input type="text" id="username" [(ngModel)]="username" name="username" required clearInput></ion-input>
+          </ion-item>
+          <ion-item>
+            <ion-label stacked for="password">Password</ion-label>
+            <ion-input type="password" id="password" [(ngModel)]="password" name="password" required clearInput></ion-input>
+          </ion-item>
+        </ion-list>
+        <div padding>
+          <button>Sign In</button>
+        </div>
+      </form>
+    </ion-card-content>
+  </ion-card>
 </ion-content>

@@ -1,7 +1,15 @@
 .login {
-  text-align: center;
+  ion-card {
+    padding: 20px;
+    h1 {
+      font-weight: 800;
+    }
+  }
   @media(min-width: $breakPointSm) {
     width: 50%;
     left: 25%;
   }
+}
+ion-content.login {
+  background: #f1f1f1;
 }
