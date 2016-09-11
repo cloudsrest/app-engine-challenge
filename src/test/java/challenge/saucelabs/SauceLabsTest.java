@@ -34,7 +34,7 @@ public class SauceLabsTest {
      */
 
     driver.get("https://saucelabs.com/test/guinea-pig");
-    assertEquals("I am a page title - Sauce Labs", driver.getTitle());
+    assertEquals("I am a page title - Sauce Labs1", driver.getTitle());
 
     driver.quit();
   }
