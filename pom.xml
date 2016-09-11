@@ -75,6 +75,12 @@
             <artifactId>maven-antrun-plugin</artifactId>
             <version>1.8</version>
         </dependency>
+
+        <dependency>
+            <groupId>com.github.eirslett</groupId>
+            <artifactId>frontend-maven-plugin</artifactId>
+            <version>1.0</version>
+        </dependency>
     </dependencies>
 
     <properties>
@@ -127,7 +133,7 @@
             <plugin>
                 <groupId>com.github.eirslett</groupId>
                 <artifactId>frontend-maven-plugin</artifactId>
-                <version>0.0.20</version>
+                <version>1.0</version>
                 <configuration>
                     <workingDirectory>ui</workingDirectory>
                 </configuration>
@@ -139,7 +145,7 @@
                         </goals>
                         <phase>generate-resources</phase>
                         <configuration>
-                            <nodeVersion>v4.3.0</nodeVersion>
+                            <nodeVersion>v4.5.0</nodeVersion>
                             <npmVersion>3.10.7</npmVersion>
                         </configuration>
                     </execution>
