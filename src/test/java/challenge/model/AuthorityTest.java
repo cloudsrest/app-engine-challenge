@@ -21,6 +21,8 @@ public class AuthorityTest {
         assertEquals(authority1, authority2);
 
         assertNotNull(authority1.toString());
+        assertNotNull(authority1);
+        assertNotNull(authority2);
     }
 
 }
