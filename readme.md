@@ -19,6 +19,23 @@ spring.datasource.password = root
 - Java 8
 - Maven > 3.0
 
+
+#### To set up local environment
+
+- install: maven, mysql
+- go to your mysql instance and run ```create database challengedb```
+- clone repo 
+- create a file under this path ```src/main/resources/application-default.properties``` that has (modify username/password to your set up):
+spring.datasource.url = jdbc:mysql://localhost:3306/challengedb?useSSL=false
+spring.datasource.username = root
+spring.datasource.password =
+- run ```mvn spring-boot:run```  ... this will start your app, and also create the schema
+- in a sql editor run the sql in <root_dir>/starterData.sql 
+ for example: mysql -uroot -p challengedb <  starterData.sql 
+- now there will be users in your db and you should be able to log in as admin/admin or <any_username>/pass
+example usernames are: nturner, fcarr, and smcgrath
+
+
 #### Start localhost
 
 * Go on the project's root folder, then type:
