@@ -1,3 +1,13 @@
 .recognition-create {
-
+  ion-list {
+    height: 100%;
+  }
+  textarea {
+    height: 100%;
+  }
+  .item.item-textarea {
+    padding-top: 16px;
+    border-bottom: none;
+    height: 100%;
+  }
 }
