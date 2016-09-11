@@ -8,7 +8,7 @@ cache:
   - $HOME/.m2
   - $HOME/google-cloud-sdk/
 
-script: "mvn cobertura:cobertura -Ptest -Dquiet=true"
+# script: "mvn cobertura:cobertura -Ptest -Dquiet=true"
 
 before_install:
   - gcloud version || true
@@ -24,7 +24,7 @@ before_install:
 install:
   - gcloud config set project blissful-cell-141318
 
-# script: "mvn -Ptest verify"
+script: "mvn -Ptest cobertura:cobertura verify -Dquiet=true"
 
 deploy:
   - provider: script
@@ -41,6 +41,12 @@ deploy:
 
 after_success:
   - bash <(curl -s https://codecov.io/bash)
+
+addons:
+  sauce_connect:
+    username: "cloudsrest"
+  jwt:
+    secure: "w3zPGrQZIBOLnWwPckQcBoMPKXDMZK6bZJLtdTmh+VE6wKRFhaXu+Otbdrdcvos6Z6wfE94nwHMahVmbdnkzYF1fT9xxdyGUZTA7fnaEGI5FXPscsoagY/R+o1SA8lBwTkbqkwKqW6g6qT+hAdvX4CYdmmaQPVENeWNNXHIDDYysN0KpcyYvd14VE+d2o6YXa3QjPP5rF+g7fJ4hpMjMR8K/LovHBebjKy3tBpJECrgi97xfBYtGmXoefwMOdlRkm+V5lXCjt9P263+Syfnezk0CrArnQUlHuSGVEwsa++NJo6Grot7BpVe99KCtq2VoBojaIYS8wNpdrKi6LAybtAQDWaNP0Bt4azZwqOBOgufDXrnvp9EjMDQd9ND2fJsaqOwxFo/+17fQJgahjobAoUhhhJm2BPEguUhsRcri3v4gNr8US6WSc7nu4cXszchuG5WvUd5DBiG8rVMxz1/XE0uTb90wreqCgDwp+dot21WFnZS2aRv6A0OpO1ZjH594xEszP1R2CIbfFf+MlmBrJQyDpE0QE/Y9DHZr6ROge/a1dWfQPb8xay1RpdhXFohV9tgevpPyxUX/Z1HL6uBUe6C1CLnRNntxym2slAMhkKu6nE8lIRrpz8K2Nkx1/Q+VruLdZD0g1e4QpwSQaRU2VuHMhOc/H71dMOAfDVETEXE="
 
 notifications:
   email:
