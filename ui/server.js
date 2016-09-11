@@ -3,8 +3,7 @@
 
 'use strict';
 
-var PORT = 8080;
-
+var argv = require('minimist')(process.argv.slice(2));
 var _express = require('express');
 var _fs = require('fs');
 var _http = require('http');
@@ -13,7 +12,8 @@ var _url = require('url');
 
 var _app = _express();
 
-var _apiUrl = 'https://prod-dot-blissful-cell-141318.appspot.com/';
+var PORT = argv.port || 8081;
+var _apiUrl = argv.remote || 'https://prod-dot-blissful-cell-141318.appspot.com/';
 var _serveDir = '/www';
 var _server;
 var _port;
@@ -62,6 +62,7 @@ function bootstrap() {
   _server = _http.createServer(_app).listen(_port);
   _server.timeout = 0;
   console.log('listening on port ' + _port);
+  console.log('proxying API requests to ' + _apiUrl);
 }
 
 function sendIndex(req, res, next) {
