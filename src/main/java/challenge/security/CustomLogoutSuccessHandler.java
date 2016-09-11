@@ -46,5 +46,4 @@ public class CustomLogoutSuccessHandler
         response.setStatus(HttpServletResponse.SC_OK);
 
     }
-
 }

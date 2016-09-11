@@ -16,6 +16,7 @@ import org.springframework.test.context.junit4.SpringRunner;
 
 import java.io.IOException;
 
+import static org.junit.Assert.assertEquals;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
@@ -40,8 +41,12 @@ public class ExceptionResponseTest extends BaseIntegrationTest {
             TokenDTO accessToken = getAccessToken(testUser);
 
             ResponseEntity<ErrorDTO> exchange = restTemplate.exchange(meUrl, HttpMethod.GET, buildTokenHeader(accessToken, null), ErrorDTO.class);
-            Assert.assertEquals(HttpStatus.INTERNAL_SERVER_ERROR, exchange.getStatusCode());
-            Assert.assertEquals("Internal Server Error", exchange.getBody().getError());
+            assertEquals(HttpStatus.INTERNAL_SERVER_ERROR, exchange.getStatusCode());
+            ErrorDTO err = exchange.getBody();
+            assertEquals("Internal Server Error", err.getError());
+            assertEquals("org.springframework.web.util.NestedServletException: Request processing failed; nested exception is challenge.exception.InternalServerException: Database not available", err.getMessage());
+            assertEquals(500, err.getStatus());
+
         } finally {
             usrController.setUserService(userService);
         }
