@@ -2,6 +2,7 @@ package challenge.saucelabs;
 
 import org.junit.After;
 import org.junit.Before;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.openqa.selenium.By;
@@ -22,6 +23,7 @@ import static org.junit.Assert.assertNotEquals;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest()
+@Ignore
 public class SauceLabsTest {
 
   public static final String USERNAME = "cloudsrest";
