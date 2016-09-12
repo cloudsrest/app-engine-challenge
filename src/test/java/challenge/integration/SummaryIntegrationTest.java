@@ -25,9 +25,8 @@ import static org.junit.Assert.assertTrue;
 @RunWith(SpringRunner.class)
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 public class SummaryIntegrationTest extends BaseIntegrationTest {
-
+    
     String summaryUrl = "/api/secure/summary/stats";
-
 
     @Test
     public void testGetStats() throws IOException {
