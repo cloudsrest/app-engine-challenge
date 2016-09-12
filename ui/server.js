@@ -32,6 +32,9 @@ bootstrap();
 // request static assets
 _app.use('/build', _express.static(__dirname + _serveDir + '/build'));
 _app.use('/img', _express.static(__dirname + _serveDir + '/img'));
+_app.use('/css', _express.static(__dirname + _serveDir + '/css'));
+_app.use('/js', _express.static(__dirname + _serveDir + '/js'));
+_app.use('/fonts', _express.static(__dirname + _serveDir + '/fonts'));
 
 // proxy api requests
 _app.use(apiProxy());

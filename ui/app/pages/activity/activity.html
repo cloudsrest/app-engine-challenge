@@ -1,57 +1,150 @@
-<ion-header>
-  <ion-toolbar primary-darkest>
-    <button menuToggle>
-      <ion-icon name="menu"></ion-icon>
-    </button>
-    <ion-buttons end>
-      <button (click)="openRecognitionCreate()">
-        Give Recognition
-        <ion-icon name="star"></ion-icon>
-      </button>
-    </ion-buttons>
-  </ion-toolbar>
-</ion-header>
+<header class="usa-header" role="banner">
+    <div class="usa-nav-container">
+        <div class="usa-navbar">
+            <button class="usa-menu-btn">Menu</button>
+            <div class="usa-logo" id="logo">
+                <em class="usa-logo-text">
+                    <a href="/" accesskey="1" title="Home" aria-label="Home">Flash Challenge<br>Exercise</a>
+                </em>
+            </div>
+        </div>
+        <nav role="navigation" class="usa-nav">
+            <button class="usa-nav-close">
+                <img src="/assets/img/close.svg" alt="close">
+            </button>
+            <ul class="usa-nav-primary usa-accordion">
+                <li *ngFor="let p of pages">
+                    <a class="usa-nav-link" (click)="openPage(p)" href="javascript:">
+                        <span>{{p.title}}</span>
+                    </a>
+                </li>
+            </ul>
+        </nav>
+    </div>
+</header>
 
-<ion-content class="activity" padding>
-  <ion-list>
-    <ion-list-header>{{getViewTitle()}}</ion-list-header>
-    <ion-item *ngIf="!loading && recognitions.length === 0">
-      <p gray-light>No activity to display</p>
-    </ion-item>
-    <div class="text-center padding">
-      <ion-spinner *ngIf="loading"></ion-spinner>
+<div class="usa-nav-container" style="margin-top: 5%; margin-bottom: 5%;">
+    <h2>
+        Welcome
+    </h2>
+    <p>
+        This is a place to see and give your colleagues the recognition they deserve. Find your favorite peeps and give them some kudos!
+    </p>
+    <button (click)="openPage(pages[1])" class="btn-green">
+        Give Kudos
+    </button>
+
+    <h2>{{getViewTitle()}}</h2>
+
+    <ul>
+        <li *ngFor="let item of recognitions | orderBy : 'timestamp' : false">
+            <h5 *ngIf="item.getFromUser() && item.getToUser()">
+                {{item.getFromUser().getFirstName()}} {{item.getFromUser().getLastName()}}
+                gave
+                {{item.getToUser().getFirstName()}} {{item.getToUser().getLastName()}}
+                recognition
+                <span *ngIf="item.getType()">for</span>
+                <span *ngIf="item.getType()" class="usa-label">{{item.getType().toLowerCase()}}</span>
+            </h5>
+            <p *ngIf="item.getComment()">"{{item.getComment()}}"</p>
+            <small>{{item.getCreatedAt() | amTimeAgo}}</small>
+            <hr>
+        </li>
+        <li *ngIf="recognitions.length === 0">
+            <p style="padding-bottom: 64px;">No activity to display</p>
+        </li>
+    </ul>
+</div>
+
+<footer class="usa-footer usa-footer-slim" role="contentinfo">
+    <div class="usa-footer-primary-section">
+        <div class="usa-grid-full">
+            <nav class="usa-footer-nav usa-width-two-thirds">
+                <ul class="usa-unstyled-list">
+                    <li class="usa-width-one-fourth usa-footer-primary-content">
+                        <a class="usa-footer-primary-link" href="javascript:void(0);">Home</a>
+                    </li>
+                    <li class="usa-width-one-fourth usa-footer-primary-content">
+                        <a class="usa-footer-primary-link" href="javascript:void(0);">Kudos</a>
+                    </li>
+                    <li class="usa-width-one-fourth usa-footer-primary-content">
+                        <a class="usa-footer-primary-link" href="javascript:void(0);">Reports</a>
+                    </li>
+                </ul>
+            </nav>
+            <div class="usa-width-one-third">
+                <div class="usa-footer-primary-content usa-footer-contact_info">
+                    <p>(800) CALL-GOVT</p>
+                </div>
+                <div class="usa-footer-primary-content usa-footer-contact_info">
+                    <a href="mailto:info@agency.gov">info@agency.gov</a>
+                </div>
+            </div>
+        </div>
     </div>
-    <div *ngFor="let item of recognitions | orderBy : 'timestamp' : false">
-      <ion-item text-wrap>
-        <ion-avatar item-left>
-          <img [src]="item.getIcon()">
-        </ion-avatar>
-        <h2 *ngIf="item.getFromUser() && item.getToUser()">
-          {{item.getFromUser().getFirstName()}} {{item.getFromUser().getLastName()}}
-          gave
-          {{item.getToUser().getFirstName()}} {{item.getToUser().getLastName()}}
-          recognition
-          <span *ngIf="item.getType()">for #{{item.getType().toLowerCase()}}</span>
-        </h2>
-        <p *ngIf="item.getComment()">"{{item.getComment()}}"</p>
-        <small>{{item.getCreatedAt() | amTimeAgo}}</small>
-      </ion-item>
-      <!-- removing comments list, leaving example impl -->
-      <!--<ion-list class="comments-list">-->
-        <!--<ion-item class="comment-item" text-wrap *ngFor="let n of [1, 2, 3, 4, 5]">-->
-          <!--<ion-avatar item-left>-->
-            <!--<img [src]="'https://api.adorable.io/avatars/face/eyes' + n + '/nose' + n + '/mouth' + n + '/f1f1f1'">-->
-          <!--</ion-avatar>-->
-          <!--<h4>Mike Judge</h4>-->
-          <!--<p>blah blah blah</p>-->
-        <!--</ion-item>-->
-        <!--<ion-item class="comment-item">-->
-          <!--<ion-avatar item-left>-->
-            <!--<img src="https://api.adorable.io/avatars/90/abott@adorable.png">-->
-          <!--</ion-avatar>-->
-          <!--<ion-input placeholder="Write a comment..."></ion-input>-->
-        <!--</ion-item>-->
-      <!--</ion-list>-->
+
+    <div class="usa-footer-secondary_section">
+        <div class="usa-grid">
+            <div class="usa-footer-logo">
+                <h3 class="usa-footer-slim-logo-heading">Enterprise Horizon</h3>
+            </div>
+        </div>
     </div>
-  </ion-list>
-</ion-content>
+</footer>
+<!--<ion-header>-->
+<!--<ion-toolbar primary-darkest>-->
+<!--<button menuToggle>-->
+<!--<ion-icon name="menu"></ion-icon>-->
+<!--</button>-->
+<!--<ion-buttons end>-->
+<!--<button (click)="openRecognitionCreate()">-->
+<!--Give Recognition-->
+<!--<ion-icon name="star"></ion-icon>-->
+<!--</button>-->
+<!--</ion-buttons>-->
+<!--</ion-toolbar>-->
+<!--</ion-header>-->
+
+<!--<ion-content class="activity" padding>-->
+<!--<ion-list>-->
+<!--<ion-list-header>{{getViewTitle()}}</ion-list-header>-->
+<!--<ion-item *ngIf="!loading && recognitions.length === 0">-->
+<!--<p gray-light>No activity to display</p>-->
+<!--</ion-item>-->
+<!--<div class="text-center padding">-->
+<!--<ion-spinner *ngIf="loading"></ion-spinner>-->
+<!--</div>-->
+<!--<div *ngFor="let item of recognitions | orderBy : 'timestamp' : false">-->
+<!--<ion-item text-wrap>-->
+<!--<ion-avatar item-left>-->
+<!--<img [src]="item.getIcon()">-->
+<!--</ion-avatar>-->
+<!--<h2 *ngIf="item.getFromUser() && item.getToUser()">-->
+<!--{{item.getFromUser().getFirstName()}} {{item.getFromUser().getLastName()}}-->
+<!--gave-->
+<!--{{item.getToUser().getFirstName()}} {{item.getToUser().getLastName()}}-->
+<!--recognition-->
+<!--<span *ngIf="item.getType()">for #{{item.getType().toLowerCase()}}</span>-->
+<!--</h2>-->
+<!--<p *ngIf="item.getComment()">"{{item.getComment()}}"</p>-->
+<!--<small>{{item.getCreatedAt() | amTimeAgo}}</small>-->
+<!--</ion-item>-->
+<!--&lt;!&ndash; removing comments list, leaving example impl &ndash;&gt;-->
+<!--&lt;!&ndash;<ion-list class="comments-list">&ndash;&gt;-->
+<!--&lt;!&ndash;<ion-item class="comment-item" text-wrap *ngFor="let n of [1, 2, 3, 4, 5]">&ndash;&gt;-->
+<!--&lt;!&ndash;<ion-avatar item-left>&ndash;&gt;-->
+<!--&lt;!&ndash;<img [src]="'https://api.adorable.io/avatars/face/eyes' + n + '/nose' + n + '/mouth' + n + '/f1f1f1'">&ndash;&gt;-->
+<!--&lt;!&ndash;</ion-avatar>&ndash;&gt;-->
+<!--&lt;!&ndash;<h4>Mike Judge</h4>&ndash;&gt;-->
+<!--&lt;!&ndash;<p>blah blah blah</p>&ndash;&gt;-->
+<!--&lt;!&ndash;</ion-item>&ndash;&gt;-->
+<!--&lt;!&ndash;<ion-item class="comment-item">&ndash;&gt;-->
+<!--&lt;!&ndash;<ion-avatar item-left>&ndash;&gt;-->
+<!--&lt;!&ndash;<img src="https://api.adorable.io/avatars/90/abott@adorable.png">&ndash;&gt;-->
+<!--&lt;!&ndash;</ion-avatar>&ndash;&gt;-->
+<!--&lt;!&ndash;<ion-input placeholder="Write a comment..."></ion-input>&ndash;&gt;-->
+<!--&lt;!&ndash;</ion-item>&ndash;&gt;-->
+<!--&lt;!&ndash;</ion-list>&ndash;&gt;-->
+<!--</div>-->
+<!--</ion-list>-->
+<!--</ion-content>-->

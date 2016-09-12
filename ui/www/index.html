@@ -7,17 +7,43 @@
   <meta name="format-detection" content="telephone=no">
   <meta name="msapplication-tap-highlight" content="no">
 
+  <link rel="shortcut icon" type="image/ico" href="img/favicons/favicon.ico" />
+  <link rel="icon" type="image/png" href="img/favicons/favicon.png" />
+
   <link href="https://fonts.googleapis.com/css?family=Merriweather|Source+Sans+Pro" rel="stylesheet">
-  <link ios-href="build/css/app.ios.css" rel="stylesheet">
-  <link md-href="build/css/app.md.css" rel="stylesheet">
-  <link wp-href="build/css/app.wp.css" rel="stylesheet">
+  <!--<link ios-href="build/css/app.ios.css" rel="stylesheet">-->
+  <!--<link md-href="build/css/app.md.css" rel="stylesheet">-->
+  <!--<link wp-href="build/css/app.wp.css" rel="stylesheet">-->
+  <!-- include uswebstandards css -->
+  <link href="css/uswds.css" rel="stylesheet">
+  <!-- custom styles -->
+  <link href="css/app.css" rel="stylesheet">
 </head>
 
 <body>
-  <ion-app></ion-app>
+  <ion-app>
+    <!-- show header as a loading template while ng2 does boostrap process for app -->
+    <header class="usa-header" role="banner">
+      <div class="usa-nav-container">
+        <div class="usa-navbar">
+          <button class="usa-menu-btn">Menu</button>
+          <div class="usa-logo" id="logo">
+            <em class="usa-logo-text">
+              <a href="/" accesskey="1" title="Home" aria-label="Home">Flash Challenge<br>Exercise</a>
+            </em>
+          </div>
+        </div>
+      </div>
+    </header>
+    <div class="usa-nav-container">
+      <h4>Loading...</h4>
+    </div>
+  </ion-app>
 
   <!-- cordova.js required for cordova apps -->
   <!--<script src="cordova.js"></script>-->
+  <!-- include uswebstandards js -->
+  <script src="js/uswds.js"></script>
   <!-- Polyfill needed for platforms without Promise and Collection support -->
   <script src="build/js/es6-shim.min.js"></script>
   <!-- Zone.js and Reflect-metadata  -->

@@ -20,16 +20,6 @@
     }
   }
   @media(min-width: $breakPointSm) {
-    .toolbar {
-      height: 10.3rem;
-      border-bottom: 1px solid $gray-light;
-    }
-    .toolbar-title {
-      text-align: left;
-      width: 20%;
-      word-break: break-word;
-      white-space: pre-line;
-    }
     ion-card {
       position: relative;
       width: 50%;
@@ -37,6 +27,7 @@
     }
     .footer {
       height: 64px;
+      border: 0;
     }
   }
   ion-card {
