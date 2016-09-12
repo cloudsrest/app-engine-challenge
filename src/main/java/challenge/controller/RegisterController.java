@@ -37,7 +37,6 @@ public class RegisterController extends BaseController  {
             String pass = encoder.encode(userDto.getPassword());
             user.setPassword(pass);
             saved = userService.createUser(requestor(principal), user);
-            System.out.println("pass = " + pass);
         } catch (Exception e) {
             throw new InternalServerException(e.getMessage());
         }
