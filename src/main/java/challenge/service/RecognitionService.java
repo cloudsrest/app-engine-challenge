@@ -13,5 +13,6 @@ public interface RecognitionService {
     public Recognition createRecognition(User user, RecognitionDTO recognition);
     public long getTotalRecognitions();
     public List<challenge.dao.RecognitionSummary> getTopRecognitionReceivers();
+    public List<challenge.dao.RecognitionSummary> getTopRecognitionSenders();
 
 }
