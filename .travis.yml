@@ -33,7 +33,7 @@ deploy:
   - provider: script
     skip_cleanup: true
     #attempting to run test with in-memory profile then package without
-    script: (echo 'STAGE DEPLOY' && mvn gcloud:deploy -DskipTests -Dgcloud.version=staging -Dlog_level=error && mvn test -Ptest -DendToEnd=true)
+    script: (echo 'STAGE DEPLOY' && mvn gcloud:deploy -DskipTests -Dgcloud.version=staging -Dlog_level=error && echo 'RUNNING E2E' && mvn test -Ptest -DendToEnd=true)
     on:
       all_branches: true
   - provider: script
