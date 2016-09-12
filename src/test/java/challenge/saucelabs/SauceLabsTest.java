@@ -28,6 +28,8 @@ public class SauceLabsTest {
   public static final String ACCESS_KEY = "da75edb5-517a-485d-9d1f-3e6cb84a3f3a";
   public static final String URL = "http://" + USERNAME + ":" + ACCESS_KEY + "@ondemand.saucelabs.com:80/wd/hub";
 
+  public static final Integer waitForLoad = 15;
+
   private WebDriver driver;
 
   @Before
@@ -48,16 +50,7 @@ public class SauceLabsTest {
 
     driver.get("https://blissful-cell-141318.appspot.com/api/www/index.html");
 
-    WebDriverWait wait = new WebDriverWait(driver, 15);
-
-    WebElement autocomplete = wait
-            .until(
-                    ExpectedConditions
-                            .visibilityOfElementLocated(
-                                    By.xpath("//ion-input[@name='username']")
-                            )
-            );
-
+    waitForElement(driver, By.xpath("//ion-input[@name='username']"));
 
     List<WebElement> usernameEls;
     usernameEls = driver.findElements(By.xpath("//ion-input[@name='username']"));
@@ -72,15 +65,7 @@ public class SauceLabsTest {
     assertEquals("Cannot find submit input", 1, submitEls.size());
     submitEls.get(0).click();
 
-    wait = new WebDriverWait(driver, 15);
-
-    autocomplete = wait
-            .until(
-                    ExpectedConditions
-                    .visibilityOfElementLocated(
-                            By.xpath("//button[@class='bar-button bar-button-default bar-button-icon-right']")
-                    )
-            );
+    waitForElement(driver, By.xpath("//button[@class='bar-button bar-button-default bar-button-icon-right']"));
 
     submitEls = driver.findElements(By.xpath("//button[@class='bar-button bar-button-default bar-button-icon-right']"));
     assertEquals("Cannot find Give Recognition input", 1, submitEls.size());
@@ -89,6 +74,21 @@ public class SauceLabsTest {
 
   }
 
+  private void waitForElement(WebDriver driver, By by) {
+    waitForElement(driver, by, waitForLoad);
+  }
+
+  private void waitForElement(WebDriver driver, By by, Integer waitForLoad) {
+    WebDriverWait wait = new WebDriverWait(driver, waitForLoad);
+
+    WebElement el = wait
+            .until(
+                    ExpectedConditions
+                            .visibilityOfElementLocated(
+                                    by
+                            )
+            );
+  }
 
   @After
   public void after() {
