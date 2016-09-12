@@ -16,6 +16,7 @@ import org.springframework.test.context.junit4.SpringRunner;
 
 import java.net.URL;
 import java.util.List;
+import java.util.Properties;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotEquals;
@@ -31,6 +32,7 @@ public class SauceLabsTest {
   public static final Integer waitForLoad = 15;
 
   private WebDriver driver;
+  private boolean shouldRun;
 
   @Before
   public void before() throws Exception {
@@ -39,10 +41,25 @@ public class SauceLabsTest {
     caps.setCapability("version", "43.0");
 
     driver = new RemoteWebDriver(new URL(URL), caps);
+    Properties properties = System.getProperties();
+    String endToEnd = properties.getProperty("endToEnd");
+    System.out.println("endToEnd property = " + endToEnd);
+    if (null == endToEnd) {
+      System.out.println("Not an endToEnd run, aborting tests");
+      shouldRun = false;
+    }
+    else {
+      shouldRun = true;
+    }
+
+
   }
 
   @Test
   public void testSuccessLogin() throws Exception {
+    if (!shouldRun) {
+      return;
+    }
 
     /**
      * Goes to Sauce Lab's guinea-pig page and prints title
@@ -79,6 +96,10 @@ public class SauceLabsTest {
 
   @Test
   public void testGiveRecognition() throws Exception {
+      if (!shouldRun) {
+          return;
+      }
+
 
     /**
      * Goes to Sauce Lab's guinea-pig page and prints title

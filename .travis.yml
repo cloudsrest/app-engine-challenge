@@ -24,23 +24,25 @@ before_install:
 install:
   - gcloud config set project blissful-cell-141318
 
-script: "mvn -Ptest cobertura:cobertura verify -Dquiet=true"
+script: mvn -Ptest cobertura:cobertura verify -Dquiet=true
+
+after_success:
+  - bash <(curl -s https://codecov.io/bash)
 
 deploy:
   - provider: script
     skip_cleanup: true
     #attempting to run test with in-memory profile then package without
-    script: (mvn clean package -DskipTests && exec mvn gcloud:deploy -DskipTests -Dgcloud.version=staging -Dlog_level=error)
-    on: master
+    script: (echo 'STAGE DEPLOY' && mvn gcloud:deploy -DskipTests -Dgcloud.version=staging -Dlog_level=error && mvn test -Ptest -DendToEnd=true)
+    on:
+      all_branches: true
   - provider: script
     skip_cleanup: true
     #attempting to run test with in-memory profile then package without
-    script: (mvn clean package -DskipTests && exec mvn gcloud:deploy -DskipTests -Dlog_level=error)
+    script: (echo 'PROD DEPLOY' && mvn gcloud:deploy -DskipTests -Dlog_level=error)
     # no_stop_previous_version: true
-    on: master
-
-after_success:
-  - bash <(curl -s https://codecov.io/bash)
+    on:
+      all_branches: true
 
 addons:
   sauce_connect:
