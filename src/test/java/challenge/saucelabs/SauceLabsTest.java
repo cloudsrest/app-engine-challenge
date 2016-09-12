@@ -116,14 +116,16 @@ public class SauceLabsTest {
     // Click on "Select a colleague to give recognition to..." textbox
     //
     webElementsList = waitAndFind(driver, By.id("colleague-select"));
+
+    WebElement select = webElementsList.get(0);
     assertNotEquals("Cannot find Select a Colleague input", 0, webElementsList.size());
-    webElementsList.get(0).click();
+    select.click();
 
     // Click on Colleague's name.
     // alert-tappable alert-radio alert-radio-button alert-radio-button-default
-    WebElement webElement = webElementsList.get(0).findElement(By.tagName("option"));
+    webElementsList = select.findElements(By.tagName("option"));
     //webElementsList = driver.findElements(By.xpath("/html/body/ion-app/div[2]/ion-nav/ion-page/div/form/select/option[3]']"));
-    webElement.click();
+    webElementsList.get(0).click();
 
     // Select teamwork
     webElementsList = driver.findElements(By.id("team-work"));
@@ -135,7 +137,8 @@ public class SauceLabsTest {
     webElementsList.get(0).sendKeys("Great Teamwork");
 
     // Submit
-    webElementsList = driver.findElements(By.className("usa-form"));
+    // button button-default
+    webElementsList = driver.findElements(By.xpath("//button[@class='button button-default']"));
     webElementsList.get(0).submit();
 
 
