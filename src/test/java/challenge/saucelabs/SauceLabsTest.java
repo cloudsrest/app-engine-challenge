@@ -1,5 +1,6 @@
 package challenge.saucelabs;
 
+import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.openqa.selenium.WebDriver;
@@ -12,6 +13,7 @@ import java.net.URL;
 
 import static org.junit.Assert.assertEquals;
 
+@Ignore
 @RunWith(SpringRunner.class)
 @SpringBootTest()
 public class SauceLabsTest {
