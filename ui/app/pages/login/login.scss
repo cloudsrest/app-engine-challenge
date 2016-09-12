@@ -1,15 +1,39 @@
+@import '../../theme/app.variables';
+
 .login {
+  ion-content.login {
+    background: #f1f1f1;
+  }
+  .text-input {
+    border: 1px solid #5b616b;
+    height: 4.4rem;
+  }
+  ion-list .item .item-inner {
+    border-bottom: 0;
+  }
+  ion-list > .item:last-child {
+    border-bottom: 0;
+  }
+  @media(max-width: $breakPointSm) {
+    ion-title {
+      padding: 0;
+    }
+  }
+  @media(min-width: $breakPointSm) {
+    ion-card {
+      position: relative;
+      width: 50%;
+      left: 25%;
+    }
+    .footer {
+      height: 64px;
+      border: 0;
+    }
+  }
   ion-card {
     padding: 20px;
     h1 {
       font-weight: 800;
     }
   }
-  @media(min-width: $breakPointSm) {
-    width: 50%;
-    left: 25%;
-  }
-}
-ion-content.login {
-  background: #f1f1f1;
 }

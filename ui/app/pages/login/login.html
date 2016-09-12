@@ -1,30 +1,94 @@
-<ion-header>
-  <ion-navbar primary-darkest>
-  </ion-navbar>
-</ion-header>
-
-<ion-content class="login" padding>
-  <ion-card>
-    <ion-card-header>
-      <h1>Sign in</h1>
-      <p alert>{{errorMsg}}</p>
-    </ion-card-header>
-    <ion-card-content>
-      <form (ngSubmit)="login()">
-        <ion-list>
-          <ion-item>
-            <ion-label stacked for="username">Username</ion-label>
-            <ion-input type="text" id="username" [(ngModel)]="username" name="username" required clearInput></ion-input>
-          </ion-item>
-          <ion-item>
-            <ion-label stacked for="password">Password</ion-label>
-            <ion-input type="password" id="password" [(ngModel)]="password" name="password" required clearInput></ion-input>
-          </ion-item>
-        </ion-list>
-        <div padding>
-          <button>Sign In</button>
+<header class="usa-header" role="banner">
+    <div class="usa-nav-container">
+        <div class="usa-navbar">
+            <button class="usa-menu-btn">Menu</button>
+            <div class="usa-logo" id="logo">
+                <em class="usa-logo-text">
+                    <a href="/" accesskey="1" title="Home" aria-label="Home">Flash Challenge<br>Exercise</a>
+                </em>
+            </div>
         </div>
-      </form>
-    </ion-card-content>
-  </ion-card>
-</ion-content>
+        <nav role="navigation" class="usa-nav">
+            <button class="usa-nav-close">
+                <img src="/assets/img/close.svg" alt="close">
+            </button>
+            <ul class="usa-nav-primary usa-accordion">
+                <li *ngFor="let p of pages">
+                    <a class="usa-nav-link" (click)="openPage(p)" href="javascript:">
+                        <span>{{p.title}}</span>
+                    </a>
+                </li>
+            </ul>
+        </nav>
+    </div>
+</header>
+
+<div class="usa-nav-container" style="margin-top: 5%; margin-bottom: 5%;">
+    <form class="usa-form" (ngSubmit)="login()">
+        <fieldset>
+            <legend class="usa-drop_text">Sign in</legend>
+            <p class="text-alert">{{errorMsg}}</p>
+            <label for="username">Username</label>
+            <input id="username"
+                   name="username"
+                   type="text"
+                   autocapitalize="off"
+                   autocorrect="off"
+                   [(ngModel)]="username"
+                   required>
+
+            <label for="password">Password</label>
+            <input id="password"
+                   name="password"
+                   [type]="showPassword && 'text' || 'password'"
+                   [(ngModel)]="password">
+            <p class="usa-form-note">
+                <a title="Show password"
+                   href="javascript:"
+                   (click)="showPassword = !showPassword"
+                   class="usa-show_password"
+                   aria-controls="password">
+                    {{showPassword && 'Hide' || 'Show'}} password
+                </a>
+            </p>
+
+            <input type="submit" value="Sign in" />
+        </fieldset>
+    </form>
+</div>
+
+<footer class="usa-footer usa-footer-slim" role="contentinfo">
+    <div class="usa-footer-primary-section">
+        <div class="usa-grid-full">
+            <nav class="usa-footer-nav usa-width-two-thirds">
+                <ul class="usa-unstyled-list">
+                    <li class="usa-width-one-fourth usa-footer-primary-content">
+                        <a class="usa-footer-primary-link" href="javascript:void(0);">Home</a>
+                    </li>
+                    <li class="usa-width-one-fourth usa-footer-primary-content">
+                        <a class="usa-footer-primary-link" href="javascript:void(0);">Kudos</a>
+                    </li>
+                    <li class="usa-width-one-fourth usa-footer-primary-content">
+                        <a class="usa-footer-primary-link" href="javascript:void(0);">Reports</a>
+                    </li>
+                </ul>
+            </nav>
+            <div class="usa-width-one-third">
+                <div class="usa-footer-primary-content usa-footer-contact_info">
+                    <p>(800) CALL-GOVT</p>
+                </div>
+                <div class="usa-footer-primary-content usa-footer-contact_info">
+                    <a href="mailto:info@agency.gov">info@agency.gov</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="usa-footer-secondary_section">
+        <div class="usa-grid">
+            <div class="usa-footer-logo">
+                <h3 class="usa-footer-slim-logo-heading">Enterprise Horizon</h3>
+            </div>
+        </div>
+    </div>
+</footer>

@@ -12,15 +12,23 @@ export class LoginPage {
   loginUrl: string = '/api/oauth/token';
   digest: string = 'Zmxhc2hkZXY6c2VjcmV0';
   errorMsg: string;
+  pages: Array<{title: string, component: any, data?: any}>;
   private storage: Storage;
 
   constructor(private navCtrl: NavController, private loadingCtrl: LoadingController, private http: Http) {
     this.storage = new Storage(LocalStorage);
+    this.pages = [];
   }
 
   onPageWillEnter() {
     // clear local storage
     this.storage.clear();
+  }
+
+  openPage(page) {
+    // Reset the content nav to have just this page
+    // we wouldn't want the back button to show in this scenario
+    this.navCtrl.setRoot(page.component, page.data);
   }
 
   public login() {
