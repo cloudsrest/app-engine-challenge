@@ -1,0 +1,52 @@
+.text-center {
+    text-align: center;
+}
+
+.text-alert {
+    color: #e31c3d;
+}
+
+.text-highlight {
+    color: #FFB550;
+}
+
+.btn-green,
+.btn-green:focus,
+.btn-green:active {
+    background-color: #2e8540;
+    color: white;
+}
+
+ul {
+    padding: 0;
+    list-style-type: none;
+}
+
+li {
+    list-style: none;
+}
+
+.padding {
+    padding: 8px;
+}
+
+.usa-header, .usa-nav {
+    background-color: #112e51;
+}
+
+.usa-logo a, .usa-nav-primary > li > a {
+    color: white;
+}
+
+.usa-nav-primary a:hover {
+    color: #FFB550;
+}
+
+hr {
+    display: block;
+    height: 1px;
+    border: 0;
+    border-top: 1px solid #ccc;
+    margin: 1em 0;
+    padding: 0;
+}

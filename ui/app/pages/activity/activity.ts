@@ -23,11 +23,21 @@ export class ActivityPage {
   recognitions: Recognition[];
   currentView: string;
   loading: boolean;
+  pages: Array<{title: string, component: any, data?: any}>;
+  reloadOnEnter: boolean;
 
   constructor(private navCtrl: NavController, params: NavParams, private recData: RecognitionProvider, private userData: UserProvider, private modalCtrl: ModalController) {
     this.recognitions = [];
     // allow context to switch between notifications and recent activity using the same page
     this.currentView = params.data.view || ActivityPage.ACTIVITY.recent;
+    this.reloadOnEnter = !!params.data.reload;
+    this.pages = [
+      {title: 'Home', component: ActivityPage, data: {view: 'recent'}},
+      {title: 'Give Kudos', component: RecognitionCreateModal},
+      {title: 'Notifications', component: ActivityPage, data: {view: 'notifications'}},
+      // {title: 'Reports', component: ReportsPage}, // TODO
+      {title: 'Sign Out', component: LoginPage}
+    ];
   }
 
   // load data before page becomes active
@@ -44,6 +54,12 @@ export class ActivityPage {
       // revert to login page
       this.errorHandler(res);
     });
+  }
+
+  openPage(page) {
+    // Reset the content nav to have just this page
+    // we wouldn't want the back button to show in this scenario
+    this.navCtrl.setRoot(page.component, page.data);
   }
 
   // clear data before page becomes deactivated
@@ -84,7 +100,7 @@ export class ActivityPage {
 
   // set the recognitions context to "recent activity"
   showRecentActivity() {
-    this.loadAllRecognitions();
+    this.loadAllRecognitions(this.reloadOnEnter);
   }
 
   // set the recognitions context to "notifications"
