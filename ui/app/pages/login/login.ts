@@ -11,10 +11,16 @@ export class LoginPage {
   password: string = '';
   loginUrl: string = '/api/oauth/token';
   digest: string = 'Zmxhc2hkZXY6c2VjcmV0';
+  errorMsg: string;
   private storage: Storage;
 
   constructor(private navCtrl: NavController, private loadingCtrl: LoadingController, private http: Http) {
     this.storage = new Storage(LocalStorage);
+  }
+
+  onPageWillEnter() {
+    // clear local storage
+    this.storage.clear();
   }
 
   public login() {
@@ -29,6 +35,8 @@ export class LoginPage {
         this.storage.set('access_token', accessToken);
         this.storage.set('refresh_token', refreshToken);
         this.navCtrl.setRoot(ActivityPage);
+      }, () => {
+        this.errorMsg = 'Unable to login';
       });
     }
   }
@@ -36,7 +44,7 @@ export class LoginPage {
   presentLoading() {
     let loader = this.loadingCtrl.create({
       content: "Please wait...",
-      duration: 2000
+      duration: 1000
     });
     loader.present();
   }

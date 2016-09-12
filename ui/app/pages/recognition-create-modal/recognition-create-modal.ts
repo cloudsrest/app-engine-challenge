@@ -15,7 +15,7 @@ export class RecognitionCreateModal {
   users: User[];
   recognitionTypes: string[];
   currentUser: User;
-  recognitionUser: number;
+  recognitionUser: User;
   recognitionType: string;
   recognitionComment: string;
 
@@ -29,6 +29,7 @@ export class RecognitionCreateModal {
     this.recognitionProvider.recognitionTypes().subscribe((types: string[]) => {
       this.recognitionTypes = types;
     });
+    this.recognitionUser = new User({});
   }
 
   dismiss(data?: any) {
@@ -37,7 +38,7 @@ export class RecognitionCreateModal {
 
   save() {
     let recognition = new Recognition({
-      toUserId: this.recognitionUser,
+      toUserId: this.recognitionUser.getId(),
       fromUserId: this.currentUser.getId(),
       type: this.recognitionType,
       comment: this.recognitionComment
@@ -48,6 +49,10 @@ export class RecognitionCreateModal {
     }, () => {
       this.dismiss();
     });
+  }
+
+  getIcon(type: string) {
+    return Recognition.getIcon(type);
   }
 
 }
