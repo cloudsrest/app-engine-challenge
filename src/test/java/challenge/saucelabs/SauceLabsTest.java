@@ -74,6 +74,44 @@ public class SauceLabsTest {
 
   }
 
+  @Test
+  public void testGiveRecognition() throws Exception {
+
+    /**
+     * Goes to Sauce Lab's guinea-pig page and prints title
+     */
+
+    driver.get("https://blissful-cell-141318.appspot.com/api/www/index.html");
+
+    waitForElement(driver, By.xpath("//ion-input[@name='username']"));
+
+    List<WebElement> usernameEls;
+    usernameEls = driver.findElements(By.xpath("//ion-input[@name='username']"));
+    List<WebElement> passwordEls = driver.findElements(By.xpath("//ion-input[@name='password']"));
+    assertNotEquals("Cannot find username text box", 0, usernameEls.size());
+    assertNotEquals("Cannot find password text box", 0, passwordEls.size());
+    WebElement username = usernameEls.get(0).findElement(By.name("username"));
+    WebElement password = passwordEls.get(0).findElement(By.name("password"));
+    username.sendKeys("nturner");
+    password.sendKeys("pass");
+    List<WebElement> webElementsList = driver.findElements(By.xpath("//button[@class='button button-default']"));
+    assertEquals("Cannot find submit input", 1, webElementsList.size());
+    webElementsList.get(0).click();
+
+    waitForElement(driver, By.xpath("//button[@class='bar-button bar-button-default bar-button-icon-right']"));
+
+    webElementsList = driver.findElements(By.xpath("//button[@class='bar-button bar-button-default bar-button-icon-right']"));
+    assertEquals("Cannot find Give Recognition input", 1, webElementsList.size());
+    String giveRecognition = webElementsList.get(0).findElement(By.tagName("span")).getText();
+    assertEquals("Give Recognition", giveRecognition);
+
+    webElementsList.get(0).click();
+
+    waitForElement(driver, By.xpath("//button[@class='item-cover item-cover-default']"));
+    webElementsList = driver.findElements(By.xpath("//button[@class='bar-button bar-button-default bar-button-icon-right']"));
+    assertEquals("Cannot find Select a Colleague input", 1, webElementsList.size());
+  }
+
   private void waitForElement(WebDriver driver, By by) {
     waitForElement(driver, by, waitForLoad);
   }
