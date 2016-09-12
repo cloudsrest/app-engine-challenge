@@ -3,6 +3,7 @@ package challenge.integration;
 import challenge.dto.RecognitionDTO;
 import challenge.dto.TokenDTO;
 import challenge.model.User;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,6 +19,7 @@ import java.util.List;
 
 import static org.junit.Assert.*;
 
+@Ignore
 @RunWith(SpringRunner.class)
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 public class RecognitionIntegrationTest extends BaseIntegrationTest {
@@ -27,6 +29,8 @@ public class RecognitionIntegrationTest extends BaseIntegrationTest {
 
     @Test
     public void testCreateRecognitionDTOs() throws IOException {
+        if (shouldNotRun()) return;
+
         String comment1 = "great!";
         RecognitionDTO rec1 = getRecognition(comment1, testUser);
         String comment2 = "awesome!";
@@ -54,6 +58,8 @@ public class RecognitionIntegrationTest extends BaseIntegrationTest {
 
     @Test
     public void testGetMine() throws IOException {
+        if (shouldNotRun()) return;
+
         User recipient2 = getUser("someRecipient2");
 
         RecognitionDTO rec1 = getRecognition("Dude!", testUser);
@@ -73,6 +79,8 @@ public class RecognitionIntegrationTest extends BaseIntegrationTest {
 
     @Test
     public void testGetAll() throws IOException {
+        if (shouldNotRun()) return;
+
         User recipient = getUser("someRecipient");
         User recipient2 = getUser("someRecipient2");
 

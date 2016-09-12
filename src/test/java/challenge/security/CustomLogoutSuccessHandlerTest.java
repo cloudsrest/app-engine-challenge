@@ -2,6 +2,7 @@ package challenge.security;
 
 import challenge.dto.TokenDTO;
 import challenge.integration.BaseIntegrationTest;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mockito;
@@ -18,6 +19,8 @@ import java.io.IOException;
 import static org.junit.Assert.assertTrue;
 import static org.mockito.Mockito.mock;
 
+
+@Ignore
 @RunWith(SpringRunner.class)
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 public class CustomLogoutSuccessHandlerTest extends BaseIntegrationTest {
@@ -27,6 +30,7 @@ public class CustomLogoutSuccessHandlerTest extends BaseIntegrationTest {
 
     @Test
     public void test() throws IOException, ServletException {
+        if (shouldNotRun()) return;
         TokenDTO accessToken = getAccessToken(testUser);
         HttpServletRequest request = mock(HttpServletRequest.class);
         HttpServletResponse response = mock(HttpServletResponse.class);

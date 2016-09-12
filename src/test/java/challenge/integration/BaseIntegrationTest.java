@@ -5,6 +5,8 @@ import challenge.dto.ErrorDTO;
 import challenge.dto.RecognitionDTO;
 import challenge.dto.TokenDTO;
 import challenge.model.User;
+import org.junit.Before;
+import org.junit.Ignore;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -13,16 +15,29 @@ import org.springframework.http.*;
 import org.springframework.test.context.junit4.SpringRunner;
 
 import java.io.IOException;
+import java.util.Properties;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
 
+@Ignore
 @RunWith(SpringRunner.class)
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 public class BaseIntegrationTest extends BaseTest {
 
     @Autowired
     public TestRestTemplate restTemplate;
+
+    protected boolean shouldNotRun() {
+        System.out.println("System.getProperties().getProperty(\"noIntegration\") = " + System.getProperties().getProperty("noIntegration"));
+
+        if (null != System.getProperties().getProperty("noIntegration")) {
+            System.out.println("Setting doNotRun for BaseIntegrationTest");
+            return true;
+        }
+
+        return false;
+    }
 
     public TokenDTO getAccessToken(User usr) throws IOException {
         String authUrl;

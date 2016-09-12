@@ -3,6 +3,7 @@ package challenge.integration;
 import challenge.BaseTest;
 import challenge.dto.TokenDTO;
 import challenge.dto.UserDTO;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -16,6 +17,7 @@ import java.util.List;
 import static org.junit.Assert.*;
 
 
+@Ignore
 @RunWith(SpringRunner.class)
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 public class UserIntegrationTest extends BaseIntegrationTest {
@@ -26,6 +28,8 @@ public class UserIntegrationTest extends BaseIntegrationTest {
 
     @Test
     public void testGetUsers_not_authenticated() throws IOException {
+        if (shouldNotRun()) return;
+
         ResponseEntity<String> forEntity = restTemplate.getForEntity(usersUrl, String.class);
 
         assertUnauthorized(forEntity);
@@ -33,6 +37,8 @@ public class UserIntegrationTest extends BaseIntegrationTest {
 
     @Test
     public void testGetUser_not_authenticated() throws IOException {
+        if (shouldNotRun()) return;
+
         ResponseEntity<String> forEntity = restTemplate.getForEntity(userUrl, String.class);
 
         assertUnauthorized(forEntity);
@@ -40,6 +46,8 @@ public class UserIntegrationTest extends BaseIntegrationTest {
 
     @Test
     public void testGetMe_not_authenticated() throws IOException {
+        if (shouldNotRun()) return;
+
         ResponseEntity<String> forEntity = restTemplate.getForEntity(meUrl, String.class);
 
         assertUnauthorized(forEntity);
@@ -47,6 +55,8 @@ public class UserIntegrationTest extends BaseIntegrationTest {
 
     @Test
     public void testGetUsers_authenticated() throws IOException {
+        if (shouldNotRun()) return;
+
         String usr1 = "usr1";
         getUser(usr1);
         getUser("usr2");
@@ -67,6 +77,8 @@ public class UserIntegrationTest extends BaseIntegrationTest {
 
     @Test
     public void testGetUser_authenticated() throws IOException {
+        if (shouldNotRun()) return;
+
         TokenDTO accessToken = getAccessToken(testUser);
 
         ResponseEntity<UserDTO> exchange = restTemplate.exchange(usersUrl + "/" + testUser.getId(), HttpMethod.GET, buildTokenHeader(accessToken, null), UserDTO.class);
@@ -81,6 +93,8 @@ public class UserIntegrationTest extends BaseIntegrationTest {
 
     @Test
     public void testGetMe_authenticated() throws IOException {
+        if (shouldNotRun()) return;
+
         TokenDTO accessToken = getAccessToken(testUser);
 
         ResponseEntity<UserDTO> exchange = restTemplate.exchange(meUrl, HttpMethod.GET, buildTokenHeader(accessToken, null), UserDTO.class);

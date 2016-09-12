@@ -2,6 +2,7 @@ package challenge.controller;
 
 import challenge.BaseTest;
 import challenge.dto.UserDTO;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,6 +17,7 @@ import static org.junit.Assert.assertTrue;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
+@Ignore
 @RunWith(SpringRunner.class)
 @SpringBootTest()
 public class UserControllerTest extends BaseTest {

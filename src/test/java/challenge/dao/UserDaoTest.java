@@ -12,6 +12,7 @@ import org.springframework.test.context.junit4.SpringRunner;
 import static org.junit.Assert.*;
 import static org.junit.Assert.assertEquals;
 
+@Ignore
 @RunWith(SpringRunner.class)
 @SpringBootTest()
 public class UserDaoTest extends BaseTest {

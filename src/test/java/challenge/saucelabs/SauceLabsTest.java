@@ -41,6 +41,7 @@ public class SauceLabsTest {
     caps.setCapability("version", "43.0");
 
     driver = new RemoteWebDriver(new URL(URL), caps);
+
     Properties properties = System.getProperties();
     String endToEnd = properties.getProperty("endToEnd");
     System.out.println("endToEnd property = " + endToEnd);
