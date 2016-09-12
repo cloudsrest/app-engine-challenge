@@ -54,9 +54,10 @@ public class SauceLabsTest {
             .until(
                     ExpectedConditions
                             .visibilityOfElementLocated(
-                                    By.xpath("//ion-input[@name='username']']")
+                                    By.xpath("//ion-input[@name='username']")
                             )
             );
+
 
     List<WebElement> usernameEls;
     usernameEls = driver.findElements(By.xpath("//ion-input[@name='username']"));
@@ -71,7 +72,6 @@ public class SauceLabsTest {
     assertEquals("Cannot find submit input", 1, submitEls.size());
     submitEls.get(0).click();
 
-    // Wait for the page to show up
     wait = new WebDriverWait(driver, 15);
 
     autocomplete = wait
@@ -82,13 +82,13 @@ public class SauceLabsTest {
                     )
             );
 
-    //
     submitEls = driver.findElements(By.xpath("//button[@class='bar-button bar-button-default bar-button-icon-right']"));
     assertEquals("Cannot find Give Recognition input", 1, submitEls.size());
     String giveRecognition = submitEls.get(0).findElement(By.tagName("span")).getText();
     assertEquals("Give Recognition", giveRecognition);
 
   }
+
 
   @After
   public void after() {
