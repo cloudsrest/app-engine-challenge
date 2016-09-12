@@ -1,16 +1,18 @@
 package challenge.controller;
 
+import challenge.dto.RecognitionDTO;
 import challenge.dto.UserDTO;
 import challenge.exception.InternalServerException;
+import challenge.model.Recognition;
+import challenge.model.Team;
 import challenge.model.User;
+import challenge.service.TeamService;
 import challenge.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
+import org.springframework.security.crypto.password.StandardPasswordEncoder;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 
 import java.security.Principal;
 import java.util.ArrayList;
@@ -22,6 +24,9 @@ public class UserController extends BaseController {
 
     @Autowired
     private UserService userService;
+
+    @Autowired
+    private TeamService teamService;
 
     @RequestMapping(method = RequestMethod.GET, produces= MediaType.APPLICATION_JSON_VALUE)
     public @ResponseBody List<UserDTO> getUsers(Principal principal) {

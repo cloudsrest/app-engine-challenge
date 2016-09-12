@@ -28,6 +28,10 @@ public class UserServiceImpl implements UserService {
         return userDao.totalUsers();
     }
 
+    @Override
+    public User createUser(User requestingUser, User user) {
+        return userDao.save(user);
+    }
 
 
 }

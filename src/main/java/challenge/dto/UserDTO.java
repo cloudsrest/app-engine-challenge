@@ -8,8 +8,19 @@ public class UserDTO {
     private String lastName;
     private boolean isAdmin;
     private Long team;
+    private String password;
 
     public UserDTO() {
+    }
+
+    public UserDTO(Long id, String username, String firstName, String lastName, boolean isAdmin, Long team, String password) {
+        this.id = id;
+        this.username = username;
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.isAdmin = isAdmin;
+        this.team = team;
+        this.password = password;
     }
 
     public UserDTO(challenge.model.User model) {
@@ -66,5 +77,13 @@ public class UserDTO {
 
     public void setTeam(Long team) {
         this.team = team;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
     }
 }

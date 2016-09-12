@@ -14,7 +14,10 @@ public class BaseController {
     UserDao userDao;
 
     protected User requestor(Principal user) {
-        return userDao.findByUsername(user.getName());
+        if (user!=null) {
+            return userDao.findByUsername(user.getName());
+        }
+        return null;
     }
 
 }
