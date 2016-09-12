@@ -21,4 +21,7 @@ public interface RecognitionDao extends CrudRepository<Recognition, Long> {
     @Query("select new challenge.dao.RecognitionSummary(r.toUser.username, count(r) as summaryCount) from recognition r group by r.toUser.username order by summaryCount desc")
     public List<RecognitionSummary> topRecognitionReceivers();
 
+    @Query("select new challenge.dao.RecognitionSummary(r.fromUser.username, count(r) as summaryCount) from recognition r group by r.fromUser.username order by summaryCount desc")
+    public List<RecognitionSummary> topRecognitionSenders();
+
 }

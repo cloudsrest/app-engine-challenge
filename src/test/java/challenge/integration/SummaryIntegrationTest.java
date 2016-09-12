@@ -4,10 +4,8 @@ import challenge.dao.RecognitionSummary;
 import challenge.dto.RecognitionTypeEnum;
 import challenge.dto.Summary;
 import challenge.dto.TokenDTO;
-import challenge.dto.UserDTO;
 import challenge.model.Recognition;
 import challenge.model.User;
-import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -25,7 +23,7 @@ import static org.junit.Assert.assertTrue;
 @RunWith(SpringRunner.class)
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 public class SummaryIntegrationTest extends BaseIntegrationTest {
-    
+
     String summaryUrl = "/api/secure/summary/stats";
 
     @Test
@@ -37,7 +35,7 @@ public class SummaryIntegrationTest extends BaseIntegrationTest {
 
         assertTrue(summary.getRecognitionCount() > 8);
         assertTrue(summary.getUserCount() > 3);
-        List<RecognitionSummary> summaries = summary.getSummaries();
+        List<RecognitionSummary> summaries = summary.getTopRecognitionReceivers();
         assertEquals(3, summaries.size());
         RecognitionSummary topSummary = summaries.get(0);
         assertTrue(topSummary.getCount() > 5);
