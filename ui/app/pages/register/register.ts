@@ -11,7 +11,7 @@ export class RegistrationPage {
     registrationUser: any;
     errorMsg: string;
     private digest: string = 'Zmxhc2hkZXY6c2VjcmV0';
-    private endpoint: string = '/api/register';
+    private endpoint: string = '/api/public/register';
     private loginUrl: string = '/api/oauth/token';
     private storage: Storage;
 
@@ -21,8 +21,9 @@ export class RegistrationPage {
     }
 
     createAccount() {
-        this.presentLoading();
-        this.http.post(this.endpoint, JSON.stringify(this.registrationUser)).subscribe(() => {
+        let headers = new Headers();
+        headers.append('Content-Type', 'application/json');
+        this.http.post(this.endpoint, JSON.stringify(this.registrationUser), {headers: headers}).subscribe(() => {
             // make a call to authenticate the user and fetch an access token
             let url = `${this.loginUrl}?username=${this.registrationUser.username}&password=${this.registrationUser.password}&grant_type=password`;
             let headers = new Headers();
@@ -40,6 +41,7 @@ export class RegistrationPage {
         }, (err: Response) => {
            this.errorMsg = err.statusText;
         });
+        this.presentLoading();
     }
 
     goToSignIn() {
