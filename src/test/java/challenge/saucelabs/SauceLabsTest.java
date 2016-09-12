@@ -52,27 +52,30 @@ public class SauceLabsTest {
 
     driver.get(baseURL);
 
-    waitForElement(driver, By.xpath("//ion-input[@name='username']"));
+    waitForElement(driver, By.xpath("//input[@id='username']"));
 
     List<WebElement> usernameEls;
-    usernameEls = driver.findElements(By.xpath("//ion-input[@name='username']"));
-    List<WebElement> passwordEls = driver.findElements(By.xpath("//ion-input[@name='password']"));
+    usernameEls = driver.findElements(By.xpath("//input[@id='username']"));
     assertNotEquals("Cannot find username text box", 0, usernameEls.size());
+    WebElement username = usernameEls.get(0);
+
+    List<WebElement> passwordEls = driver.findElements(By.xpath("//input[@id='password']"));
     assertNotEquals("Cannot find password text box", 0, passwordEls.size());
-    WebElement username = usernameEls.get(0).findElement(By.name("username"));
-    WebElement password = passwordEls.get(0).findElement(By.name("password"));
+    WebElement password = passwordEls.get(0);
+
     username.sendKeys("nturner");
     password.sendKeys("pass");
-    List<WebElement> submitEls = driver.findElements(By.xpath("//button[@class='button button-default']"));
+
+    List<WebElement> submitEls = driver.findElements(By.xpath("//input[@type='submit']"));
     assertEquals("Cannot find submit input", 1, submitEls.size());
     submitEls.get(0).click();
 
-    waitForElement(driver, By.xpath("//button[@class='bar-button bar-button-default bar-button-icon-right']"));
-
-    submitEls = driver.findElements(By.xpath("//button[@class='bar-button bar-button-default bar-button-icon-right']"));
+    // /html/body/ion-app/div[2]/ion-nav/ion-page/div/button
+    waitForElement(driver, By.xpath("/html/body/ion-app/div[2]/ion-nav/ion-page/div/button"));
+    submitEls = driver.findElements(By.xpath("/html/body/ion-app/div[2]/ion-nav/ion-page/div/button"));
     assertEquals("Cannot find Give Recognition input", 1, submitEls.size());
     String giveRecognition = submitEls.get(0).findElement(By.tagName("span")).getText();
-    assertEquals("Give Recognition", giveRecognition);
+    assertEquals("Give Kudos", giveRecognition);
 
   }
 
@@ -85,55 +88,60 @@ public class SauceLabsTest {
 
     driver.get(baseURL);
 
-    waitForElement(driver, By.xpath("//ion-input[@name='username']"));
+    waitForElement(driver, By.xpath("//input[@id='username']"));
 
     List<WebElement> usernameEls;
-    usernameEls = driver.findElements(By.xpath("//ion-input[@name='username']"));
-    List<WebElement> passwordEls = driver.findElements(By.xpath("//ion-input[@name='password']"));
+    usernameEls = driver.findElements(By.xpath("//input[@id='username']"));
     assertNotEquals("Cannot find username text box", 0, usernameEls.size());
+    WebElement username = usernameEls.get(0);
+
+    List<WebElement> passwordEls = driver.findElements(By.xpath("//input[@id='password']"));
     assertNotEquals("Cannot find password text box", 0, passwordEls.size());
-    WebElement username = usernameEls.get(0).findElement(By.name("username"));
-    WebElement password = passwordEls.get(0).findElement(By.name("password"));
+    WebElement password = passwordEls.get(0);
+
     username.sendKeys("nturner");
     password.sendKeys("pass");
-    List<WebElement> webElementsList = driver.findElements(By.xpath("//button[@class='button button-default']"));
-    assertEquals("Cannot find submit input", 1, webElementsList.size());
-    webElementsList.get(0).click();
 
-    waitForElement(driver, By.xpath("//button[@class='bar-button bar-button-default bar-button-icon-right']"));
+    List<WebElement> submitEls = driver.findElements(By.xpath("//input[@type='submit']"));
+    assertEquals("Cannot find submit input", 1, submitEls.size());
+    submitEls.get(0).click();
 
-    webElementsList = driver.findElements(By.xpath("//button[@class='bar-button bar-button-default bar-button-icon-right']"));
-    assertEquals("Cannot find Give Recognition input", 1, webElementsList.size());
+    List<WebElement> webElementsList;
 
+    // /html/body/ion-app/div[2]/ion-nav/ion-page/div/button
+    waitForElement(driver, By.xpath("/html/body/ion-app/div[2]/ion-nav/ion-page/div/button"));
+    webElementsList = driver.findElements(By.xpath("/html/body/ion-app/div[2]/ion-nav/ion-page/div/button"));
+    assertEquals("Cannot find Give Recognition input", 1, submitEls.size());
     String giveRecognition = webElementsList.get(0).findElement(By.tagName("span")).getText();
-    assertEquals("Give Recognition", giveRecognition);
+    assertEquals("Give Kudos", giveRecognition);
     webElementsList.get(0).click();
 
-    // Click on "Select a colleague..."
-    waitForElement(driver, By.xpath("//button[@class='item-cover item-cover-default']"));
-    webElementsList = driver.findElements(By.xpath("//button[@class='item-cover item-cover-default']"));
+    // ----------
+
+    // Click on "Select a colleague to give recognition to..." textbox
+    waitForElement(driver, By.id("colleague-select"));
+    webElementsList = driver.findElements(By.id("colleague-select"));
     assertNotEquals("Cannot find Select a Colleague input", 0, webElementsList.size());
     webElementsList.get(0).click();
 
     // Click on Colleague's name.
     // alert-tappable alert-radio alert-radio-button alert-radio-button-default
-    waitForElement(driver, By.xpath("//button[@class='alert-tappable alert-radio alert-radio-button alert-radio-button-default']"));
-    webElementsList = driver.findElements(By.xpath("//button[@class='alert-tappable alert-radio alert-radio-button alert-radio-button-default']"));
-    webElementsList.get(1).click();
+    WebElement webElement = webElementsList.get(0).findElement(By.tagName("option"));
+    //webElementsList = driver.findElements(By.xpath("/html/body/ion-app/div[2]/ion-nav/ion-page/div/form/select/option[3]']"));
+    webElement.click();
 
-    // click ok
-    // alert-button alert-button-default
-    webElementsList = driver.findElements(By.xpath("//button[@class='alert-button alert-button-default']"));
-    webElementsList.get(1).click();
-
-    // select an award
-    waitForElement(driver, By.xpath("//button[@class='item-cover item-cover-default']"));
-    webElementsList = driver.findElements(By.xpath("//button[@class='item-cover item-cover-default']"));
-    webElementsList.get(1).click();
-
-    // click on "add" button
-    webElementsList = driver.findElements(By.xpath("//button[@class='bar-button bar-button-default bar-button-primary']"));
+    // Select teamwork
+    webElementsList = driver.findElements(By.id("team-work"));
     webElementsList.get(0).click();
+
+    // Enter comment
+    // select an award
+    webElementsList = driver.findElements(By.id("recognition-comment"));
+    webElementsList.get(0).sendKeys("Great Teamwork");
+
+    // Submit
+    webElementsList = driver.findElements(By.className("usa-form"));
+    webElementsList.get(0).submit();
 
 
 
