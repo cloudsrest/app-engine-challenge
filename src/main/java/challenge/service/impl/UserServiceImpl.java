@@ -23,4 +23,11 @@ public class UserServiceImpl implements UserService {
     public User getUser(User requestingUser, Long userId) {
         return userDao.findOne(userId);
     }
+
+    public long geTotalUsers() {
+        return userDao.totalUsers();
+    }
+
+
+
 }

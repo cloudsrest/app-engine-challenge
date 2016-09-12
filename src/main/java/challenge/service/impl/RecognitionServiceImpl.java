@@ -46,4 +46,12 @@ public class RecognitionServiceImpl implements RecognitionService {
         recognition.setTimestamp(new Date());
         return recognitionDao.save(recognition);
     }
+
+    public long getTotalRecognitions() {
+        return recognitionDao.totalRecognitions();
+    }
+
+    public List<challenge.dao.RecognitionSummary> getTopRecognitionReceivers() {
+        return recognitionDao.topRecognitionReceivers();
+    }
 }

@@ -55,5 +55,16 @@ public class UserDaoTest extends BaseTest {
         assertEquals(saved.getId(), fetched.getId());
     }
 
+    @Test
+    public void testGetTotalUsers() {
+        getUser("usr1");
+        getUser("usr2");
+        getUser("usr3");
+        getUser("usr3");
+
+        long i = userDao.totalUsers();
+        assertEquals(4, i);
+    }
+
 
 }

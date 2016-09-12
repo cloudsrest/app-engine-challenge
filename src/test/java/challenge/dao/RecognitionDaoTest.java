@@ -4,10 +4,8 @@ import challenge.BaseTest;
 import challenge.dto.RecognitionTypeEnum;
 import challenge.model.Recognition;
 import challenge.model.User;
-import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 
@@ -62,6 +60,45 @@ public class RecognitionDaoTest extends BaseTest {
 
         List<Recognition> byToUser = recognitionDao.findAll();
         assertTrue(byToUser.size() > 2);
+    }
+
+    @Test
+    public void testGetRecCount() {
+        User fromUsr = getUser("fromUsr2");
+        User toUsr = getUser("toUsr");
+        recognitionDao.save(new Recognition(fromUsr, toUsr, RecognitionTypeEnum.CREATIVITY, "owner comment 1", new Date()));
+        recognitionDao.save(new Recognition(fromUsr, toUsr, RecognitionTypeEnum.CREATIVITY, "owner comment 2", new Date()));
+        recognitionDao.save(new Recognition(fromUsr, toUsr, RecognitionTypeEnum.CREATIVITY, "from different user", new Date()));
+
+        long i = recognitionDao.totalRecognitions();
+        assertEquals(3, i);
+
+    }
+
+    @Test
+    public void testTopReceivers() {
+        User fromUsr1 = getUser("fromUsr");
+        User toUser1 = getUser("fromUsr1");
+        User toUser2 = getUser("fromUs2");
+        User toUser3 = getUser("fromUs3");
+
+        recognitionDao.save(new Recognition(fromUsr1, toUser1, RecognitionTypeEnum.CREATIVITY, "owner comment 1", new Date()));
+        recognitionDao.save(new Recognition(fromUsr1, toUser2, RecognitionTypeEnum.CREATIVITY, "owner comment 2", new Date()));
+        recognitionDao.save(new Recognition(fromUsr1, toUser2, RecognitionTypeEnum.CREATIVITY, "from different user", new Date()));
+
+        recognitionDao.save(new Recognition(fromUsr1, toUser3, RecognitionTypeEnum.CREATIVITY, "from different user", new Date()));
+        recognitionDao.save(new Recognition(fromUsr1, toUser3, RecognitionTypeEnum.CREATIVITY, "from different user", new Date()));
+        recognitionDao.save(new Recognition(fromUsr1, toUser3, RecognitionTypeEnum.CREATIVITY, "from different user", new Date()));
+        recognitionDao.save(new Recognition(fromUsr1, toUser3, RecognitionTypeEnum.CREATIVITY, "from different user", new Date()));
+        recognitionDao.save(new Recognition(fromUsr1, toUser3, RecognitionTypeEnum.CREATIVITY, "from different user", new Date()));
+        recognitionDao.save(new Recognition(fromUsr1, toUser3, RecognitionTypeEnum.CREATIVITY, "from different user", new Date()));
+
+
+        List<RecognitionSummary> o = recognitionDao.topRecognitionReceivers();
+        assertEquals(3, o.size());
+        RecognitionSummary recognitionSummary = o.get(0);
+        assertEquals(toUser3.getUsername(), recognitionSummary.getUserName());
+        assertEquals(6, recognitionSummary.getCount());
     }
 
 }
