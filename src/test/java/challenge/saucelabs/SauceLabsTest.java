@@ -21,9 +21,9 @@ import java.util.List;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotEquals;
 
+//@Ignore
 @RunWith(SpringRunner.class)
 @SpringBootTest()
-@Ignore
 public class SauceLabsTest {
 
   public static final String USERNAME = "cloudsrest";
@@ -43,6 +43,8 @@ public class SauceLabsTest {
     caps.setCapability("version", "43.0");
 
     driver = new RemoteWebDriver(new URL(seleniumURL), caps);
+    String sessionId = ((RemoteWebDriver) driver).getSessionId().toString();
+    System.out.println("SAUCE LAB URL -->  https://saucelabs.com/beta/tests/" + sessionId + "/logs");
   }
 
   @Test
