@@ -4,15 +4,21 @@ import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
 import org.openqa.selenium.remote.DesiredCapabilities;
 import org.openqa.selenium.remote.RemoteWebDriver;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 
 import java.net.URL;
+import java.util.List;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotEquals;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest()
@@ -40,8 +46,36 @@ public class SauceLabsTest {
      * Goes to Sauce Lab's guinea-pig page and prints title
      */
 
-    driver.get("https://saucelabs.com/test/guinea-pig");
-    assertEquals("I am a page title - Sauce Labs", driver.getTitle());
+    driver.get("https://blissful-cell-141318.appspot.com/api/www/index.html");
+    List<WebElement> usernameEls = driver.findElements(By.xpath("//*[contains(local-name(), 'username')]"));
+    usernameEls = driver.findElements(By.xpath("//ion-input[@name='username']"));
+    List<WebElement> passwordEls = driver.findElements(By.xpath("//ion-input[@name='password']"));
+    assertNotEquals("Cannot find username text box", 0, usernameEls.size());
+    assertNotEquals("Cannot find password text box", 0, passwordEls.size());
+    WebElement username = usernameEls.get(0).findElement(By.name("username"));
+    WebElement password = passwordEls.get(0).findElement(By.name("password"));
+    username.sendKeys("nturner");
+    password.sendKeys("pass");
+    List<WebElement> submitEls = driver.findElements(By.xpath("//button[@class='button button-default']"));
+    assertEquals("Cannot find submit input", 1, submitEls.size());
+    submitEls.get(0).click();
+
+    // Wait for the page to show up
+    WebDriverWait wait = new WebDriverWait(driver, 15);
+
+    WebElement autocomplete = wait
+            .until(
+                    ExpectedConditions
+                    .visibilityOfElementLocated(
+                            By.xpath("//button[@class='bar-button bar-button-default bar-button-icon-right']")
+                    )
+            );
+
+    //
+    submitEls = driver.findElements(By.xpath("//button[@class='bar-button bar-button-default bar-button-icon-right']"));
+    assertEquals("Cannot find Give Recognition input", 1, submitEls.size());
+    String giveRecognition = submitEls.get(0).findElement(By.tagName("span")).getText();
+    assertEquals("Give Recognition", giveRecognition);
 
   }
 
