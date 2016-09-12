@@ -26,8 +26,10 @@ public class SauceLabsTest {
 
   public static final String USERNAME = "cloudsrest";
   public static final String ACCESS_KEY = "da75edb5-517a-485d-9d1f-3e6cb84a3f3a";
-  public static final String URL = "http://" + USERNAME + ":" + ACCESS_KEY + "@ondemand.saucelabs.com:80/wd/hub";
-
+  public static final String seleniumURL = "http://" + USERNAME + ":" + ACCESS_KEY + "@ondemand.saucelabs.com:80/wd/hub";
+  //public static final String seleniumURL = "http://localhost:4444/";
+  public static final String baseURL = "https://blissful-cell-141318.appspot.com/api/www/index.html";
+  //public static final String baseURL = "http://localhost:8080/api/www/index.html";
   public static final Integer waitForLoad = 15;
 
   private WebDriver driver;
@@ -38,7 +40,7 @@ public class SauceLabsTest {
     caps.setCapability("platform", "Windows XP");
     caps.setCapability("version", "43.0");
 
-    driver = new RemoteWebDriver(new URL(URL), caps);
+    driver = new RemoteWebDriver(new URL(seleniumURL), caps);
   }
 
   @Test
@@ -48,7 +50,7 @@ public class SauceLabsTest {
      * Goes to Sauce Lab's guinea-pig page and prints title
      */
 
-    driver.get("https://blissful-cell-141318.appspot.com/api/www/index.html");
+    driver.get(baseURL);
 
     waitForElement(driver, By.xpath("//ion-input[@name='username']"));
 
@@ -81,7 +83,7 @@ public class SauceLabsTest {
      * Goes to Sauce Lab's guinea-pig page and prints title
      */
 
-    driver.get("https://blissful-cell-141318.appspot.com/api/www/index.html");
+    driver.get(baseURL);
 
     waitForElement(driver, By.xpath("//ion-input[@name='username']"));
 
@@ -102,21 +104,46 @@ public class SauceLabsTest {
 
     webElementsList = driver.findElements(By.xpath("//button[@class='bar-button bar-button-default bar-button-icon-right']"));
     assertEquals("Cannot find Give Recognition input", 1, webElementsList.size());
+
     String giveRecognition = webElementsList.get(0).findElement(By.tagName("span")).getText();
     assertEquals("Give Recognition", giveRecognition);
-
     webElementsList.get(0).click();
 
+    // Click on "Select a colleague..."
     waitForElement(driver, By.xpath("//button[@class='item-cover item-cover-default']"));
-    webElementsList = driver.findElements(By.xpath("//button[@class='bar-button bar-button-default bar-button-icon-right']"));
-    assertEquals("Cannot find Select a Colleague input", 1, webElementsList.size());
+    webElementsList = driver.findElements(By.xpath("//button[@class='item-cover item-cover-default']"));
+    assertNotEquals("Cannot find Select a Colleague input", 0, webElementsList.size());
+    webElementsList.get(0).click();
+
+    // Click on Colleague's name.
+    // alert-tappable alert-radio alert-radio-button alert-radio-button-default
+    waitForElement(driver, By.xpath("//button[@class='alert-tappable alert-radio alert-radio-button alert-radio-button-default']"));
+    webElementsList = driver.findElements(By.xpath("//button[@class='alert-tappable alert-radio alert-radio-button alert-radio-button-default']"));
+    webElementsList.get(1).click();
+
+    // click ok
+    // alert-button alert-button-default
+    webElementsList = driver.findElements(By.xpath("//button[@class='alert-button alert-button-default']"));
+    webElementsList.get(1).click();
+
+    // select an award
+    waitForElement(driver, By.xpath("//button[@class='item-cover item-cover-default']"));
+    webElementsList = driver.findElements(By.xpath("//button[@class='item-cover item-cover-default']"));
+    webElementsList.get(1).click();
+
+    // click on "add" button
+    webElementsList = driver.findElements(By.xpath("//button[@class='bar-button bar-button-default bar-button-primary']"));
+    webElementsList.get(0).click();
+
+
+
   }
 
   private void waitForElement(WebDriver driver, By by) {
     waitForElement(driver, by, waitForLoad);
   }
 
-  private void waitForElement(WebDriver driver, By by, Integer waitForLoad) {
+  private WebElement waitForElement(WebDriver driver, By by, Integer waitForLoad) {
     WebDriverWait wait = new WebDriverWait(driver, waitForLoad);
 
     WebElement el = wait
@@ -126,6 +153,7 @@ public class SauceLabsTest {
                                     by
                             )
             );
+    return el;
   }
 
   @After
