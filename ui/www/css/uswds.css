@@ -405,56 +405,56 @@ th {
   font-family: "Source Sans Pro";
   font-style: normal;
   font-weight: 300;
-  /*src: url("../../../../../Downloads/uswds-0.12.1/fonts/sourcesanspro-light-webfont.eot?#iefix") format("embedded-opentype"), url("../../../../../Downloads/uswds-0.12.1/fonts/sourcesanspro-light-webfont.woff2") format("woff2"), url("../../../../../Downloads/uswds-0.12.1/fonts/sourcesanspro-light-webfont.woff") format("woff"), url("../../../../../Downloads/uswds-0.12.1/fonts/sourcesanspro-light-webfont.ttf") format("truetype");*/
+  src: url("/fonts/sourcesanspro-light-webfont.eot?#iefix") format("embedded-opentype"), url("/fonts/sourcesanspro-light-webfont.woff2") format("woff2"), url("/fonts/sourcesanspro-light-webfont.woff") format("woff"), url("/fonts/sourcesanspro-light-webfont.ttf") format("truetype");
 }
 
 @font-face {
   font-family: "Source Sans Pro";
   font-style: normal;
   font-weight: 400;
-  /*src: url("../../../../../Downloads/uswds-0.12.1/fonts/sourcesanspro-regular-webfont.eot?#iefix") format("embedded-opentype"), url("../../../../../Downloads/uswds-0.12.1/fonts/sourcesanspro-regular-webfont.woff2") format("woff2"), url("../../../../../Downloads/uswds-0.12.1/fonts/sourcesanspro-regular-webfont.woff") format("woff"), url("../../../../../Downloads/uswds-0.12.1/fonts/sourcesanspro-regular-webfont.ttf") format("truetype");*/
+  src: url("/fonts/sourcesanspro-regular-webfont.eot?#iefix") format("embedded-opentype"), url("/fonts/sourcesanspro-regular-webfont.woff2") format("woff2"), url("/fonts/sourcesanspro-regular-webfont.woff") format("woff"), url("/fonts/sourcesanspro-regular-webfont.ttf") format("truetype");
 }
 
 @font-face {
   font-family: "Source Sans Pro";
   font-style: italic;
   font-weight: 400;
-  /*src: url("../../../../../Downloads/uswds-0.12.1/fonts/sourcesanspro-italic-webfont.eot?#iefix") format("embedded-opentype"), url("../../../../../Downloads/uswds-0.12.1/fonts/sourcesanspro-italic-webfont.woff2") format("woff2"), url("../../../../../Downloads/uswds-0.12.1/fonts/sourcesanspro-italic-webfont.woff") format("woff"), url("../../../../../Downloads/uswds-0.12.1/fonts/sourcesanspro-italic-webfont.ttf") format("truetype");*/
+  src: url("/fonts/sourcesanspro-italic-webfont.eot?#iefix") format("embedded-opentype"), url("/fonts/sourcesanspro-italic-webfont.woff2") format("woff2"), url("/fonts/sourcesanspro-italic-webfont.woff") format("woff"), url("/fonts/sourcesanspro-italic-webfont.ttf") format("truetype");
 }
 
 @font-face {
   font-family: "Source Sans Pro";
   font-style: normal;
   font-weight: 700;
-  /*src: url("../../../../../Downloads/uswds-0.12.1/fonts/sourcesanspro-bold-webfont.eot?#iefix") format("embedded-opentype"), url("../../../../../Downloads/uswds-0.12.1/fonts/sourcesanspro-bold-webfont.woff2") format("woff2"), url("../../../../../Downloads/uswds-0.12.1/fonts/sourcesanspro-bold-webfont.woff") format("woff"), url("../../../../../Downloads/uswds-0.12.1/fonts/sourcesanspro-bold-webfont.ttf") format("truetype");*/
+  src: url("/fonts/sourcesanspro-bold-webfont.eot?#iefix") format("embedded-opentype"), url("/fonts/sourcesanspro-bold-webfont.woff2") format("woff2"), url("/fonts/sourcesanspro-bold-webfont.woff") format("woff"), url("/fonts/sourcesanspro-bold-webfont.ttf") format("truetype");
 }
 
 @font-face {
   font-family: "Merriweather";
   font-style: normal;
   font-weight: 300;
-  /*src: url("../../../../../Downloads/uswds-0.12.1/fonts/merriweather-light-webfont.eot?#iefix") format("embedded-opentype"), url("../../../../../Downloads/uswds-0.12.1/fonts/merriweather-light-webfont.woff2") format("woff2"), url("../../../../../Downloads/uswds-0.12.1/fonts/merriweather-light-webfont.woff") format("woff"), url("../../../../../Downloads/uswds-0.12.1/fonts/merriweather-light-webfont.ttf") format("truetype");*/
+  src: url("/fonts/merriweather-light-webfont.eot?#iefix") format("embedded-opentype"), url("/fonts/merriweather-light-webfont.woff2") format("woff2"), url("/fonts/merriweather-light-webfont.woff") format("woff"), url("/fonts/merriweather-light-webfont.ttf") format("truetype");
 }
 
 @font-face {
   font-family: "Merriweather";
   font-style: normal;
   font-weight: 400;
-  /*src: url("../../../../../Downloads/uswds-0.12.1/fonts/merriweather-regular-webfont.eot?#iefix") format("embedded-opentype"), url("../../../../../Downloads/uswds-0.12.1/fonts/merriweather-regular-webfont.woff2") format("woff2"), url("../../../../../Downloads/uswds-0.12.1/fonts/merriweather-regular-webfont.woff") format("woff"), url("../../../../../Downloads/uswds-0.12.1/fonts/merriweather-regular-webfont.ttf") format("truetype");*/
+  src: url("/fonts/merriweather-regular-webfont.eot?#iefix") format("embedded-opentype"), url("/fonts/merriweather-regular-webfont.woff2") format("woff2"), url("/fonts/merriweather-regular-webfont.woff") format("woff"), url("/fonts/merriweather-regular-webfont.ttf") format("truetype");
 }
 
 @font-face {
   font-family: "Merriweather";
   font-style: italic;
   font-weight: 400;
-  /*src: url("../../../../../Downloads/uswds-0.12.1/fonts/merriweather-italic-webfont.eot?#iefix") format("embedded-opentype"), url("../../../../../Downloads/uswds-0.12.1/fonts/merriweather-italic-webfont.woff2") format("woff2"), url("../../../../../Downloads/uswds-0.12.1/fonts/merriweather-italic-webfont.woff") format("woff"), url("../../../../../Downloads/uswds-0.12.1/fonts/merriweather-italic-webfont.ttf") format("truetype");*/
+  src: url("/fonts/merriweather-italic-webfont.eot?#iefix") format("embedded-opentype"), url("/fonts/merriweather-italic-webfont.woff2") format("woff2"), url("/fonts/merriweather-italic-webfont.woff") format("woff"), url("/fonts/merriweather-italic-webfont.ttf") format("truetype");
 }
 
 @font-face {
   font-family: "Merriweather";
   font-style: normal;
   font-weight: 700;
-  /*src: url("../../../../../Downloads/uswds-0.12.1/fonts/merriweather-bold-webfont.eot?#iefix") format("embedded-opentype"), url("../../../../../Downloads/uswds-0.12.1/fonts/merriweather-bold-webfont.woff2") format("woff2"), url("../../../../../Downloads/uswds-0.12.1/fonts/merriweather-bold-webfont.woff") format("woff"), url("../../../../../Downloads/uswds-0.12.1/fonts/merriweather-bold-webfont.ttf") format("truetype");*/
+  src: url("/fonts/merriweather-bold-webfont.eot?#iefix") format("embedded-opentype"), url("/fonts/merriweather-bold-webfont.woff2") format("woff2"), url("/fonts/merriweather-bold-webfont.woff") format("woff"), url("/fonts/merriweather-bold-webfont.ttf") format("truetype");
 }
 
 html {
@@ -1403,8 +1403,8 @@ select {
   -webkit-appearance: none;
   appearance: none;
   background-color: #ffffff;
-  background-image: url("../../../../../Downloads/uswds-0.12.1/img/arrow-down.png");
-  background-image: url("../../../../../Downloads/uswds-0.12.1/img/arrow-down.svg");
+  background-image: url("/img/arrow-down.png");
+  background-image: url("/img/arrow-down.svg");
   background-position: right 1.3rem center;
   background-repeat: no-repeat;
   background-size: 1.3rem;
@@ -1486,8 +1486,8 @@ input[type="radio"]:focus + label::before {
 }
 
 input[type="checkbox"]:checked + label::before {
-  background-image: url("../../../../../Downloads/uswds-0.12.1/img/correct8.png");
-  background-image: url("../../../../../Downloads/uswds-0.12.1/img/correct8.svg");
+  background-image: url("/img/correct8.png");
+  background-image: url("/img/correct8.svg");
   background-position: 50%;
   background-repeat: no-repeat;
 }
@@ -1761,8 +1761,8 @@ a:focus {
 }
 
 .usa-external_link::after {
-  background: url("../../../../../Downloads/uswds-0.12.1/img/external-link.png") no-repeat 0 0;
-  background: url("../../../../../Downloads/uswds-0.12.1/img/external-link.svg") no-repeat 0 0;
+  background: url("/img/external-link.png") no-repeat 0 0;
+  background: url("/img/external-link.svg") no-repeat 0 0;
   background-size: 100%;
   content: '';
   display: inline-block;
@@ -1773,13 +1773,13 @@ a:focus {
 }
 
 .usa-external_link:hover::after {
-  background-image: url("../../../../../Downloads/uswds-0.12.1/img/external-link-hover.png");
-  background-image: url("../../../../../Downloads/uswds-0.12.1/img/external-link-hover.svg");
+  background-image: url("/img/external-link-hover.png");
+  background-image: url("/img/external-link-hover.svg");
 }
 
 .usa-external_link-alt::after {
-  background: url("../../../../../Downloads/uswds-0.12.1/img/external-link-alt.png") no-repeat 0 0;
-  background: url("../../../../../Downloads/uswds-0.12.1/img/external-link-alt.svg") no-repeat 0 0;
+  background: url("/img/external-link-alt.png") no-repeat 0 0;
+  background: url("/img/external-link-alt.svg") no-repeat 0 0;
   background-size: 100%;
   content: '';
   display: inline-block;
@@ -1790,8 +1790,8 @@ a:focus {
 }
 
 .usa-external_link-alt:hover::after {
-  background-image: url("../../../../../Downloads/uswds-0.12.1/img/external-link-alt-hover.png");
-  background-image: url("../../../../../Downloads/uswds-0.12.1/img/external-link-alt-hover.svg");
+  background-image: url("/img/external-link-alt-hover.png");
+  background-image: url("/img/external-link-alt-hover.svg");
 }
 
 h1,
@@ -2004,8 +2004,8 @@ dfn {
   text-align: left;
   -webkit-font-smoothing: auto;
   background-color: #f1f1f1;
-  background-image: url("../../../../../Downloads/uswds-0.12.1/img/minus.png");
-  background-image: url("../../../../../Downloads/uswds-0.12.1/img/minus.svg");
+  background-image: url("/img/minus.png");
+  background-image: url("/img/minus.svg");
   background-position: right 3rem center;
   background-repeat: no-repeat;
   background-size: 13px;
@@ -2052,8 +2052,8 @@ dfn {
 
 .usa-accordion > ul [aria-expanded=false],
 .usa-accordion-bordered > ul [aria-expanded=false] {
-  background-image: url("../../../../../Downloads/uswds-0.12.1/img/plus.png");
-  background-image: url("../../../../../Downloads/uswds-0.12.1/img/plus.svg");
+  background-image: url("/img/plus.png");
+  background-image: url("/img/plus.svg");
   background-repeat: no-repeat;
   background-size: 1.3rem;
 }
@@ -2103,8 +2103,8 @@ dfn {
   text-align: left;
   -webkit-font-smoothing: auto;
   background-color: #f1f1f1;
-  background-image: url("../../../../../Downloads/uswds-0.12.1/img/minus.png");
-  background-image: url("../../../../../Downloads/uswds-0.12.1/img/minus.svg");
+  background-image: url("/img/minus.png");
+  background-image: url("/img/minus.svg");
   background-position: right 3rem center;
   background-repeat: no-repeat;
   background-size: 13px;
@@ -2141,8 +2141,8 @@ dfn {
 }
 
 .usa-accordion-button[aria-expanded=false] {
-  background-image: url("../../../../../Downloads/uswds-0.12.1/img/plus.png");
-  background-image: url("../../../../../Downloads/uswds-0.12.1/img/plus.svg");
+  background-image: url("/img/plus.png");
+  background-image: url("/img/plus.svg");
   background-repeat: no-repeat;
   background-size: 1.3rem;
 }
@@ -2203,26 +2203,26 @@ dfn {
 
 .usa-alert-success {
   background-color: #e7f4e4;
-  background-image: url("../../../../../Downloads/uswds-0.12.1/img/alerts/success.png");
-  background-image: url("../../../../../Downloads/uswds-0.12.1/img/alerts/success.svg");
+  background-image: url("/img/alerts/success.png");
+  background-image: url("/img/alerts/success.svg");
 }
 
 .usa-alert-warning {
   background-color: #fff1d2;
-  background-image: url("../../../../../Downloads/uswds-0.12.1/img/alerts/warning.png");
-  background-image: url("../../../../../Downloads/uswds-0.12.1/img/alerts/warning.svg");
+  background-image: url("/img/alerts/warning.png");
+  background-image: url("/img/alerts/warning.svg");
 }
 
 .usa-alert-error {
   background-color: #f9dede;
-  background-image: url("../../../../../Downloads/uswds-0.12.1/img/alerts/error.png");
-  background-image: url("../../../../../Downloads/uswds-0.12.1/img/alerts/error.svg");
+  background-image: url("/img/alerts/error.png");
+  background-image: url("/img/alerts/error.svg");
 }
 
 .usa-alert-info {
   background-color: #e1f3f8;
-  background-image: url("../../../../../Downloads/uswds-0.12.1/img/alerts/info.png");
-  background-image: url("../../../../../Downloads/uswds-0.12.1/img/alerts/info.svg");
+  background-image: url("/img/alerts/info.png");
+  background-image: url("/img/alerts/info.svg");
 }
 
 .usa-alert-no_icon {
@@ -2279,7 +2279,7 @@ dfn {
   }
 }
 
-.usa-disclaimer-official img {
+.usa-disclaimer-official /img {
   float: left;
   margin-right: 0.7rem;
   margin-top: 1px;
@@ -2550,8 +2550,8 @@ li.usa-footer-primary-content:last-child {
 }
 
 .usa-footer-big ul .usa-footer-primary-link {
-  background-image: url("../../../../../Downloads/uswds-0.12.1/img/arrow-down.png");
-  background-image: url("../../../../../Downloads/uswds-0.12.1/img/arrow-down.svg");
+  background-image: url("/img/arrow-down.png");
+  background-image: url("/img/arrow-down.svg");
   background-position: 1.5rem center;
   background-repeat: no-repeat;
   background-size: 1.3rem;
@@ -2582,8 +2582,8 @@ li.usa-footer-primary-content:last-child {
 }
 
 .usa-footer-big ul.hidden .usa-footer-primary-link {
-  background-image: url("../../../../../Downloads/uswds-0.12.1/img/arrow-right.png");
-  background-image: url("../../../../../Downloads/uswds-0.12.1/img/arrow-right.svg");
+  background-image: url("/img/arrow-right.png");
+  background-image: url("/img/arrow-right.svg");
   cursor: pointer;
   display: block;
 }
@@ -2607,11 +2607,11 @@ li.usa-footer-primary-content:last-child {
   }
 }
 
-.usa-footer-logo-img {
+.usa-footer-logo-/img {
   max-width: 14rem;
 }
 
-.usa-footer-slim-logo-img {
+.usa-footer-slim-logo-/img {
   float: left;
   max-width: 10rem;
 }
@@ -2668,23 +2668,23 @@ li.usa-footer-primary-content:last-child {
 }
 
 .usa-link-facebook {
-  background-image: url("../../../../../Downloads/uswds-0.12.1/img/social-icons/png/facebook25.png");
-  background-image: url("../../../../../Downloads/uswds-0.12.1/img/social-icons/svg/facebook25.svg");
+  background-image: url("/img/social-icons/png/facebook25.png");
+  background-image: url("/img/social-icons/svg/facebook25.svg");
 }
 
 .usa-link-twitter {
-  background-image: url("../../../../../Downloads/uswds-0.12.1/img/social-icons/png/twitter16.png");
-  background-image: url("../../../../../Downloads/uswds-0.12.1/img/social-icons/svg/twitter16.svg");
+  background-image: url("/img/social-icons/png/twitter16.png");
+  background-image: url("/img/social-icons/svg/twitter16.svg");
 }
 
 .usa-link-youtube {
-  background-image: url("../../../../../Downloads/uswds-0.12.1/img/social-icons/png/youtube15.png");
-  background-image: url("../../../../../Downloads/uswds-0.12.1/img/social-icons/svg/youtube15.svg");
+  background-image: url("/img/social-icons/png/youtube15.png");
+  background-image: url("/img/social-icons/svg/youtube15.svg");
 }
 
 .usa-link-rss {
-  background-image: url("../../../../../Downloads/uswds-0.12.1/img/social-icons/png/rss25.png");
-  background-image: url("../../../../../Downloads/uswds-0.12.1/img/social-icons/svg/rss25.svg");
+  background-image: url("/img/social-icons/png/rss25.png");
+  background-image: url("/img/social-icons/svg/rss25.svg");
 }
 
 form a {
@@ -2840,8 +2840,8 @@ fieldset {
 }
 
 .usa-checklist-checked::before {
-  background-image: url("../../../../../Downloads/uswds-0.12.1/img/correct9.png");
-  background-image: url("../../../../../Downloads/uswds-0.12.1/img/correct9.svg");
+  background-image: url("/img/correct9.png");
+  background-image: url("/img/correct9.svg");
   background-position: 100%;
   background-repeat: no-repeat;
   background-size: 100%;
@@ -3324,8 +3324,8 @@ fieldset {
 }
 
 .usa-nav-primary button[aria-expanded=false] {
-  background-image: url("../../../../../Downloads/uswds-0.12.1/img/plus-alt.png");
-  background-image: url("../../../../../Downloads/uswds-0.12.1/img/plus-alt.svg");
+  background-image: url("/img/plus-alt.png");
+  background-image: url("/img/plus-alt.svg");
   background-repeat: no-repeat;
   background-position: right 0 center;
   background-size: 1rem;
@@ -3333,15 +3333,15 @@ fieldset {
 
 @media screen and (min-width: 951px) {
   .usa-nav-primary button[aria-expanded=false] {
-    background-image: url("../../../../../Downloads/uswds-0.12.1/img/angle-arrow-down.png");
-    background-image: url("../../../../../Downloads/uswds-0.12.1/img/angle-arrow-down.svg");
+    background-image: url("/img/angle-arrow-down.png");
+    background-image: url("/img/angle-arrow-down.svg");
     background-position: 88% 44%;
   }
 }
 
 .usa-nav-primary button[aria-expanded=true] {
-  background-image: url("../../../../../Downloads/uswds-0.12.1/img/minus-alt.png");
-  background-image: url("../../../../../Downloads/uswds-0.12.1/img/minus-alt.svg");
+  background-image: url("/img/minus-alt.png");
+  background-image: url("/img/minus-alt.svg");
   background-repeat: no-repeat;
   background-position: right 0 center;
   background-size: 1rem;
@@ -3351,8 +3351,8 @@ fieldset {
   .usa-nav-primary button[aria-expanded=true] {
     background-color: #112e51;
     color: #ffffff;
-    background-image: url("../../../../../Downloads/uswds-0.12.1/img/angle-arrow-down-hover.png");
-    background-image: url("../../../../../Downloads/uswds-0.12.1/img/angle-arrow-down-hover.svg");
+    background-image: url("/img/angle-arrow-down-hover.png");
+    background-image: url("/img/angle-arrow-down-hover.svg");
     background-position: 88% 44%;
   }
   .usa-nav-primary button[aria-expanded=true]:hover {
@@ -3539,8 +3539,8 @@ fieldset {
 
 @media screen and (min-width: 951px) {
   .usa-nav-secondary-links .usa-header-search-button {
-    background-image: url("../../../../../Downloads/uswds-0.12.1/img/search-alt.png");
-    background-image: url("../../../../../Downloads/uswds-0.12.1/img/search-alt.svg");
+    background-image: url("/img/search-alt.png");
+    background-image: url("/img/search-alt.svg");
     background-repeat: no-repeat;
     background-position: left center;
     background-size: 2.2rem;
@@ -3665,7 +3665,7 @@ fieldset {
   }
 }
 
-.usa-nav-close img {
+.usa-nav-close /img {
   width: 1.3rem;
 }
 
@@ -3809,8 +3809,8 @@ fieldset {
 
 .usa-search [type="submit"],
 .usa-search .usa-search-submit {
-  background-image: url("../../../../../Downloads/uswds-0.12.1/img/search.png");
-  background-image: url("../../../../../Downloads/uswds-0.12.1/img/search.svg");
+  background-image: url("/img/search.png");
+  background-image: url("/img/search.svg");
   background-position: 50%;
   background-repeat: no-repeat;
   border-bottom-left-radius: 0;
@@ -3861,8 +3861,8 @@ fieldset {
   }
   .usa-search.usa-search-small [type="submit"],
   .usa-search.usa-search-small .usa-search-submit {
-    background-image: url("../../../../../Downloads/uswds-0.12.1/img/search.png");
-    background-image: url("../../../../../Downloads/uswds-0.12.1/img/search.svg");
+    background-image: url("/img/search.png");
+    background-image: url("/img/search.svg");
     background-position: 50%;
     background-repeat: no-repeat;
     width: 4.5rem;
