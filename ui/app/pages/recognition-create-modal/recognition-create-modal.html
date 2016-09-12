@@ -1,97 +1,70 @@
 <header class="usa-header" role="banner">
-  <div class="usa-nav-container">
-    <div class="usa-navbar">
-      <button class="usa-menu-btn">Menu</button>
-      <div class="usa-logo" id="logo">
-        <em class="usa-logo-text">
-          <a href="/" accesskey="1" title="Home" aria-label="Home">Flash Challenge<br>Exercise</a>
-        </em>
-      </div>
+    <div class="usa-nav-container">
+        <div class="usa-navbar">
+            <button class="usa-menu-btn">Menu</button>
+            <div class="usa-logo" id="logo">
+                <em class="usa-logo-text">
+                    <a href="/" accesskey="1" title="Home" aria-label="Home">Flash Challenge<br>Exercise</a>
+                </em>
+            </div>
+        </div>
+        <nav role="navigation" class="usa-nav">
+            <button class="usa-nav-close">
+                <img src="/assets/img/close.svg" alt="close">
+            </button>
+            <ul class="usa-nav-primary usa-accordion">
+                <li *ngFor="let p of pages">
+                    <a class="usa-nav-link" (click)="openPage(p)" href="javascript:">
+                        <span>{{p.title}}</span>
+                    </a>
+                </li>
+            </ul>
+        </nav>
     </div>
-    <nav role="navigation" class="usa-nav">
-      <button class="usa-nav-close">
-        <img src="/assets/img/close.svg" alt="close">
-      </button>
-      <ul class="usa-nav-primary usa-accordion">
-        <li *ngFor="let p of pages">
-          <a class="usa-nav-link" (click)="openPage(p)" href="javascript:">
-            <span>{{p.title}}</span>
-          </a>
-        </li>
-      </ul>
-    </nav>
-  </div>
 </header>
 
 <div class="usa-nav-container" style="margin-top: 5%; margin-bottom: 5%;">
-  <h2>Give Kudos</h2>
-  <p class="text-alert">{{errorMsg}}</p>
-  <form class="usa-form" (ngSubmit)="save()">
-    <label for="colleague-select">Select a colleague to give recognition to...</label>
-    <select [(ngModel)]="recognitionUser" [ngModelOptions]="{standalone: true}" id="colleague-select" name="colleague-select">
-      <option *ngFor="let user of users" [value]="user.getId()">{{user.getFirstName()}}</option>
-    </select>
-    <br>
-    <fieldset class="usa-fieldset-inputs usa-sans">
-      <legend class="usa-sr-only">Select Type of Recognition</legend>
+    <h2>Give Kudos</h2>
+    <p class="text-alert">{{errorMsg}}</p>
+    <form class="usa-form" (ngSubmit)="save()">
+        <label for="colleague-select">Select a colleague to give recognition to...</label>
+        <select [(ngModel)]="recognitionUser" [ngModelOptions]="{standalone: true}" id="colleague-select"
+                name="colleague-select">
+            <option *ngFor="let user of users" [value]="user.getId()">
+                {{user.getFirstName()}} {{user.getLastName()}}
+            </option>
+        </select>
+        <br>
+        <fieldset class="usa-fieldset-inputs usa-sans">
+            <legend class="usa-sr-only">Select Type of Recognition</legend>
 
-      <ul class="usa-unstyled-list">
-        <li>
-          <input id="creativity" type="radio" name="CREATIVITY" value="CREATIVITY" [(ngModel)]="recognitionType">
-          <label for="creativity">Creativity</label>
-        </li>
-        <li>
-          <input id="hard-work" type="radio" name="HARD_WORK" value="HARD_WORK" [(ngModel)]="recognitionType">
-          <label for="hard-work">Hard Work</label>
-        </li>
-        <li>
-          <input id="team-work" type="radio" name="HARD_WORK" value="TEAM_WORK" [(ngModel)]="recognitionType">
-          <label for="team-work">Team Work</label>
-        </li>
-        <li>
-          <input id="innovation" type="radio" name="HARD_WORK" value="INNOVATION" [(ngModel)]="recognitionType">
-          <label for="innovation">Innovation</label>
-        </li>
-      </ul>
-    </fieldset>
-    <label for="recognition-comment">Write a comment</label>
-    <textarea id="recognition-comment" name="recognition-comment" [(ngModel)]="recognitionComment"></textarea>
-    <button type="submit" [disabled]="!recognitionUser || !recognitionType">Submit</button>
-  </form>
+            <ul class="usa-unstyled-list">
+                <li>
+                    <input id="creativity" type="radio" name="CREATIVITY" value="CREATIVITY"
+                           [(ngModel)]="recognitionType">
+                    <label for="creativity">Creativity</label>
+                </li>
+                <li>
+                    <input id="hard-work" type="radio" name="HARD_WORK" value="HARD_WORK" [(ngModel)]="recognitionType">
+                    <label for="hard-work">Hard Work</label>
+                </li>
+                <li>
+                    <input id="team-work" type="radio" name="HARD_WORK" value="TEAM_WORK" [(ngModel)]="recognitionType">
+                    <label for="team-work">Team Work</label>
+                </li>
+                <li>
+                    <input id="innovation" type="radio" name="HARD_WORK" value="INNOVATION"
+                           [(ngModel)]="recognitionType">
+                    <label for="innovation">Innovation</label>
+                </li>
+                <li>
+                    <input id="other" type="radio" name="HARD_WORK" checked value="" [(ngModel)]="recognitionType">
+                    <label for="other">Other</label>
+                </li>
+            </ul>
+        </fieldset>
+        <label for="recognition-comment">Write a comment</label>
+        <textarea id="recognition-comment" name="recognition-comment" [(ngModel)]="recognitionComment"></textarea>
+        <button type="submit" [disabled]="!recognitionUser">Submit</button>
+    </form>
 </div>
-<!--<ion-header>-->
-  <!--<ion-toolbar>-->
-    <!--<ion-buttons start>-->
-      <!--<button (click)="dismiss()">-->
-        <!--Cancel-->
-      <!--</button>-->
-    <!--</ion-buttons>-->
-    <!--<ion-title>Give Recognition</ion-title>-->
-    <!--<ion-buttons end>-->
-      <!--<button (click)="save()" primary [disabled]="!recognitionUser.getId() || !recognitionType">-->
-        <!--Add-->
-      <!--</button>-->
-    <!--</ion-buttons>-->
-  <!--</ion-toolbar>-->
-<!--</ion-header>-->
-
-<!--<ion-content class="recognition-create">-->
-  <!--<ion-list radio-group [(ngModel)]="recognitionType">-->
-    <!--<ion-item>-->
-      <!--<ion-label>Select a colleague...</ion-label>-->
-      <!--<ion-select [(ngModel)]="recognitionUser">-->
-        <!--<ion-option [value]="user" *ngFor="let user of users">{{user.getFirstName()}}</ion-option>-->
-      <!--</ion-select>-->
-    <!--</ion-item>-->
-    <!--<ion-item *ngFor="let type of recognitionTypes">-->
-      <!--<ion-avatar item-left>-->
-        <!--<img [src]="getIcon(type)">-->
-      <!--</ion-avatar>-->
-      <!--<ion-label>#{{type}}</ion-label>-->
-      <!--<ion-radio [value]="type"></ion-radio>-->
-    <!--</ion-item>-->
-    <!--<ion-item>-->
-      <!--<ion-textarea placeholder="Write a comment..." [(ngModel)]="recognitionComment"></ion-textarea>-->
-    <!--</ion-item>-->
-  <!--</ion-list>-->
-<!--</ion-content>-->
