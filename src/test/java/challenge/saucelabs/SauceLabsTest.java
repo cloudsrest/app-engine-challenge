@@ -121,9 +121,10 @@ public class SauceLabsTest {
     assertNotEquals("Cannot find Select a Colleague input", 0, webElementsList.size());
     select.click();
 
+    // /html/body/ion-app/div[2]/ion-nav/ion-page/div/form/select/option[7]
     // Click on Colleague's name.
     // alert-tappable alert-radio alert-radio-button alert-radio-button-default
-    webElementsList = select.findElements(By.tagName("option"));
+    webElementsList = waitAndFind(driver, By.xpath("/html/body/ion-app/div[2]/ion-nav/ion-page/div/form/select/option[7]"));
     //webElementsList = driver.findElements(By.xpath("/html/body/ion-app/div[2]/ion-nav/ion-page/div/form/select/option[3]']"));
     webElementsList.get(0).click();
 
