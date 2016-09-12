@@ -40,14 +40,25 @@ public class SauceLabsTest {
   }
 
   @Test
-  public void testSauce() throws Exception {
+  public void testSuccessLogin() throws Exception {
 
     /**
      * Goes to Sauce Lab's guinea-pig page and prints title
      */
 
     driver.get("https://blissful-cell-141318.appspot.com/api/www/index.html");
-    List<WebElement> usernameEls = driver.findElements(By.xpath("//*[contains(local-name(), 'username')]"));
+
+    WebDriverWait wait = new WebDriverWait(driver, 15);
+
+    WebElement autocomplete = wait
+            .until(
+                    ExpectedConditions
+                            .visibilityOfElementLocated(
+                                    By.xpath("//ion-input[@name='username']']")
+                            )
+            );
+
+    List<WebElement> usernameEls;
     usernameEls = driver.findElements(By.xpath("//ion-input[@name='username']"));
     List<WebElement> passwordEls = driver.findElements(By.xpath("//ion-input[@name='password']"));
     assertNotEquals("Cannot find username text box", 0, usernameEls.size());
@@ -61,9 +72,9 @@ public class SauceLabsTest {
     submitEls.get(0).click();
 
     // Wait for the page to show up
-    WebDriverWait wait = new WebDriverWait(driver, 15);
+    wait = new WebDriverWait(driver, 15);
 
-    WebElement autocomplete = wait
+    autocomplete = wait
             .until(
                     ExpectedConditions
                     .visibilityOfElementLocated(
