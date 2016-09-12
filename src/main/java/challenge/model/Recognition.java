@@ -6,7 +6,7 @@ import org.hibernate.annotations.Type;
 import javax.persistence.*;
 import java.util.Date;
 
-@Entity
+@Entity(name = "recognition")
 public class Recognition {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)

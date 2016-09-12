@@ -43,4 +43,8 @@ public interface UserDao extends CrudRepository<User, Long> {
     @Query
     User findByEmailAndResetPasswordKey(String email, String resetPasswordKey);
 
+    @Query("select count(*) from User")
+    public long totalUsers();
+
+
 }
