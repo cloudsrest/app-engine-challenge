@@ -1,7 +1,33 @@
-<ion-header>
-  <ion-navbar primary-darkest>
+<ion-header class="login">
+  <ion-navbar white>
+    <ion-title>
+      <h3>Flash Challenge Exercise</h3>
+    </ion-title>
   </ion-navbar>
 </ion-header>
+
+<ion-footer class="login">
+  <ion-toolbar gray-lighter class="footer">
+    <ion-row class="text-center">
+      <ion-col>
+        Home
+      </ion-col>
+      <ion-col>
+        (800) CALL-GOVT
+      </ion-col>
+      <ion-col>
+        <a href="mailto:info@agency.gov">info@agency.gov</a>
+      </ion-col>
+    </ion-row>
+  </ion-toolbar>
+  <ion-toolbar gray-light class="footer footer-brand">
+    <ion-row class="text-center">
+      <ion-col>
+        Enterprise Horizon
+      </ion-col>
+    </ion-row>
+  </ion-toolbar>
+</ion-footer>
 
 <ion-content class="login" padding>
   <ion-card>
@@ -18,9 +44,16 @@
           </ion-item>
           <ion-item>
             <ion-label stacked for="password">Password</ion-label>
-            <ion-input type="password" id="password" [(ngModel)]="password" name="password" required clearInput></ion-input>
+            <ion-input [type]="showPassword && 'text' || 'password'"
+                       [(ngModel)]="password"
+                       id="password"
+                       name="password" required clearInput>
+            </ion-input>
           </ion-item>
         </ion-list>
+        <div padding>
+          <a href="javascript:" (click)="showPassword = !showPassword">Show password</a>
+        </div>
         <div padding>
           <button>Sign In</button>
         </div>
