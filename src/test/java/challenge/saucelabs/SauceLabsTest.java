@@ -50,6 +50,9 @@ public class SauceLabsTest {
 
     driver.get("https://blissful-cell-141318.appspot.com/api/www/index.html");
 
+    String id = ((RemoteWebDriver)driver).getSessionId().toString();
+    System.out.println("Running test in sauce lab: https://saucelabs.com/jobs/" + id);
+
     waitForElement(driver, By.xpath("//ion-input[@name='username']"));
 
     List<WebElement> usernameEls;

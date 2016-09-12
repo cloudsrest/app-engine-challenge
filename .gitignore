@@ -8,6 +8,7 @@ build/
 dist/
 logs/
 ui/node_modules/
+ui/node/
 out/
 target/
 tmp/
