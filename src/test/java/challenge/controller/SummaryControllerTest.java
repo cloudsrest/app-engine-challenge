@@ -5,7 +5,6 @@ import challenge.dto.RecognitionTypeEnum;
 import challenge.dto.Summary;
 import challenge.model.Recognition;
 import challenge.model.User;
-import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -49,7 +48,7 @@ public class SummaryControllerTest extends BaseTest {
         Summary stats = summaryController.getStats(mockPrinciple);
         assertTrue(stats.getUserCount() > 3);
         assertTrue(stats.getRecognitionCount() > 8);
-        assertEquals(3, stats.getSummaries().size());
+        assertEquals(3, stats.getTopRecognitionReceivers().size());
     }
 
 }

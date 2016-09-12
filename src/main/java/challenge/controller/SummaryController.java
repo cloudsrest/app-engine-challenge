@@ -24,13 +24,21 @@ public class SummaryController extends BaseController {
     @Autowired
     RecognitionService recognitionService;
 
-    @RequestMapping(value="/stats", method = RequestMethod.GET, produces= MediaType.APPLICATION_JSON_VALUE)
+    @RequestMapping(value = "/stats", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
     public @ResponseBody Summary getStats(Principal principal) {
         long totalUsers = userService.geTotalUsers();
         long totalRecognitions = recognitionService.getTotalRecognitions();
         List<RecognitionSummary> topRecognitionReceivers = recognitionService.getTopRecognitionReceivers();
-        topRecognitionReceivers = topRecognitionReceivers.subList(0,3);
-        return new Summary(totalUsers, totalRecognitions, topRecognitionReceivers);
+        if (topRecognitionReceivers.size() > 3) {
+            topRecognitionReceivers = topRecognitionReceivers.subList(0, 3);
+        }
+
+        List<RecognitionSummary> topRecognitionSenders = recognitionService.getTopRecognitionSenders();
+        if (topRecognitionSenders.size() > 3) {
+            topRecognitionSenders = topRecognitionSenders.subList(0, 3);
+        }
+
+        return new Summary(totalUsers, totalRecognitions, topRecognitionReceivers, topRecognitionSenders);
     }
 
 }

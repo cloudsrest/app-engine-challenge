@@ -8,15 +8,17 @@ public class Summary {
 
     private long userCount;
     private long recognitionCount;
-    private List<RecognitionSummary> summaries;
+    private List<RecognitionSummary> topRecognitionReceivers;
+    private List<RecognitionSummary> topRecognitionSenders;
 
     public Summary() {
     }
 
-    public Summary(long userCount, long recognitionCount, List<RecognitionSummary> summaries) {
+    public Summary(long userCount, long recognitionCount, List<RecognitionSummary> topRecognitionReceivers, List<RecognitionSummary> topRecognitionSenders) {
         this.userCount = userCount;
         this.recognitionCount = recognitionCount;
-        this.summaries = summaries;
+        this.topRecognitionReceivers = topRecognitionReceivers;
+        this.topRecognitionSenders = topRecognitionSenders;
     }
 
     public long getUserCount() {
@@ -35,11 +37,19 @@ public class Summary {
         this.recognitionCount = recognitionCount;
     }
 
-    public List<RecognitionSummary> getSummaries() {
-        return summaries;
+    public List<RecognitionSummary> getTopRecognitionReceivers() {
+        return topRecognitionReceivers;
     }
 
-    public void setSummaries(List<RecognitionSummary> summaries) {
-        this.summaries = summaries;
+    public void setTopRecognitionReceivers(List<RecognitionSummary> topRecognitionReceivers) {
+        this.topRecognitionReceivers = topRecognitionReceivers;
+    }
+
+    public List<RecognitionSummary> getTopRecognitionSenders() {
+        return topRecognitionSenders;
+    }
+
+    public void setTopRecognitionSenders(List<RecognitionSummary> topRecognitionSenders) {
+        this.topRecognitionSenders = topRecognitionSenders;
     }
 }

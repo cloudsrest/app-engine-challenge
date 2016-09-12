@@ -54,4 +54,10 @@ public class RecognitionServiceImpl implements RecognitionService {
     public List<challenge.dao.RecognitionSummary> getTopRecognitionReceivers() {
         return recognitionDao.topRecognitionReceivers();
     }
+
+    public List<challenge.dao.RecognitionSummary> getTopRecognitionSenders() {
+        return recognitionDao.topRecognitionSenders();
+    }
+
+
 }
