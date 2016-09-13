@@ -2,7 +2,6 @@ package challenge.saucelabs;
 
 import org.junit.After;
 import org.junit.Before;
-import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.openqa.selenium.By;
@@ -21,7 +20,6 @@ import java.util.List;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotEquals;
 
-@Ignore
 @RunWith(SpringRunner.class)
 @SpringBootTest()
 public class SauceLabsTest {
@@ -46,6 +44,7 @@ public class SauceLabsTest {
     String sessionId = ((RemoteWebDriver) driver).getSessionId().toString();
     System.out.println("SAUCE LAB URL -->  https://saucelabs.com/beta/tests/" + sessionId + "/logs");
   }
+
 
   @Test
   public void testSuccessLogin() throws Exception {
@@ -72,23 +71,19 @@ public class SauceLabsTest {
     assertEquals("Cannot find submit input", 1, submitEls.size());
     submitEls.get(0).click();
 
-    submitEls = waitAndFind(driver, By.xpath("/html/body/ion-app/div[2]/ion-nav/ion-page/div/button"));
-    assertEquals("Cannot find Give Recognition input", 1, submitEls.size());
-    String giveRecognition = submitEls.get(0).findElement(By.tagName("span")).getText();
-    assertEquals("Give Kudos", giveRecognition);
+    submitEls = waitAndFind(driver, By.id("colleague-select"));
+    assertEquals("Cannot find Colleague Select", 1, submitEls.size());
 
   }
 
   @Test
-  public void testGiveRecognition() throws Exception {
+  public void testGivePoint() throws Exception {
 
     /**
      * Goes to Sauce Lab's guinea-pig page and prints title
      */
 
     driver.get(baseURL);
-
-    waitForElement(driver, By.xpath("//input[@id='username']"));
 
     List<WebElement> usernameEls;
     usernameEls = waitAndFind(driver, By.xpath("//input[@id='username']"));
@@ -106,24 +101,11 @@ public class SauceLabsTest {
     assertEquals("Cannot find submit input", 1, submitEls.size());
     submitEls.get(0).click();
 
+    submitEls = waitAndFind(driver, By.id("colleague-select"));
+    assertEquals("Cannot find Colleague Select", 1, submitEls.size());
+
     List<WebElement> webElementsList;
 
-    // /html/body/ion-app/div[2]/ion-nav/ion-page/div/button
-    webElementsList = waitAndFind(driver, By.xpath("/html/body/ion-app/div[2]/ion-nav/ion-page/div/button"));
-    assertEquals("Cannot find Give Recognition input", 1, submitEls.size());
-    String giveRecognition = webElementsList.get(0).findElement(By.tagName("span")).getText();
-    assertEquals("Give Kudos", giveRecognition);
-    webElementsList.get(0).click();
-
-    // ----------
-
-    // Click on "Select a colleague to give recognition to..." textbox
-    //
-    webElementsList = waitAndFind(driver, By.id("colleague-select"));
-
-    WebElement select = webElementsList.get(0);
-    assertNotEquals("Cannot find Select a Colleague input", 0, webElementsList.size());
-    select.click();
 
     // /html/body/ion-app/div[2]/ion-nav/ion-page/div/form/select/option[7]
     // Click on Colleague's name.
@@ -133,7 +115,7 @@ public class SauceLabsTest {
     webElementsList.get(0).click();
 
     // Select teamwork
-    webElementsList = driver.findElements(By.id("team-work"));
+    webElementsList = driver.findElements(By.id("TEAMWORK"));
     webElementsList.get(0).click();
 
     // Enter comment
