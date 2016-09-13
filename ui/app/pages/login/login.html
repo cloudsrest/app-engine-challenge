@@ -27,6 +27,7 @@
     <form class="usa-form" (ngSubmit)="login()">
         <fieldset>
             <legend class="usa-drop_text">Sign in</legend>
+            <span>or <a href="javascript:" (click)="goToCreateAccount()">create an account</a></span>
             <p class="text-alert">{{errorMsg}}</p>
             <label for="username">Username</label>
             <input id="username"
