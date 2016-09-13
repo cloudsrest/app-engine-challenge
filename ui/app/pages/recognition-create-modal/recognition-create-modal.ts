@@ -83,7 +83,7 @@ export class RecognitionCreateModal {
     this.successAlertShown = true;
     setTimeout(() => {
       this.successAlertShown = false;
-    }, 5000);
+    }, 10000);
   }
 
   // generic error handler, send user to login page on unauthorized response
