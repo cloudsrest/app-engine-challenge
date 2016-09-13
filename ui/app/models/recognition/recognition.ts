@@ -80,16 +80,16 @@ export class Recognition {
   static getIcon(type: string): string {
     let icon;
     switch (type) {
-      case 'HARD_WORK':
+      case 'TEAMWORK':
+        icon = 'img/team.svg';
+        break;
+      case 'EXPERIMENT':
+        icon = 'img/brain.svg';
+        break;
+      case 'IMPROVEMENT':
         icon = 'img/thumbs-up.svg';
             break;
-      case 'TEAM_WORK':
-        icon = 'img/team.svg';
-            break;
-      case 'CREATIVITY':
-        icon = 'img/brain.svg';
-            break;
-      case 'INNOVATION':
+      case 'DELIVERY':
         icon = 'img/light-bulb.svg';
             break;
       default:

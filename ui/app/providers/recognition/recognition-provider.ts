@@ -9,10 +9,10 @@ import {Storage, LocalStorage} from "ionic-angular";
 export class RecognitionProvider {
 
   static RECOGNITION_TYPES: string[] = [
-    'INNOVATION',
-    'CREATIVITY',
-    'TEAM_WORK',
-    'HARD_WORK'
+    'TEAMWORK',
+    'IMPROVEMENT',
+    'DELIVERY',
+    'EXPERIMENT'
   ];
 
   private endpoint: string = '/api/secure/recognitions';

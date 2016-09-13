@@ -108,7 +108,7 @@ public class BaseTest {
     }
 
     public RecognitionDTO getRecognition(String comment, User toUser) {
-        Recognition recognition = new Recognition(testUser, toUser, RecognitionTypeEnum.CREATIVITY, comment, new Date());
+        Recognition recognition = new Recognition(testUser, toUser, RecognitionTypeEnum.DELIVERY, comment, new Date());
         return new RecognitionDTO(recognition);
     }
 
