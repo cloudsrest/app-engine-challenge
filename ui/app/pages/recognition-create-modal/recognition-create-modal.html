@@ -4,7 +4,7 @@
             <button class="usa-menu-btn">Menu</button>
             <div class="usa-logo" id="logo">
                 <em class="usa-logo-text">
-                    <a href="/" accesskey="1" title="Home" aria-label="Home">Flash Challenge<br>&nbsp;Exercise</a>
+                    <a href="/" accesskey="1" title="Home" aria-label="Home">Kudos</a>
                 </em>
             </div>
         </div>
@@ -46,8 +46,41 @@
             <option *ngFor="let user of users" [value]="user.getId()" [disabled]="!user.canReceiveRecognition()">
                 {{user.getFirstName()}} {{user.getLastName()}}
             </option>
+            <option value="">
+                None
+            </option>
         </select>
+        <a href="javascript:" (click)="showAddUserForm = !showAddUserForm">
+            <small>I don't see the person I want to give recognition to &#9660;</small>
+        </a>
         <br>
+        <br>
+        <form *ngIf="showAddUserForm" class="usa-form">
+            <p class="text-alert">{{errorMsg}}</p>
+            <label for="first-name">First name <span class="usa-additional_text">Required</span></label>
+            <input id="first-name"
+                   name="first-name"
+                   type="text"
+                   required=""
+                   aria-required="true"
+                   [(ngModel)]="userToAdd.firstName">
+
+            <label for="last-name">Last name <span class="usa-additional_text">Required</span></label>
+            <input id="last-name"
+                   name="last-name"
+                   type="text"
+                   required=""
+                   [(ngModel)]="userToAdd.lastName"
+                   aria-required="true">
+
+            <label for="username">Username<span class="usa-additional_text">Required</span></label>
+            <input id="username"
+                   name="username"
+                   type="username"
+                   required=""
+                   [(ngModel)]="userToAdd.username"
+                   aria-required="true">
+        </form>
         <fieldset class="usa-fieldset-inputs usa-sans">
             <label for="colleague-select">Select recognition category...</label>
             <br>
@@ -74,6 +107,6 @@
         </fieldset>
         <label for="recognition-comment">Write a comment</label>
         <textarea id="recognition-comment" name="recognition-comment" [(ngModel)]="recognitionComment"></textarea>
-        <button type="submit" [disabled]="!recognitionUser">Submit</button>
+        <button type="submit" [disabled]="!(recognitionUser || validUserForAdd())">Submit</button>
     </form>
 </div>

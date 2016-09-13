@@ -85,6 +85,20 @@ public class UserController extends BaseController {
         return new UserDTO(user);
     }
 
+    @RequestMapping(method = RequestMethod.PUT, consumes = MediaType.APPLICATION_JSON_VALUE ,produces=MediaType.APPLICATION_JSON_VALUE)
+    public @ResponseBody UserDTO updateUser(@RequestBody UserDTO userDto, Principal principal) {
+        User saved;
+        try {
+            Team team = teamService.findAll().get(0);
+            User fetched = userService.getUser(requestor(principal), userDto.getId());
+            fetched.setActivated(userDto.isActive());
+            saved = userService.createUser(requestor(principal), fetched);
+        } catch (Exception e) {
+            throw new InternalServerException(e.getMessage());
+        }
+        return new UserDTO(saved);
+    }
+
     public void setUserService(UserService userService) {
         this.userService = userService;
     }

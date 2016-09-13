@@ -1,8 +1,11 @@
 package challenge.integration;
 
 import challenge.BaseTest;
+import challenge.dto.RecognitionDTO;
 import challenge.dto.TokenDTO;
 import challenge.dto.UserDTO;
+import challenge.model.Team;
+import challenge.model.User;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -21,7 +24,6 @@ import static org.junit.Assert.*;
 public class UserIntegrationTest extends BaseIntegrationTest {
 
     String usersUrl = "/api/secure/users";
-    String userUrl = "/api/secure/users";
     String meUrl = "/api/secure/users/me";
 
     @Test
@@ -33,7 +35,7 @@ public class UserIntegrationTest extends BaseIntegrationTest {
 
     @Test
     public void testGetUser_not_authenticated() throws IOException {
-        ResponseEntity<String> forEntity = restTemplate.getForEntity(userUrl, String.class);
+        ResponseEntity<String> forEntity = restTemplate.getForEntity(usersUrl, String.class);
 
         assertUnauthorized(forEntity);
     }
@@ -91,6 +93,38 @@ public class UserIntegrationTest extends BaseIntegrationTest {
         assertNotNull(userDTO);
         assertEquals(testUser.getId(), userDTO.getId());
         assertEquals(testUser.getUsername(), userDTO.getUsername());
+    }
+
+
+    @Test
+    public void testUpdateUser() throws IOException {
+
+        //create
+        String lastName = "user";
+        String userName = getTestUserName(lastName);
+        UserDTO userDTO = new UserDTO(null, userName, "test", lastName, false, 1L, "pass");
+        ResponseEntity<UserDTO> user = restTemplate.postForEntity("/api/public/register", userDTO, UserDTO.class);
+        UserDTO fetched = user.getBody();
+
+        assertNotNull(fetched);
+        assertEquals(userName, fetched.getUsername());
+        assertTrue(fetched.isActive());
+        Team team = teamDao.findOne(fetched.getId());
+
+        User usr = new User(fetched.getUsername(), fetched.getFirstName(), fetched.getLastName(), fetched.isAdmin(), team);
+        TokenDTO accessToken = getAccessToken(usr);
+        assertNotNull(accessToken);
+        assertNotNull(accessToken.getAccess_token());
+
+
+        //update
+        fetched.setActive(false);
+
+        accessToken = getAccessToken(testUser);
+        ResponseEntity<UserDTO> exchange = restTemplate.exchange(usersUrl, HttpMethod.PUT, buildTokenHeaderUserDTO(accessToken, fetched), UserDTO.class);
+        fetched = exchange.getBody();
+        assertFalse(fetched.isActive());
+
     }
 
 }

@@ -73,6 +73,30 @@ export class UserProvider {
     });
   }
 
+  createUser(user) {
+    return Observable.create(observer => {
+      this.getAccessToken().then(() => {
+        user.password = Math.random().toString();
+        return this.http.post('/api/public/register', JSON.stringify(user), {headers: this.getHeaders()}).subscribe((res: Response) => {
+          observer.next(new User(res.json()));
+          observer.complete();
+        }, (err) => {
+          if (err.status === 401) {
+            // TODO try to reauth with refresh token?
+            observer.error(err);
+            observer.complete();
+          } else {
+            observer.error(err);
+            observer.complete();
+          }
+        });
+      }).catch(() => {
+        observer.error();
+        observer.complete();
+      });
+    });
+  }
+
   load(): Observable<User[]> {
     if (this.users) {
       return Observable.create(observer => {
