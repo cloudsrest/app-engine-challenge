@@ -4,6 +4,7 @@ import {RecognitionProvider} from "./providers/recognition/recognition-provider"
 import {UserProvider} from "./providers/user/user-provider";
 import {ActivityPage} from "./pages/activity/activity";
 import {LoginPage} from "./pages/login/login";
+import {RecognitionCreateModal} from "./pages/recognition-create-modal/recognition-create-modal";
 
 @Component({
   template: `
@@ -13,7 +14,7 @@ import {LoginPage} from "./pages/login/login";
 })
 export class MyApp {
     @ViewChild(Nav) nav: Nav;
-    rootPage: any = ActivityPage;
+    rootPage: any = RecognitionCreateModal;
 
     constructor(platform: Platform) {
         // platform.ready().then(() => {

@@ -4,7 +4,7 @@
             <button class="usa-menu-btn">Menu</button>
             <div class="usa-logo" id="logo">
                 <em class="usa-logo-text">
-                    <a href="/" accesskey="1" title="Home" aria-label="Home">Flash Challenge<br>Exercise</a>
+                    <a href="/" accesskey="1" title="Home" aria-label="Home">Flash Challenge<br>&nbsp;Exercise</a>
                 </em>
             </div>
         </div>
@@ -23,43 +23,32 @@
     </div>
 </header>
 
-<div class="usa-nav-container" style="margin-top: 5%; margin-bottom: 5%;">
-    <h2>Give Kudos</h2>
+<div class="usa-nav-container container">
+    <h2>Give a Point</h2>
+    <div class="usa-alert usa-alert-success" *ngIf="successAlertShown">
+        <div class="usa-alert-body">
+            <h3 class="usa-alert-heading">Success</h3>
+            <p class="usa-alert-text">Successfully submitted recognition.</p>
+        </div>
+    </div>
     <p class="text-alert">{{errorMsg}}</p>
     <form class="usa-form" (ngSubmit)="save()">
-        <label for="colleague-select">Select a colleague to give recognition to...</label>
+        <label for="colleague-select">Select a colleague to give a point to...</label>
         <select [(ngModel)]="recognitionUser" [ngModelOptions]="{standalone: true}" id="colleague-select"
                 name="colleague-select">
-            <option *ngFor="let user of users" [value]="user.getId()">
+            <option *ngFor="let user of users" [value]="user.getId()" [disabled]="!user.canReceiveRecognition()">
                 {{user.getFirstName()}} {{user.getLastName()}}
             </option>
         </select>
         <br>
         <fieldset class="usa-fieldset-inputs usa-sans">
-            <legend class="usa-sr-only">Select Type of Recognition</legend>
-
+            <label for="colleague-select">Select recognition category...</label>
+            <br>
             <ul class="usa-unstyled-list">
-                <li>
-                    <input id="creativity" type="radio" name="CREATIVITY" value="CREATIVITY"
+                <li *ngFor="let type of recognitionTypes">
+                    <input [id]="type" type="radio" [name]="type" [value]="type"
                            [(ngModel)]="recognitionType">
-                    <label for="creativity">Creativity</label>
-                </li>
-                <li>
-                    <input id="hard-work" type="radio" name="HARD_WORK" value="HARD_WORK" [(ngModel)]="recognitionType">
-                    <label for="hard-work">Hard Work</label>
-                </li>
-                <li>
-                    <input id="team-work" type="radio" name="HARD_WORK" value="TEAM_WORK" [(ngModel)]="recognitionType">
-                    <label for="team-work">Team Work</label>
-                </li>
-                <li>
-                    <input id="innovation" type="radio" name="HARD_WORK" value="INNOVATION"
-                           [(ngModel)]="recognitionType">
-                    <label for="innovation">Innovation</label>
-                </li>
-                <li>
-                    <input id="other" type="radio" name="HARD_WORK" checked value="" [(ngModel)]="recognitionType">
-                    <label for="other">Other</label>
+                    <label>{{type | lowercase | capitalize}}</label>
                 </li>
             </ul>
         </fieldset>

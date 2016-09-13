@@ -16,7 +16,7 @@ describe('Retrieve Recognitions', () => {
 
   let recognitionData = [
     {"fromUserId": 1, "toUserId": 2, "type": null, "comment": "Love what you did on the Dodge project!"},
-    {"fromUserId": 2, "toUserId": 1, "type": "INNOVATION", "comment": "Good idea to use Spring Boot"}
+    {"fromUserId": 2, "toUserId": 1, "type": "DELIVERY", "comment": "Good idea to use Spring Boot"}
   ];
 
   it('should return a list of recognitions', inject([XHRBackend, RecognitionProvider], (mockBackend, recProvider) => {
@@ -54,7 +54,7 @@ describe('Create a Recognition', () => {
             fromUserId: 7,
             toUserId: 8,
             comment: 'Test 123',
-            type: 'INNOVATION'
+            type: 'IMPROVEMENT'
           }})
         ));
     });
@@ -63,12 +63,12 @@ describe('Create a Recognition', () => {
       fromUserId: 7,
       toUserId: 8,
       comment: 'Test 123',
-      type: 'INNOVATION'
+      type: 'IMPROVEMENT'
     });
 
     recProvider.create(recognition).subscribe((r: Recognition) => {
       expect(r.getToUserId()).toEqual(8);
-      expect(r.getType()).toEqual('INNOVATION');
+      expect(r.getType()).toEqual('IMPROVEMENT');
     });
 
   }));
@@ -84,8 +84,8 @@ describe('Get the current users Recognitions', () => {
   });
 
   let recognitionData = [
-    {"fromUserId": 2, "toUserId": 1, "type": "INNOVATION", "comment": "Good idea to use Spring Boot"},
-    {"fromUserId": 6, "toUserId": 1, "type": "CREATIVITY", "comment": null}
+    {"fromUserId": 2, "toUserId": 1, "type": "TEAMWORK", "comment": "Good idea to use Spring Boot"},
+    {"fromUserId": 6, "toUserId": 1, "type": "DELIVERY", "comment": null}
   ];
 
   it('should return a list of recognitions that belong to the current user',

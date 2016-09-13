@@ -10,6 +10,8 @@ public class UserDTO {
     private Long team;
     private String password;
 
+    private boolean canGiveTo = true;
+
     public UserDTO() {
     }
 
@@ -29,6 +31,14 @@ public class UserDTO {
         this.firstName = model.getFirstName();
         this.lastName = model.getLastName();
         this.team = model.getTeam() == null ? null : model.getTeam().getId();
+    }
+
+    public boolean isCanGiveTo() {
+        return canGiveTo;
+    }
+
+    public void setCanGiveTo(boolean canGiveTo) {
+        this.canGiveTo = canGiveTo;
     }
 
     public Long getId() {
