@@ -4,6 +4,7 @@ import challenge.BaseTest;
 import challenge.dto.ErrorDTO;
 import challenge.dto.RecognitionDTO;
 import challenge.dto.TokenDTO;
+import challenge.dto.UserDTO;
 import challenge.model.User;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -51,6 +52,16 @@ public class BaseIntegrationTest extends BaseTest {
             obj = new RecognitionDTO();
         }
         String bodyTesting = "test";
+        HttpHeaders headers = new HttpHeaders();
+        headers.set("Authorization", "Bearer " + accessToken.getAccess_token());
+        headers.setContentType(MediaType.APPLICATION_JSON);
+        return new HttpEntity<>(obj, headers);
+    }
+
+    public HttpEntity<UserDTO> buildTokenHeaderUserDTO(TokenDTO accessToken, UserDTO obj) {
+        if (obj == null) {
+            obj = new UserDTO();
+        }
         HttpHeaders headers = new HttpHeaders();
         headers.set("Authorization", "Bearer " + accessToken.getAccess_token());
         headers.setContentType(MediaType.APPLICATION_JSON);

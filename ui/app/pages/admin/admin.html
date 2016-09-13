@@ -1,0 +1,34 @@
+<header class="usa-header" role="banner">
+    <div class="usa-nav-container">
+        <div class="usa-navbar">
+            <button class="usa-menu-btn">Menu</button>
+            <div class="usa-logo" id="logo">
+                <em class="usa-logo-text">
+                    <a href="/" accesskey="1" title="Home" aria-label="Home">Flash Challenge<br>&nbsp;Exercise</a>
+                </em>
+            </div>
+        </div>
+    </div>
+</header>
+
+<div class="usa-nav-container container">
+    <form (ngSubmit)="enableUsers()">
+        <fieldset class="usa-fieldset-inputs usa-sans">
+
+            <legend class="usa-sr-only">User Administration</legend>
+            <h4>User Administration</h4>
+            <ul class="usa-unstyled-list">
+                <li *ngFor="let user of users">
+                    <input id="enabled" type="checkbox" name="enabled" [value]="user.enabled" [(ngModel)]="user.enabled">
+                    <label for="enabled">
+                        {{user.getFirstName()}} {{user.getLastName()}}
+                        <i><small>{{user.enabled && '(enabled)' || ('disabled')}}</small></i>
+                    </label>
+                </li>
+            </ul>
+
+            <button type="submit">Save</button>
+
+        </fieldset>
+    </form>
+</div>
