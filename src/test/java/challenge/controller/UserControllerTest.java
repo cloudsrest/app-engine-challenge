@@ -1,7 +1,10 @@
 package challenge.controller;
 
 import challenge.BaseTest;
+import challenge.dto.RecognitionTypeEnum;
 import challenge.dto.UserDTO;
+import challenge.model.Recognition;
+import challenge.model.User;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,9 +12,11 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 
 import java.security.Principal;
+import java.util.Date;
 import java.util.List;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
@@ -35,6 +40,27 @@ public class UserControllerTest extends BaseTest {
         List<UserDTO> users = userController.getUsers(mockPrinciple);
 
         assertTrue(users.size() > 5);
+    }
+
+    @Test
+    public void testGetUsers_withRec() {
+        Principal mockPrinciple = getPrincipal();
+        User toUser = getUser("toUser");
+        User user1 = getUser("user1");
+        User user2 = getUser("user2");
+        User user3 = getUser("user3");
+        User user4 = getUser("user4");
+
+        Recognition recognition = new Recognition(testUser, toUser, RecognitionTypeEnum.DELIVERY, "good job", new Date());
+        recognitionDao.save(recognition);
+
+        List<UserDTO> users = userController.getUsers(mockPrinciple);
+        for (UserDTO user : users) {
+            if (user.getUsername().equals(toUser.getUsername())) {
+                assertFalse(user.isCanGiveTo());
+            }
+        }
+        System.out.println("users = " + users);
     }
 
     @Test
