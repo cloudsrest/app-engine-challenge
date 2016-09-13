@@ -49,6 +49,10 @@ export class User {
     return JSON.stringify(this.asJson());
   }
 
+  setCanGiveTo(value: boolean) {
+    this.canGiveTo = value;
+  }
+
   asJson(): any {
     return {
       firstName: this.getFirstName(),

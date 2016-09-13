@@ -4,7 +4,7 @@
             <button class="usa-menu-btn">Menu</button>
             <div class="usa-logo" id="logo">
                 <em class="usa-logo-text">
-                    <a href="/" accesskey="1" title="Home" aria-label="Home">Flash Challenge<br>&nbsp;Exercise</a>
+                    <a href="/" accesskey="1" title="Home" aria-label="Home">Kudos</a>
                 </em>
             </div>
         </div>
@@ -24,14 +24,21 @@
 </header>
 
 <div class="usa-nav-container container">
-    <h2>Give a Point</h2>
+    <h2>Give Kudos</h2>
     <div class="usa-alert usa-alert-success" *ngIf="successAlertShown">
         <div class="usa-alert-body">
             <h3 class="usa-alert-heading">Success</h3>
             <p class="usa-alert-text">Successfully submitted recognition.</p>
         </div>
     </div>
-    <p class="text-alert">{{errorMsg}}</p>
+    <p>{{errorMsg}}</p>
+
+    <p class="help-text">
+        One point can be given to a particular person per day.<br />
+        You may give a point to multiple different people in a day.<br />
+        Example: John gives Sam a point in the morning. John also gives Jane a point at that time. After lunch John logs in and tries to give Sam another point, which will not work. John cannot give Sam or Jane anymore points for the rest of the day, since he gave them each one earlier. Sam is able to give points to other people.
+    </p>
+
     <form class="usa-form" (ngSubmit)="save()">
         <label for="colleague-select">Select a colleague to give a point to...</label>
         <select [(ngModel)]="recognitionUser" [ngModelOptions]="{standalone: true}" id="colleague-select"
@@ -39,21 +46,67 @@
             <option *ngFor="let user of users" [value]="user.getId()" [disabled]="!user.canReceiveRecognition()">
                 {{user.getFirstName()}} {{user.getLastName()}}
             </option>
+            <option value="">
+                None
+            </option>
         </select>
+        <a href="javascript:" (click)="showAddUserForm = !showAddUserForm">
+            <small>I don't see the person I want to give recognition to &#9660;</small>
+        </a>
         <br>
+        <br>
+        <form *ngIf="showAddUserForm" class="usa-form">
+            <p class="text-alert">{{errorMsg}}</p>
+            <label for="first-name">First name <span class="usa-additional_text">Required</span></label>
+            <input id="first-name"
+                   name="first-name"
+                   type="text"
+                   required=""
+                   aria-required="true"
+                   [(ngModel)]="userToAdd.firstName">
+
+            <label for="last-name">Last name <span class="usa-additional_text">Required</span></label>
+            <input id="last-name"
+                   name="last-name"
+                   type="text"
+                   required=""
+                   [(ngModel)]="userToAdd.lastName"
+                   aria-required="true">
+
+            <label for="username">Username<span class="usa-additional_text">Required</span></label>
+            <input id="username"
+                   name="username"
+                   type="username"
+                   required=""
+                   [(ngModel)]="userToAdd.username"
+                   aria-required="true">
+        </form>
         <fieldset class="usa-fieldset-inputs usa-sans">
             <label for="colleague-select">Select recognition category...</label>
             <br>
             <ul class="usa-unstyled-list">
-                <li *ngFor="let type of recognitionTypes">
-                    <input [id]="type" type="radio" [name]="type" [value]="type"
-                           [(ngModel)]="recognitionType">
-                    <label>{{type | lowercase | capitalize}}</label>
-                </li>
+                <ul class="usa-unstyled-list">
+                    <li>
+                        <input id="teamwork" type="radio" name="TEAMWORK" value="TEAMWORK"  [(ngModel)]="recognitionType">
+                        <label for="teamwork">Teamwork <span class="help-text">- give a point in teamwork if this person has been encouraging and helpful </span></label>
+                    </li>
+                    <li>
+                        <input id="improvement" type="radio" name="IMPROVEMENT" value="IMPROVEMENT" [(ngModel)]="recognitionType">
+                        <label for="improvement">Improvement <span class="help-text">- give a point in improvement if this person has helped with process or design of an application</span></label>
+                    </li>
+                    <li>
+                        <input id="delivery" type="radio" name="DELIVERY" value="DELIVERY" [(ngModel)]="recognitionType">
+                        <label for="delivery">Delivery <span class="help-text">- give a point in delivery if this person has been timely, reliable, or submitted tasks/code in a timely manner</span></label>
+                    </li>
+                    <li>
+                        <input id="experiment" type="radio" name="EXPERIMENT" value="EXPERIMENT" [(ngModel)]="recognitionType">
+                        <label for="experiment">Experiment <span class="help-text">- give a point in experiment if this person has been thinking outside the box and conquered new technology</span></label>
+                    </li>
+                </ul>
             </ul>
         </fieldset>
         <label for="recognition-comment">Write a comment</label>
         <textarea id="recognition-comment" name="recognition-comment" [(ngModel)]="recognitionComment"></textarea>
-        <button type="submit" [disabled]="!recognitionUser">Submit</button>
+        <button type="submit" [disabled]="!(recognitionUser || validUserForAdd())">Submit</button>
     </form>
 </div>

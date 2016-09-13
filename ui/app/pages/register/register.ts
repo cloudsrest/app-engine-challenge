@@ -3,6 +3,7 @@ import {NavController, LoadingController, Storage, LocalStorage} from 'ionic-ang
 import {ActivityPage} from "../activity/activity";
 import {Http, Response, Headers} from "@angular/http";
 import {LoginPage} from "../login/login";
+import {RecognitionCreateModal} from "../recognition-create-modal/recognition-create-modal";
 
 @Component({
     templateUrl: 'build/pages/register/register.html'
@@ -34,7 +35,7 @@ export class RegistrationPage {
                 let refreshToken = res.json().refresh_token;
                 this.storage.set('access_token', accessToken);
                 this.storage.set('refresh_token', refreshToken);
-                this.navCtrl.setRoot(ActivityPage);
+                this.navCtrl.setRoot(RecognitionCreateModal);
             }, () => {
                 this.errorMsg = 'Unable to login';
             });
