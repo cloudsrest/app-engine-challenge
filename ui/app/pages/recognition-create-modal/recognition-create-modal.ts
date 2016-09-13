@@ -8,6 +8,7 @@ import {ActivityPage} from "../activity/activity";
 import {LoginPage} from "../login/login";
 import {Response, Http, Headers} from "@angular/http";
 import {CapitalizePipe} from "../../pipes/capitalize";
+import {AdminPage} from "../admin/admin-page";
 
 @Component({
   templateUrl: './build/pages/recognition-create-modal/recognition-create-modal.html',
@@ -34,6 +35,12 @@ export class RecognitionCreateModal {
       this.currentUser = currentUser;
       this.loadUsers();
       this.loadRecognitionTypes();
+      if (!this.currentUser.isAdmin()) {
+        this.pages.unshift({
+          title: 'Admin',
+          component: AdminPage
+        });
+      }
     }, (err: Response) => {
       this.errorHandler(err);
     });
@@ -73,9 +80,11 @@ export class RecognitionCreateModal {
 
   save() {
     if (this.validUserForAdd()) {
-      this.addUser().subscribe((res: Response) => {
-        this.userToAdd = null;
-        this.recognitionUser = res.json().id;
+      this.addUser().subscribe((user: User) => {
+        this.userToAdd = {};
+        if (user) {
+          this.recognitionUser = user.getId();
+        }
         this.createRecognition();
       });
     } else {
@@ -101,13 +110,11 @@ export class RecognitionCreateModal {
   }
 
   addUser() {
-    let headers = new Headers();
-    headers.append('Content-Type', 'application/json');
-    return this.http.post('/api/public/register', JSON.stringify(this.userToAdd), {headers: headers});
+    return this.userProvider.createUser(this.userToAdd);
   }
 
   validUserForAdd() {
-    return this.userToAdd.firstName && this.userToAdd.lastName && this.userToAdd.email;
+    return this.userToAdd.firstName && this.userToAdd.lastName && this.userToAdd.username;
   }
 
   getIcon(type: string) {
