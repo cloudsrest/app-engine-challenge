@@ -1,11 +1,13 @@
 package challenge.controller;
 
+import challenge.dao.RecognitionDao;
 import challenge.dto.RecognitionDTO;
 import challenge.dto.UserDTO;
 import challenge.exception.InternalServerException;
 import challenge.model.Recognition;
 import challenge.model.Team;
 import challenge.model.User;
+import challenge.service.RecognitionService;
 import challenge.service.TeamService;
 import challenge.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,6 +18,8 @@ import org.springframework.web.bind.annotation.*;
 
 import java.security.Principal;
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 
 @Controller
@@ -26,6 +30,12 @@ public class UserController extends BaseController {
     private UserService userService;
 
     @Autowired
+    private RecognitionDao recognitionDao;
+
+    @Autowired
+    private RecognitionService recognitionService;
+
+    @Autowired
     private TeamService teamService;
 
     @RequestMapping(method = RequestMethod.GET, produces= MediaType.APPLICATION_JSON_VALUE)
@@ -33,8 +43,18 @@ public class UserController extends BaseController {
         List<UserDTO> ret;
         try {
             ret = new ArrayList<>();
-            for (User user : userService.getUsers(requestor(principal))) {
-                ret.add(new UserDTO(user));
+            User requestor = requestor(principal);
+            Date date = new Date(System.currentTimeMillis() - 1000 * 60 * 60 * 24);
+            for (User user : userService.getUsers(requestor)) {
+                UserDTO userDTO = new UserDTO(user);
+                List<Recognition> byFromToAndDate = recognitionDao.findByFromToAndDate(user.getId(), requestor.getId(), date);
+                if (byFromToAndDate == null || byFromToAndDate.isEmpty()) {
+                    userDTO.setCanGiveTo(true);
+                } else {
+                    userDTO.setCanGiveTo(false);
+                }
+
+                ret.add(userDTO);
             }
         } catch (Exception e) {
             throw new InternalServerException(e.getMessage());
