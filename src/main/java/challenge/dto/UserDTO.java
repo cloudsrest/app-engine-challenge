@@ -9,6 +9,7 @@ public class UserDTO {
     private boolean isAdmin;
     private Long team;
     private String password;
+    private boolean isActive = true;
 
     private boolean canGiveTo = true;
 
@@ -31,6 +32,15 @@ public class UserDTO {
         this.firstName = model.getFirstName();
         this.lastName = model.getLastName();
         this.team = model.getTeam() == null ? null : model.getTeam().getId();
+        this.isActive = model.isActivated();
+    }
+
+    public boolean isActive() {
+        return isActive;
+    }
+
+    public void setActive(boolean isActive) {
+        this.isActive = isActive;
     }
 
     public boolean isCanGiveTo() {
