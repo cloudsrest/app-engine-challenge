@@ -30,12 +30,8 @@ export class RecognitionCreateModal {
   constructor(private recognitionProvider: RecognitionProvider, private viewCtrl: ViewController, private userProvider: UserProvider, private navCtrl: NavController) {
     this.userProvider.currentUser().subscribe((currentUser: User) => {
       this.currentUser = currentUser;
-      this.userProvider.load().subscribe((users: User[]) => {
-        this.users = users;
-      });
-      this.recognitionProvider.recognitionTypes().subscribe((types: string[]) => {
-        this.recognitionTypes = types;
-      });
+      this.loadUsers();
+      this.loadRecognitionTypes();
     }, (err: Response) => {
       this.errorHandler(err);
     });
@@ -47,6 +43,18 @@ export class RecognitionCreateModal {
       // {title: 'Reports', component: ReportsPage}, // TODO
       {title: 'Sign Out', component: LoginPage}
     ];
+  }
+
+  loadRecognitionTypes() {
+    this.recognitionProvider.recognitionTypes().subscribe((types: string[]) => {
+      this.recognitionTypes = types;
+    });
+  }
+
+  loadUsers() {
+    this.userProvider.all().subscribe((users: User[]) => {
+      this.users = users;
+    });
   }
 
   openPage(page) {
@@ -67,8 +75,9 @@ export class RecognitionCreateModal {
       comment: this.recognitionComment
     });
 
-    this.recognitionProvider.create(recognition).subscribe((res: Recognition) => {
+    this.recognitionProvider.create(recognition).subscribe(() => {
       this.showSuccessAlert();
+      this.loadUsers();
       this.reset();
     }, () => {
       this.errorMsg = 'Unable to give recognition';
@@ -84,6 +93,14 @@ export class RecognitionCreateModal {
     setTimeout(() => {
       this.successAlertShown = false;
     }, 5000);
+  }
+
+  updateUserCanGiveToFlag(userId) {
+    this.userProvider.get(userId).subscribe((user: User) => {
+      if (user) {
+        user.setCanGiveTo(false);
+      }
+    });
   }
 
   // generic error handler, send user to login page on unauthorized response
