@@ -4,55 +4,61 @@
             <button class="usa-menu-btn">Menu</button>
             <div class="usa-logo" id="logo">
                 <em class="usa-logo-text">
-                    <a href="/" accesskey="1" title="Home" aria-label="Home">Flash Challenge<br>Exercise</a>
+                    <a href="/" accesskey="1" title="Home" aria-label="Home">Flash Challenge<br>&nbsp;Exercise</a>
                 </em>
             </div>
         </div>
-        <nav role="navigation" class="usa-nav">
-            <button class="usa-nav-close">
-                <img src="/assets/img/close.svg" alt="close">
-            </button>
-            <ul class="usa-nav-primary usa-accordion">
-                <li *ngFor="let p of pages">
-                    <a class="usa-nav-link" (click)="openPage(p)" href="javascript:">
-                        <span>{{p.title}}</span>
-                    </a>
-                </li>
-            </ul>
-        </nav>
     </div>
 </header>
 
 <div class="usa-nav-container container">
-    <form class="usa-form" (ngSubmit)="login()">
+    <form class="usa-form" (ngSubmit)="createAccount()">
         <fieldset>
-            <legend class="usa-drop_text">Sign in</legend>
+            <legend class="usa-drop_text">Create Account</legend>
+            <span>or <a href="javascript:" (click)="goToSignIn()">sign in</a></span>
             <p class="text-alert">{{errorMsg}}</p>
-            <label for="username">Username</label>
+            <label for="first-name">First name <span class="usa-additional_text">Required</span></label>
+            <input id="first-name"
+                   name="first-name"
+                   type="text"
+                   required=""
+                   aria-required="true"
+                   [(ngModel)]="registrationUser.firstName">
+
+            <label for="last-name">Last name <span class="usa-additional_text">Required</span></label>
+            <input id="last-name"
+                   name="last-name"
+                   type="text"
+                   required=""
+                   [(ngModel)]="registrationUser.lastName"
+                   aria-required="true">
+
+            <label for="username">Username <span class="usa-additional_text">Required</span></label>
             <input id="username"
                    name="username"
                    type="text"
-                   autocapitalize="off"
-                   autocorrect="off"
-                   [(ngModel)]="username"
-                   required>
+                   required=""
+                   [(ngModel)]="registrationUser.username"
+                   aria-required="true">
 
-            <label for="password">Password</label>
+            <label for="email">Email<span class="usa-additional_text">Required</span></label>
+            <input id="email"
+                   name="email"
+                   type="email"
+                   required=""
+                   [(ngModel)]="registrationUser.email"
+                   aria-required="true">
+
+            <label for="password">Password<span class="usa-additional_text">Required</span></label>
             <input id="password"
                    name="password"
-                   [type]="showPassword && 'text' || 'password'"
-                   [(ngModel)]="password">
-            <p class="usa-form-note">
-                <a title="Show password"
-                   href="javascript:"
-                   (click)="showPassword = !showPassword"
-                   class="usa-show_password"
-                   aria-controls="password">
-                    {{showPassword && 'Hide' || 'Show'}} password
-                </a>
-            </p>
+                   type="password"
+                   required=""
+                   [(ngModel)]="registrationUser.password"
+                   aria-required="true">
 
-            <input type="submit" value="Sign in" />
+            <button type="submit">Submit</button>
+
         </fieldset>
     </form>
 </div>

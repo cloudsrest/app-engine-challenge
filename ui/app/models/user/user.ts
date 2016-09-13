@@ -5,6 +5,7 @@ export class User {
   private lastName: string;
   private team: number;
   private username: string;
+  private canGiveTo: boolean;
 
   constructor(data: any) {
     this.admin = data.admin;
@@ -13,6 +14,11 @@ export class User {
     this.lastName = data.lastName;
     this.team = data.team;
     this.username = data.username;
+    this.canGiveTo = data.canGiveTo;
+  }
+
+  canReceiveRecognition() {
+    return this.canGiveTo;
   }
 
   getFirstName(): string {
