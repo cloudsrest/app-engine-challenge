@@ -13,7 +13,7 @@ var _url = require('url');
 var _app = _express();
 
 var PORT = argv.port || 8081;
-var _apiUrl = argv.remote || 'https://prod-dot-blissful-cell-141318.appspot.com/';
+var _apiUrl = argv.remote || 'https://blissful-cell-141318.appspot.com/';
 var _serveDir = '/www';
 var _server;
 var _port;

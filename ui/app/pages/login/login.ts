@@ -2,6 +2,7 @@ import {Component} from '@angular/core';
 import {NavController, LoadingController, Storage, LocalStorage} from 'ionic-angular';
 import {ActivityPage} from "../activity/activity";
 import {Http, Response, Headers} from "@angular/http";
+import {RegistrationPage} from "../register/register";
 
 @Component({
   templateUrl: 'build/pages/login/login.html'
@@ -29,6 +30,10 @@ export class LoginPage {
     // Reset the content nav to have just this page
     // we wouldn't want the back button to show in this scenario
     this.navCtrl.setRoot(page.component, page.data);
+  }
+
+  goToCreateAccount() {
+    this.navCtrl.setRoot(RegistrationPage);
   }
 
   public login() {
