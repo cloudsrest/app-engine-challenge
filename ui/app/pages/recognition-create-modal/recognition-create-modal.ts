@@ -6,7 +6,7 @@ import {User} from "../../models/user/user";
 import {Recognition} from "../../models/recognition/recognition";
 import {ActivityPage} from "../activity/activity";
 import {LoginPage} from "../login/login";
-import {Response} from "@angular/http";
+import {Response, Http, Headers} from "@angular/http";
 import {CapitalizePipe} from "../../pipes/capitalize";
 
 @Component({
@@ -26,8 +26,10 @@ export class RecognitionCreateModal {
   pages: Array<{title: string, component: any, data?: any}>;
   errorMsg: string;
   successAlertShown: boolean;
+  showAddUserForm: boolean;
+  userToAdd: any;
 
-  constructor(private recognitionProvider: RecognitionProvider, private viewCtrl: ViewController, private userProvider: UserProvider, private navCtrl: NavController) {
+  constructor(private recognitionProvider: RecognitionProvider, private viewCtrl: ViewController, private userProvider: UserProvider, private navCtrl: NavController, private http: Http) {
     this.userProvider.currentUser().subscribe((currentUser: User) => {
       this.currentUser = currentUser;
       this.loadUsers();
@@ -36,6 +38,8 @@ export class RecognitionCreateModal {
       this.errorHandler(err);
     });
     this.successAlertShown = false;
+    this.showAddUserForm = false;
+    this.userToAdd = {};
     this.pages = [
       {title: 'Home', component: ActivityPage, data: {view: 'recent'}},
       {title: 'Give Kudos', component: RecognitionCreateModal},
@@ -68,6 +72,18 @@ export class RecognitionCreateModal {
   }
 
   save() {
+    if (this.validUserForAdd()) {
+      this.addUser().subscribe((res: Response) => {
+        this.userToAdd = null;
+        this.recognitionUser = res.json().id;
+        this.createRecognition();
+      });
+    } else {
+      this.createRecognition();
+    }
+  }
+
+  createRecognition() {
     let recognition = new Recognition({
       toUserId: this.recognitionUser,
       fromUserId: this.currentUser.getId(),
@@ -82,6 +98,16 @@ export class RecognitionCreateModal {
     }, () => {
       this.errorMsg = 'Unable to give recognition';
     });
+  }
+
+  addUser() {
+    let headers = new Headers();
+    headers.append('Content-Type', 'application/json');
+    return this.http.post('/api/public/register', JSON.stringify(this.userToAdd), {headers: headers});
+  }
+
+  validUserForAdd() {
+    return this.userToAdd.firstName && this.userToAdd.lastName && this.userToAdd.email;
   }
 
   getIcon(type: string) {
