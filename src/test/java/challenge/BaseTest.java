@@ -104,11 +104,11 @@ public class BaseTest {
 
     public boolean isTestAccount(Recognition rec) {
         User fromUser = rec.getFromUser();
-        return fromUser == null || fromUser.getId().equals(testUser.getId()) || fromUser.getUsername().contains(TEST_USER_PREFIX);
+        return fromUser == null || fromUser.getId() == null || fromUser.getId().equals(testUser.getId()) || fromUser.getUsername() == null || fromUser.getUsername().contains(TEST_USER_PREFIX);
     }
 
     public RecognitionDTO getRecognition(String comment, User toUser) {
-        Recognition recognition = new Recognition(testUser, toUser, RecognitionTypeEnum.CREATIVITY, comment, new Date());
+        Recognition recognition = new Recognition(testUser, toUser, RecognitionTypeEnum.DELIVERY, comment, new Date());
         return new RecognitionDTO(recognition);
     }
 

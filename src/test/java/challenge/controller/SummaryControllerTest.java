@@ -33,17 +33,17 @@ public class SummaryControllerTest extends BaseTest {
         User toUser2 = getUser("fromUs2");
         User toUser3 = getUser("fromUs3");
 
-        recognitionDao.save(new Recognition(testUser, toUser1, RecognitionTypeEnum.CREATIVITY, "owner comment 1", new Date()));
+        recognitionDao.save(new Recognition(testUser, toUser1, RecognitionTypeEnum.DELIVERY, "owner comment 1", new Date()));
 
-        recognitionDao.save(new Recognition(testUser, toUser2, RecognitionTypeEnum.CREATIVITY, "owner comment 2", new Date()));
-        recognitionDao.save(new Recognition(testUser, toUser2, RecognitionTypeEnum.CREATIVITY, "from different user", new Date()));
+        recognitionDao.save(new Recognition(testUser, toUser2, RecognitionTypeEnum.DELIVERY, "owner comment 2", new Date()));
+        recognitionDao.save(new Recognition(testUser, toUser2, RecognitionTypeEnum.DELIVERY, "from different user", new Date()));
 
-        recognitionDao.save(new Recognition(testUser, toUser3, RecognitionTypeEnum.CREATIVITY, "from different user", new Date()));
-        recognitionDao.save(new Recognition(testUser, toUser3, RecognitionTypeEnum.CREATIVITY, "from different user", new Date()));
-        recognitionDao.save(new Recognition(testUser, toUser3, RecognitionTypeEnum.CREATIVITY, "from different user", new Date()));
-        recognitionDao.save(new Recognition(testUser, toUser3, RecognitionTypeEnum.CREATIVITY, "from different user", new Date()));
-        recognitionDao.save(new Recognition(testUser, toUser3, RecognitionTypeEnum.CREATIVITY, "from different user", new Date()));
-        recognitionDao.save(new Recognition(testUser, toUser3, RecognitionTypeEnum.CREATIVITY, "from different user", new Date()));
+        recognitionDao.save(new Recognition(testUser, toUser3, RecognitionTypeEnum.DELIVERY, "from different user", new Date()));
+        recognitionDao.save(new Recognition(testUser, toUser3, RecognitionTypeEnum.DELIVERY, "from different user", new Date()));
+        recognitionDao.save(new Recognition(testUser, toUser3, RecognitionTypeEnum.DELIVERY, "from different user", new Date()));
+        recognitionDao.save(new Recognition(testUser, toUser3, RecognitionTypeEnum.DELIVERY, "from different user", new Date()));
+        recognitionDao.save(new Recognition(testUser, toUser3, RecognitionTypeEnum.DELIVERY, "from different user", new Date()));
+        recognitionDao.save(new Recognition(testUser, toUser3, RecognitionTypeEnum.DELIVERY, "from different user", new Date()));
 
         Summary stats = summaryController.getStats(mockPrinciple);
         assertTrue(stats.getUserCount() > 3);

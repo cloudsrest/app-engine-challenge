@@ -39,7 +39,7 @@ export class RegistrationPage {
                 this.errorMsg = 'Unable to login';
             });
         }, (err: Response) => {
-           this.errorMsg = err.statusText;
+            this.errorMsg = err.statusText;
         });
         this.presentLoading();
     }
