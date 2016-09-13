@@ -6,10 +6,13 @@ import {User} from "../../models/user/user";
 import {Recognition} from "../../models/recognition/recognition";
 import {ActivityPage} from "../activity/activity";
 import {LoginPage} from "../login/login";
+import {Response} from "@angular/http";
+import {CapitalizePipe} from "../../pipes/capitalize";
 
 @Component({
   templateUrl: './build/pages/recognition-create-modal/recognition-create-modal.html',
-  providers: [RecognitionProvider, UserProvider]
+  providers: [RecognitionProvider, UserProvider],
+  pipes: [CapitalizePipe]
 })
 
 export class RecognitionCreateModal {
@@ -22,17 +25,21 @@ export class RecognitionCreateModal {
   recognitionComment: string;
   pages: Array<{title: string, component: any, data?: any}>;
   errorMsg: string;
+  successAlertShown: boolean;
 
   constructor(private recognitionProvider: RecognitionProvider, private viewCtrl: ViewController, private userProvider: UserProvider, private navCtrl: NavController) {
-    this.userProvider.load().subscribe((users: User[]) => {
-      this.users = users;
-    });
     this.userProvider.currentUser().subscribe((currentUser: User) => {
       this.currentUser = currentUser;
+      this.userProvider.load().subscribe((users: User[]) => {
+        this.users = users;
+      });
+      this.recognitionProvider.recognitionTypes().subscribe((types: string[]) => {
+        this.recognitionTypes = types;
+      });
+    }, (err: Response) => {
+      this.errorHandler(err);
     });
-    this.recognitionProvider.recognitionTypes().subscribe((types: string[]) => {
-      this.recognitionTypes = types;
-    });
+    this.successAlertShown = false;
     this.pages = [
       {title: 'Home', component: ActivityPage, data: {view: 'recent'}},
       {title: 'Give Kudos', component: RecognitionCreateModal},
@@ -61,7 +68,8 @@ export class RecognitionCreateModal {
     });
 
     this.recognitionProvider.create(recognition).subscribe((res: Recognition) => {
-      this.navCtrl.setRoot(ActivityPage, {reload: true});
+      this.showSuccessAlert();
+      this.reset();
     }, () => {
       this.errorMsg = 'Unable to give recognition';
     });
@@ -69,6 +77,27 @@ export class RecognitionCreateModal {
 
   getIcon(type: string) {
     return Recognition.getIcon(type);
+  }
+
+  showSuccessAlert() {
+    this.successAlertShown = true;
+    setTimeout(() => {
+      this.successAlertShown = false;
+    }, 5000);
+  }
+
+  // generic error handler, send user to login page on unauthorized response
+  private errorHandler(res: Response) {
+    if (!res || (res && res.status === 401)) {
+      this.navCtrl.setRoot(LoginPage);
+    }
+    console.log(res);
+  }
+
+  private reset() {
+    this.recognitionComment = null;
+    this.recognitionType = null;
+    this.recognitionUser = null;
   }
 
 }
