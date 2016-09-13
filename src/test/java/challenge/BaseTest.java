@@ -99,7 +99,7 @@ public class BaseTest {
         allRecognitions.stream().filter(this::isTestAccount).forEach(recognitionDao::delete);
 
         List<User> allUsers = userDao.findAll();
-        allUsers.stream().filter(usr -> usr.getUsername().contains(TEST_USER_PREFIX)).forEach(userDao::delete);
+        allUsers.stream().filter(usr -> usr.getUsername()==null ||usr.getUsername().contains(TEST_USER_PREFIX)).forEach(userDao::delete);
     }
 
     public boolean isTestAccount(Recognition rec) {
