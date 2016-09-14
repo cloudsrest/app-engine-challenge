@@ -42,7 +42,7 @@ example usernames are: nturner, fcarr, and smcgrath
 ```
     $ mvn spring-boot:run
 ```
-* App is running here : http://localhost:8080/
+* App is running here : http://localhost:8080/api/www/index.html
 
 #### One time setup for Cloud SDK to be able to deploy to Google App Engine
 * Install Cloud SDK (Refer to https://cloud.google.com/sdk/docs/quickstarts)
@@ -66,7 +66,9 @@ example usernames are: nturner, fcarr, and smcgrath
 
 * App is running here : https://blissful-cell-141318.appspot.com/api/www/index.html
 
+#### To run unit tests
 
-### Usage
-
-- Run the application and go on http://localhost:8080/api/www/index.html
+* You must use the test maven profile.
+```
+mvn -Ptest test
+```
